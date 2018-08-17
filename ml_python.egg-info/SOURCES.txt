@@ -1,4 +1,5 @@
-README.txt
+README.md
+setup.py
 ml/__init__.py
 ml_python.egg-info/PKG-INFO
 ml_python.egg-info/SOURCES.txt
