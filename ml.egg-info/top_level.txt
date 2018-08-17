@@ -1,5 +1,0 @@
-activation
-k_means
-linear_regression
-logistic_regression
-nn
