@@ -14,5 +14,7 @@ This module uses a tensorflow backend.
 Install by running
 <br /><br />
 `pip install ml-python`
+<br ><br >
+This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
-install mtrack
+Contact me if you want me to add something.
