@@ -1,3 +1,3 @@
-from ml.nn.neuralnetwork import NeuralNetwork
+from .neuralnetwork import *
 
 

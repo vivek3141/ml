@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ml-python
-Version: 0.2
+Version: 0.3
 Summary: The easiest way to do machine learning
 Home-page: https://github.com/vivek3141/ml
 Author: Vivek Verma
@@ -18,6 +18,8 @@ Description: # ML
         I would not recommend using this module for big projects.
         
         This module uses a tensorflow backend.
+        
+        
         
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3

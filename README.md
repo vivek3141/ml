@@ -10,3 +10,9 @@ This module is not meant for high level tasks, but only for simple use and learn
 I would not recommend using this module for big projects.
 
 This module uses a tensorflow backend.
+
+Install by running
+<br /><br />
+`pip install ml-python`
+
+install mtrack

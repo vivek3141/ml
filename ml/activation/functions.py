@@ -18,4 +18,4 @@ def tanh_d(x):
 
 
 def relu(x):
-    return False
+    return max(0, x)

@@ -1,6 +1,17 @@
 README.md
 setup.py
 ml/__init__.py
+ml/activation/__init__.py
+ml/activation/functions.py
+ml/cnn/__init__.py
+ml/error/__init__.py
+ml/error/error.py
+ml/k_means/__init__.py
+ml/linear_regression/__init__.py
+ml/linear_regression/linear_regression.py
+ml/logistic_regression/__init__.py
+ml/nn/__init__.py
+ml/nn/neuralnetwork.py
 ml_python.egg-info/PKG-INFO
 ml_python.egg-info/SOURCES.txt
 ml_python.egg-info/dependency_links.txt

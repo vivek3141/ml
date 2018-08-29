@@ -11,6 +11,4 @@ I would not recommend using this module for big projects.
 
 This module uses a tensorflow backend.
 
-Install by running
-<br /><br />
-`pip install ml-python`
+
