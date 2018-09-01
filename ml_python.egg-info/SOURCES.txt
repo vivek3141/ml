@@ -10,6 +10,7 @@ ml/k_means/__init__.py
 ml/linear_regression/__init__.py
 ml/linear_regression/linear_regression.py
 ml/logistic_regression/__init__.py
+ml/logistic_regression/logistic_regression.py
 ml/nn/__init__.py
 ml/nn/neuralnetwork.py
 ml_python.egg-info/PKG-INFO
