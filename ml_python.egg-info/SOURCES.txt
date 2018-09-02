@@ -6,6 +6,9 @@ ml/activation/functions.py
 ml/cnn/__init__.py
 ml/error/__init__.py
 ml/error/error.py
+ml/graph/__init__.py
+ml/graph/lr/__init__.py
+ml/graph/lr/graph.py
 ml/k_means/__init__.py
 ml/linear_regression/__init__.py
 ml/linear_regression/linear_regression.py
@@ -13,6 +16,8 @@ ml/logistic_regression/__init__.py
 ml/logistic_regression/logistic_regression.py
 ml/nn/__init__.py
 ml/nn/neuralnetwork.py
+ml/random/__init__.py
+ml/random/datasets.py
 ml_python.egg-info/PKG-INFO
 ml_python.egg-info/SOURCES.txt
 ml_python.egg-info/dependency_links.txt
