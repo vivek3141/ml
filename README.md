@@ -17,4 +17,29 @@ Install by running
 <br ><br >
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
-Contact me if you want me to add something.
+## Examples
+Examples for all implemented structures can be found in `/examples`. <br>
+In this example, we will see how to learn a linear regression example.
+<br><br>
+First, import the required modules.
+```python
+import numpy as np
+from ml.linear_regression import LinearRegression
+```
+Then make the required object
+```python
+l = LinearRegression()
+```
+This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.
+```python
+# Randomly generating the data
+x = np.array(list(map(int, 10*np.random.random(25))))
+y = np.array(list(map(int, 10*np.random.random(25))))
+```
+Lastly, train it. Set `graph=True` to visualize the dataset and the model.
+
+```python
+l.fit(data=x, labels=y, graph=True)
+```
+<img src="./images/linear_regression.png"></img><br>
+The full code can be found in `/examples/linear_regression.py`
