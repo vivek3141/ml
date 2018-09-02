@@ -33,8 +33,8 @@ l = LinearRegression()
 This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.
 ```python
 # Randomly generating the data
-x = np.array(list(map(int, 10*np.random.random(25))))
-y = np.array(list(map(int, 10*np.random.random(25))))
+x = np.array(list(map(int, 10*np.random.random(50)))
+y = np.array(list(map(int, 10*np.random.random(50))))
 ```
 Lastly, train it. Set `graph=True` to visualize the dataset and the model.
 
