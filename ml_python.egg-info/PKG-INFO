@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ml-python
-Version: 0.7
+Version: 0.8
 Summary: The easiest way to do machine learning
 Home-page: https://github.com/vivek3141/ml
 Author: Vivek Verma
@@ -21,7 +21,13 @@ Description: # ML
         
         Install by running
         <br /><br />
-        `pip install ml-python`
+        `pip install ml-python`<br><br>
+        Or by cloning the repo and installing it.<br>
+        ```bash
+        git clone https://github.com/vivek3141/ml
+        cd ml
+        python setup.py install
+        ```
         <br ><br >
         This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
         
@@ -41,7 +47,7 @@ Description: # ML
         This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.
         ```python
         # Randomly generating the data
-        x = np.array(list(map(int, 10*np.random.random(50)))
+        x = np.array(list(map(int, 10*np.random.random(50))))
         y = np.array(list(map(int, 10*np.random.random(50))))
         ```
         Lastly, train it. Set `graph=True` to visualize the dataset and the model.
@@ -49,7 +55,7 @@ Description: # ML
         ```python
         l.fit(data=x, labels=y, graph=True)
         ```
-        <img src="https://github.com/vivek3141/ml/blob/master/images/linear_regression.png"></img><br>
+        ![Linear Regression](https://github.com/vivek3141/ml/blob/master/images/linear_regression.png)<br><br>
         The full code can be found in `/examples/linear_regression.py`
 Platform: UNKNOWN
 Classifier: Programming Language :: Python :: 3

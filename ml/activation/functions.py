@@ -1,8 +1,8 @@
-import numpy as np
+import tensorflow as tf
 
 
 def sigmoid(x):
-    return 1 / (1 + np.exp(-x))
+    return 1 / (1 + tf.exp(-x))
 
 
 def sigmoid_d(x):
@@ -10,11 +10,11 @@ def sigmoid_d(x):
 
 
 def tanh(x):
-    return np.tanh(x)
+    return tf.tanh(x)
 
 
 def tanh_d(x):
-    return 1 - (np.tanh(x) ** 2)
+    return 1 - (tf.tanh(x) ** 2)
 
 
 def relu(x):

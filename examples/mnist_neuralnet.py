@@ -5,7 +5,7 @@ from tensorflow.examples.tutorials.mnist import input_data
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
 n = NeuralNetwork(
-    layers=20,
+    layers=[20, 10],
     inp=784,
     activation=sigmoid,
     out=10,

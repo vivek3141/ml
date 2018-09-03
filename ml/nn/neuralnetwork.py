@@ -1,5 +1,6 @@
 import tensorflow as tf
 from ml.error import Error
+
 try:
     import matplotlib.pyplot as plt
 except ModuleNotFoundError:
@@ -20,8 +21,10 @@ class NeuralNetwork:
         self.b = []
         self.x = tf.placeholder(tf.float32, shape=[None, self.input])
         self.yy = tf.placeholder(tf.float32, shape=[None, self.output])
-        self.z = self.create_layer(0, self.input, self.layers, self.x, False)
-        self.y = self.create_layer(1, self.layers, self.output, self.z, False)
+        self.z = self.create_layer(0, self.input, self.layers[0], self.x, False)
+        for n, i in enumerate(layers[1:]):
+            self.z = self.create_layer(n + 1, layers[n], i, self.z, False)
+        self.y = self.create_layer(len(layers), self.layers[-1], self.output, self.z, False)
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
 
     def fit(self, steps, data, labels, graph=False, check=50, lr=0.001):
@@ -51,7 +54,7 @@ class NeuralNetwork:
             self.b = tf.get_variable("b", [1, output_size])
             y = tf.matmul(x, self.W) + self.b
             if nonlinear:
-                y = self.activation(self.y)
+                y = self.activation(y)
             return y
 
     @staticmethod
@@ -74,7 +77,7 @@ class NeuralNetwork:
             if np.argmax(r[0]) == np.argmax(test_y[i]):
                 num_c += 1
         acc = num_c / len(test_x)
-        print("Accuracy: {}%".format(acc*100))
+        print("Accuracy: {}%".format(acc * 100))
         return acc
 
     def save(self, file_name):
