@@ -13,7 +13,13 @@ This module uses a tensorflow backend.
 
 Install by running
 <br /><br />
-`pip install ml-python`
+`pip install ml-python`<br><br>
+Or by cloning the repo and installing it.<br>
+```bash
+git clone https://github.com/vivek3141/ml
+cd ml
+python setup.py install
+```
 <br ><br >
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
@@ -33,7 +39,7 @@ l = LinearRegression()
 This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.
 ```python
 # Randomly generating the data
-x = np.array(list(map(int, 10*np.random.random(50)))
+x = np.array(list(map(int, 10*np.random.random(50))))
 y = np.array(list(map(int, 10*np.random.random(50))))
 ```
 Lastly, train it. Set `graph=True` to visualize the dataset and the model.
