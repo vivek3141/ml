@@ -41,5 +41,5 @@ Lastly, train it. Set `graph=True` to visualize the dataset and the model.
 ```python
 l.fit(data=x, labels=y, graph=True)
 ```
-<img src="./images/linear_regression.png"></img><br>
+<img src="https://github.com/vivek3141/ml/blob/master/images/linear_regression.png"></img><br>
 The full code can be found in `/examples/linear_regression.py`
