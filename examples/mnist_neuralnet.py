@@ -15,6 +15,6 @@ n = NeuralNetwork(
 
 n.fit(50000, data=mnist.train.images, labels=mnist.train.labels, lr=0.0001, graph=True)
 
-n.test(mnist.test.images, mnist.test.labels)
+n.test(mnist.test.images, mnist.test.labels)  # 91.52%, can be better!
 
 n.save("model.pkl")
