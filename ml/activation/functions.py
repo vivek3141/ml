@@ -18,4 +18,4 @@ def tanh_d(x):
 
 
 def relu(x):
-    return max(0, x)
+    return tf.nn.relu(x)

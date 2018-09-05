@@ -23,7 +23,7 @@ class NeuralNetwork:
         self.yy = tf.placeholder(tf.float32, shape=[None, self.output])
         self.z = self.create_layer(0, self.input, self.layers[0], self.x, False)
         for n, i in enumerate(layers[1:]):
-            self.z = self.create_layer(n + 1, layers[n], i, self.z, False)
+            self.z = self.create_layer(n + 1, layers[n], i, self.z, True)
         self.y = self.create_layer(len(layers), self.layers[-1], self.output, self.z, False)
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
 
