@@ -2,7 +2,9 @@
   <dictionary name="vivnp">
     <words>
       <w>conv</w>
+      <w>logits</w>
       <w>relu</w>
+      <w>softmax</w>
       <w>tanh</w>
       <w>verma</w>
       <w>vivek</w>
