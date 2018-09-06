@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="933184af-977b-4b6c-9959-d93c1d6f61f8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ml/cnn/cnn2d.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ml/cnn/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml/cnn/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ml/cnn/cnn2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/ml/cnn/cnn2d.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +72,7 @@
           <entry key="dummy" value="33" />
           <entry key="gitignore" value="56" />
           <entry key="md" value="939" />
-          <entry key="py" value="12987" />
+          <entry key="py" value="13496" />
           <entry key="txt" value="661" />
         </counts>
       </usages-collector>
@@ -83,7 +81,7 @@
           <entry key="Bash" value="1" />
           <entry key="Markdown" value="938" />
           <entry key="PLAIN_TEXT" value="750" />
-          <entry key="Python" value="13666" />
+          <entry key="Python" value="14175" />
         </counts>
       </usages-collector>
     </session>
@@ -135,10 +133,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ml/cnn/cnn2d.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="23" column="97" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
+            <state relative-caret-position="550">
+              <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
               <folding>
-                <marker date="1536208286282" expanded="true" signature="39:44" ph="..." />
+                <element signature="e#0#23#0" expanded="true" />
+                <marker date="1536209030609" expanded="true" signature="69:74" ph="..." />
               </folding>
             </state>
           </provider>
@@ -495,12 +494,12 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" auto_hide="true" id="Terminal" order="10" weight="0.32827735" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="11" visible="true" weight="0.32936078" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.32936078" />
       <window_info anchor="bottom" id="Version Control" order="12" weight="0.32936078" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.28444937" />
+      <window_info anchor="right" id="SciView" order="3" weight="0.28444937" />
       <window_info anchor="right" id="Database" order="4" weight="0.32982844" />
     </layout>
   </component>
@@ -722,10 +721,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ml/cnn/cnn2d.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="23" column="97" selection-start-line="23" selection-start-column="97" selection-end-line="23" selection-end-column="97" />
+        <state relative-caret-position="550">
+          <caret line="29" column="41" lean-forward="true" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
           <folding>
-            <marker date="1536208286282" expanded="true" signature="39:44" ph="..." />
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1536209030609" expanded="true" signature="69:74" ph="..." />
           </folding>
         </state>
       </provider>
