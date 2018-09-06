@@ -16,6 +16,7 @@ class CNN2D:
         self.pool_size = pool_size
         self.drop = drop_rate
         self.lr = 0
+        self.classifier = None
 
     def _create_model(self, data, labels, mode):
         size = [-1, len(data), len(data[0]), 1]
@@ -56,3 +57,30 @@ class CNN2D:
 
     def fit(self, data, labels, lr):
         self.lr = lr
+        self.classifier = tf.estimator.Estimator(
+            model_fn=self._create_model, model_dir="./CNN_model")
+
+        tensors_to_log = {"probabilities": "softmax_tensor"}
+        logging_hook = tf.train.LoggingTensorHook(
+            tensors=tensors_to_log, every_n_iter=50)
+        
+        train_input_fn = tf.estimator.inputs.numpy_input_fn(
+            x={"x": data},
+            y=labels,
+            batch_size=100,
+            num_epochs=None,
+            shuffle=True)
+        self.classifier.train(
+            input_fn=train_input_fn,
+            steps=20000,
+            hooks=[logging_hook])
+
+    def test(self, data, labels):
+        eval_input_fn = tf.estimator.inputs.numpy_input_fn(
+            x={"x": data},
+            y=labels,
+            num_epochs=1,
+            shuffle=False)
+        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
+        print(eval_results)
+        return eval_results
