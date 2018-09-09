@@ -4,7 +4,7 @@ setup(
     name='ml-python',
     version='0.9',
     packages=['ml', 'ml.nn', 'ml.linear_regression', 'ml.activation', 'ml.k_means', 'ml.logistic_regression',
-              'ml.error', 'ml.cnn', 'ml.random', 'ml.graph', 'ml.graph.lr'],
+              'ml.error', 'ml.cnn', 'ml.random', 'ml.graph', 'ml.graph.lr', 'ml.data'],
     author="Vivek Verma",
     author_email="vivekverma3141@gmail.com",
     url="https://github.com/vivek3141/ml",

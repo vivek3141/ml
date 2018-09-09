@@ -2,3 +2,5 @@ build/
 dist/
 ml.egg-info/
 examples/MNIST_data/
+ml_python.egg-info/
+.idea/
