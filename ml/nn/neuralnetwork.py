@@ -43,6 +43,7 @@ class NeuralNetwork:
             y_val = labels[i].reshape(1, self.output)
             if i % check == 0:
                 losses.append(self.s.run(self.J, feed_dict={self.x: x_c, self.yy: y_c}))
+                print("Step: {}, Loss: {}".format(steps, losses[-1]))
             self.s.run(min, feed_dict={self.x: x_val, self.yy: y_val})
         if graph:
             plt.plot(range(len(losses)), losses)
