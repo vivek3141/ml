@@ -22,7 +22,7 @@ class CNN2D:
         self.dimensions = dimensions
 
     def _create_model(self, features, labels, mode):
-        data = features["x"]
+        data = features
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
         inp = tf.reshape(data, size)
@@ -76,7 +76,7 @@ class CNN2D:
             tensors=tensors_to_log, every_n_iter=50)
 
         train_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x={"x":data},
+            x=data,
             y=labels,
             batch_size=100,
             num_epochs=None,
@@ -87,7 +87,7 @@ class CNN2D:
             steps=20000,
             hooks=[logging_hook])
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x={"x": data},
+            x=data,
             y=labels,
             num_epochs=1,
             shuffle=False)
