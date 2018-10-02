@@ -6,8 +6,8 @@ from ml.random.kmeans import create_dataset
 
 
 class KMeans:
-    def __init__(self, K):
-        self.k = K
+    def __init__(self, k):
+        self.k = k
         self.sess = None
         self.n = None
 
