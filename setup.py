@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ml-python',
-    version='0.11',
+    version='0.12',
     # packages=['ml', 'ml.nn', 'ml.linear_regression', 'ml.activation', 'ml.k_means', 'ml.logistic_regression',
     #          'ml.error', 'ml.cnn', 'ml.random', 'ml.graph', 'ml.graph.lr', 'ml.data'],
     author="Vivek Verma",

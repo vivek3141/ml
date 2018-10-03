@@ -4,5 +4,5 @@ from ml.graph.kmeans import plot
 
 data, y = create_dataset(100)
 k = KMeans(4)
-c, assign = k.fit(data, 100)
+c, assign = k.fit(data, y, 100)
 plot(data, assign, c)

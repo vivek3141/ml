@@ -1,4 +1,5 @@
 # ML
+
 This module provides for the easiest way to implement Machine Learning algoritms without the need to know about them.
 
 Use this module if
@@ -13,7 +14,10 @@ This module uses a tensorflow backend.
 
 Install by running
 <br /><br />
-`pip install ml-python`<br><br>
+```bash
+pip install ml-python
+```
+<br><br>
 Or by cloning the repo and installing it.<br>
 ```bash
 git clone https://github.com/vivek3141/ml
