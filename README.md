@@ -13,7 +13,7 @@ I would not recommend using this module for big projects.
 This module uses a tensorflow backend.
 
 Install by running
-<br /><br />
+<br><br>
 ```bash
 pip install ml-python
 ```
@@ -24,7 +24,7 @@ git clone https://github.com/vivek3141/ml
 cd ml
 python setup.py install
 ```
-<br ><br >
+<br><br>
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
 ## Examples
