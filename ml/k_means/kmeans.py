@@ -1,8 +1,4 @@
 import tensorflow as tf
-import numpy as np
-import time
-import matplotlib.pyplot as plt
-from ml.random.kmeans import create_dataset
 
 
 class KMeans:
@@ -17,9 +13,7 @@ class KMeans:
         count = tf.unsorted_segment_sum(tf.ones_like(data), bucket_ids, num_buckets)
         return total / count
 
-    def train(self, data, epochs):
-        self.n = len(data)
-        points, cluster_assignments = create_dataset(self.n)
+    def fit(self, points, cluster_assignments, epochs):
         centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
         rep_centroids = tf.reshape(tf.tile(centroids, [self.n, 1]), [self.n, self.k, 2])
         rep_points = tf.reshape(tf.tile(points, [1, self.k]), [self.n, self.k, 2])
