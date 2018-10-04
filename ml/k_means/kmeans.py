@@ -2,10 +2,10 @@ import tensorflow as tf
 
 
 class KMeans:
-    def __init__(self, k):
+    def __init__(self, k, n):
         self.k = k
         self.sess = None
-        self.n = None
+        self.n = n
 
     @staticmethod
     def _bucket_mean(data, bucket_ids, num_buckets):
@@ -14,7 +14,8 @@ class KMeans:
         return total / count
 
     def fit(self, points, cluster_assignments, epochs):
-        centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
+        centroids = tf.Variable(tf.slice(tf.random_shuffle(points), [0, 0], [self.k, 2]))
+        # centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
         rep_centroids = tf.reshape(tf.tile(centroids, [self.n, 1]), [self.n, self.k, 2])
         rep_points = tf.reshape(tf.tile(points, [1, self.k]), [self.n, self.k, 2])
         sum_squares = tf.reduce_sum(tf.square(rep_points - rep_centroids),
@@ -22,13 +23,13 @@ class KMeans:
         best_centroids = tf.argmin(sum_squares, 1)
         did_assignments_change = tf.reduce_any(tf.not_equal(best_centroids,
                                                             cluster_assignments))
-        means = self._bucket_mean(points, best_centroids, self.k)
+        means = KMeans._bucket_mean(points, best_centroids, self.k)
         with tf.control_dependencies([did_assignments_change]):
             do_updates = tf.group(
                 centroids.assign(means),
                 cluster_assignments.assign(best_centroids))
         self.sess = tf.Session()
-        self.sess.run(tf.initialize_all_variables())
+        self.sess.run(tf.global_variables_initializer())
         changed = True
         iters = 0
         while changed and iters < epochs:
