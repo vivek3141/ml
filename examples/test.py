@@ -5,7 +5,7 @@ from ml.graph.kmeans import plot
 
 N = 1000
 K = 4
-MAX_ITERS = 1000000
+MAX_ITERS = 10000
 
 start = time.time()
 
@@ -62,4 +62,5 @@ print(("Found in %.2f seconds" % (end - start)), iters, "iterations")
 print("Centroids:")
 print(centers)
 print("Cluster assignments:", assignments)
+points = sess.run(points)
 plot(points, assignments, centers)
