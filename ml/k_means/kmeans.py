@@ -1,4 +1,5 @@
 import tensorflow as tf
+from ml.graph.kmeans import plot
 
 
 class KMeans:
@@ -13,9 +14,8 @@ class KMeans:
         count = tf.unsorted_segment_sum(tf.ones_like(data), bucket_ids, num_buckets)
         return total / count
 
-    def fit(self, points, cluster_assignments, epochs):
-        centroids = tf.Variable(tf.slice(tf.random_shuffle(points), [0, 0], [self.k, 2]))
-        # centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
+    def fit(self, points, cluster_assignments, epochs, graph=False):
+        centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
         rep_centroids = tf.reshape(tf.tile(centroids, [self.n, 1]), [self.n, self.k, 2])
         rep_points = tf.reshape(tf.tile(points, [1, self.k]), [self.n, self.k, 2])
         sum_squares = tf.reduce_sum(tf.square(rep_points - rep_centroids),
@@ -36,6 +36,9 @@ class KMeans:
             iters += 1
             [changed, _] = self.sess.run([did_assignments_change, do_updates])
         [centers, assignments] = self.sess.run([centroids, cluster_assignments])
+        data = self.sess.run(points)
+        if graph:
+            plot(data, assignments, centers)
         return centers, assignments
 
     def save(self, file_name):
