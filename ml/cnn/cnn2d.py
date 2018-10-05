@@ -66,7 +66,7 @@ class CNN2D:
         eval = {"accuracy": tf.metrics.accuracy(labels=labels, predictions=p["classes"])}
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
-    def fit(self, data, labels, lr):
+    def fit(self, data, labels, lr, epochs):
         self.lr = lr
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir="./CNN_model")
@@ -84,7 +84,7 @@ class CNN2D:
 
         self.classifier.train(
             input_fn=train_input_fn,
-            steps=20000,
+            steps=epochs,
             hooks=[logging_hook])
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x=data,
