@@ -1,6 +1,4 @@
 import matplotlib.pyplot as plt
-import matplotlib.colors as colors
-from random import shuffle
 
 
 def plot(data, assignments, centers):
