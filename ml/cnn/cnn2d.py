@@ -53,10 +53,10 @@ class CNN2D:
         drop = tf.layers.dropout(inputs=dense, rate=self.drop, training=train)
         logits = tf.layers.dense(inputs=drop, units=self.output)
         p = {"classes": tf.argmax(logits, axis=1), "probabilities": tf.nn.softmax(logits, name="softmax_tensor")}
+        loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
 
         if not train:
-            return tf.estimator.EstimatorSpec(mode=mode, predictions=p)
-        loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
+            return tf.estimator.EstimatorSpec(mode=mode, predictions=p, loss=loss)
 
         if train:
             optimizer = tf.train.AdamOptimizer(learning_rate=self.lr)
@@ -66,7 +66,7 @@ class CNN2D:
         eval = {"accuracy": tf.metrics.accuracy(labels=labels, predictions=p["classes"])}
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
-    def fit(self, data, labels, lr, epochs):
+    def _fit(self, data, labels, lr, epochs):
         self.lr = lr
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir="./CNN_model")
@@ -94,9 +94,11 @@ class CNN2D:
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
         print(eval_results)
-        tf.app.run()
 
-    def test(self, data, labels):
+    def fit(self, data, labels, lr, epochs):
+        tf.app.run(main=self._fit(data, labels, lr, epochs))
+
+    def _test(self, data, labels):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x={"x": data},
             y=labels,
@@ -105,5 +107,7 @@ class CNN2D:
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
         print(eval_results)
-        tf.app.run()
         return eval_results
+
+    def test(self, data, labels):
+        tf.app.run(main=zself._test(data, labels))
