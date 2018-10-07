@@ -141,4 +141,4 @@ class CNN2D:
         print("Saved")
 
     def load(self, file_name):
-        self.classifier = pickle.load(open(file_name, "wb"))
+        self.classifier = pickle.load(open(file_name, "rb"))
