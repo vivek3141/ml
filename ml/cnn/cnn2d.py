@@ -1,6 +1,7 @@
 import tensorflow as tf
 from ml.activation import relu
 import numpy as np
+import pickle
 
 
 class CNN2D:
@@ -71,7 +72,7 @@ class CNN2D:
         eval = {"accuracy": tf.metrics.accuracy(labels=labels, predictions=p["classes"])}
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
-    def _fit(self, argv):
+    def _fit(self, data, labels, epochs, to_print):
 
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir="./CNN_model")
@@ -81,51 +82,63 @@ class CNN2D:
             tensors=tensors_to_log, every_n_iter=50)
 
         train_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x=self.data,
-            y=self.labels,
+            x=data,
+            y=labels,
             batch_size=100,
             num_epochs=None,
             shuffle=True)
 
         self.classifier.train(
             input_fn=train_input_fn,
-            steps=self.epochs,
+            steps=epochs,
             hooks=[logging_hook])
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x=self.data,
-            y=self.labels,
+            x=data,
+            y=labels,
             num_epochs=1,
             shuffle=False)
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        print("Done Training")
-        [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+        if to_print:
+            print("Done Training")
+            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
         print("")
         self.eval_results = eval_results
 
-    def fit(self, data, labels, lr, epochs):
-        self.lr = lr
-        self.data = data
-        self.labels = labels
-        self.epochs = epochs
-        tf.app.run(main=self._fit)
-        return self.eval_results
-
-    def _test(self, args):
+    def predict(self, data):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x={"x": self.test_data},
-            y=self.test_labels,
+            x=data,
+            shuffle=False)
+        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
+        return next(eval_results)
+
+    def fit(self, data, labels, lr, epochs, to_print=False):
+        self.lr = lr
+        self._fit(data, labels, epochs, to_print)
+        return self.eval_results
+
+    def _test(self, data, labels, to_print=False):
+        eval_input_fn = tf.estimator.inputs.numpy_input_fn(
+            x=data,
+            y=labels,
             num_epochs=1,
             shuffle=False)
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        print("Done Testing")
-        [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+
+        if to_print:
+            print("Done Testing")
+            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
         print("")
         self.eval_results = eval_results
 
-    def test(self, data, labels):
-        self.test_data = data
-        self.test_labels = labels
-        tf.app.run(main=self._test)
+    def test(self, data, labels, to_print=False):
+        self._test(data, labels, to_print)
         return self.eval_results
+
+    def save(self, file_name):
+        pickle.dump(self.classifier, open(file_name, "wb"))
+        print("Saved")
+
+    def load(self, file_name):
+        self.classifier = pickle.load(open(file_name, "wb"))

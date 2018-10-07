@@ -5,13 +5,17 @@ flags = tf.app.flags
 FLAGS = flags.FLAGS
 
 
-def m():
-    flags.DEFINE_string('name', None,
-                        'Append a name Tag to run.')
+def m(ar):
+    print("hi")
+    return False
 
-    flags.DEFINE_string('hypes', 'hypes/medseg.json',
-                        'File storing model parameters.')
+
+def g(ar):
+    print("bye")
 
 
 if __name__ == '__main__':
     tf.app.run(m)
+    print("hi")
+    tf.app.close()
+    tf.app.run(g)
