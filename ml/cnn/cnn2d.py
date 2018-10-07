@@ -10,7 +10,12 @@ class CNN2D:
         self.output = out
         self.layers = layers
         self.conv = None
+        self.test_data = None
+        self.test_labels = None
         self.pool = None
+        self.data = None
+        self.labels = None
+        self.epochs = None
         self.kernel_size = kernel_size
         self.activation = activation
         self.filters = filters
@@ -66,8 +71,8 @@ class CNN2D:
         eval = {"accuracy": tf.metrics.accuracy(labels=labels, predictions=p["classes"])}
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
-    def _fit(self, data, labels, lr, epochs):
-        self.lr = lr
+    def _fit(self, argv):
+
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir="./CNN_model")
 
@@ -76,38 +81,51 @@ class CNN2D:
             tensors=tensors_to_log, every_n_iter=50)
 
         train_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x=data,
-            y=labels,
+            x=self.data,
+            y=self.labels,
             batch_size=100,
             num_epochs=None,
             shuffle=True)
 
         self.classifier.train(
             input_fn=train_input_fn,
-            steps=epochs,
+            steps=self.epochs,
             hooks=[logging_hook])
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x=data,
-            y=labels,
+            x=self.data,
+            y=self.labels,
             num_epochs=1,
             shuffle=False)
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        print(eval_results)
+        print("Done Training")
+        [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+        print("")
+        self.eval_results = eval_results
 
     def fit(self, data, labels, lr, epochs):
-        tf.app.run(main=self._fit(data, labels, lr, epochs))
+        self.lr = lr
+        self.data = data
+        self.labels = labels
+        self.epochs = epochs
+        tf.app.run(main=self._fit)
+        return self.eval_results
 
-    def _test(self, data, labels):
+    def _test(self, args):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x={"x": data},
-            y=labels,
+            x={"x": self.test_data},
+            y=self.test_labels,
             num_epochs=1,
             shuffle=False)
 
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        print(eval_results)
-        return eval_results
+        print("Done Testing")
+        [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+        print("")
+        self.eval_results = eval_results
 
     def test(self, data, labels):
-        tf.app.run(main=zself._test(data, labels))
+        self.test_data = data
+        self.test_labels = labels
+        tf.app.run(main=self._test)
+        return self.eval_results
