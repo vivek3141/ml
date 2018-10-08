@@ -72,10 +72,10 @@ class CNN2D:
         eval = {"accuracy": tf.metrics.accuracy(labels=labels, predictions=p["classes"])}
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
-    def _fit(self, data, labels, epochs, to_print):
+    def _fit(self, data, labels, epochs, to_print, save_path):
 
         self.classifier = tf.estimator.Estimator(
-            model_fn=self._create_model, model_dir="./CNN_model")
+            model_fn=self._create_model, model_dir=save_path)
 
         tensors_to_log = {"probabilities": "softmax_tensor"}
         logging_hook = tf.train.LoggingTensorHook(
@@ -112,9 +112,9 @@ class CNN2D:
         eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
         return next(eval_results)
 
-    def fit(self, data, labels, lr, epochs, to_print=False):
+    def fit(self, data, labels, lr, epochs, to_print=False, save_path="./CNN_model"):
         self.lr = lr
-        self._fit(data, labels, epochs, to_print)
+        self._fit(data, labels, epochs, to_print, save_path)
         return self.eval_results
 
     def _test(self, data, labels, to_print=False):
@@ -137,8 +137,14 @@ class CNN2D:
         return self.eval_results
 
     def save(self, file_name):
-        pickle.dump(self.classifier, open(file_name, "wb"))
-        print("Saved")
+        s = tf.train.Saver()
+        path = s.save(self.classifier, "./" + file_name)
+        #with open(file_name, "wb") as w:
+        #    pickle.dump(self.classifier, w, pickle.HIGHEST_PROTOCOL)
+        print("Saved to " + path)
 
     def load(self, file_name):
-        self.classifier = pickle.load(open(file_name, "rb"))
+        s = tf.train.Saver()
+        s.restore(self.classifier, "./" + file_name)
+        #with open(file_name, "rb") as w:
+        #    self.classifier = pickle.load(w)
