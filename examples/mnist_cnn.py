@@ -17,7 +17,9 @@ c = CNN2D(
       epochs=200,
       save_path="./CNN_model",)"""
 c.load("./CNN_model")
+
 #c.test(data=mnist.test.images, labels=np.asarray(mnist.test.labels, dtype=np.int32))
+
 pred = c.predict(mnist.test.images[0])
 for i in pred:
     print(i)
