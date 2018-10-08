@@ -2,9 +2,9 @@ from setuptools import setup, find_packages
 
 setup(
     name='ml-python',
-    version='0.19',
+    version='0.20',
     author="Vivek Verma",
-    packages=find_packages("ml"),
+    packages=["ml"],
     author_email="vivekverma3141@gmail.com",
     url="https://github.com/vivek3141/ml",
     license='MIT',
