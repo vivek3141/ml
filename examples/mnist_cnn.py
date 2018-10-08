@@ -11,7 +11,13 @@ c = CNN2D(
     filters=[32, 64],
     dimensions=[28, 28],
 )
-c.fit(data=mnist.train.images, labels=np.asarray(mnist.train.labels, dtype=np.int32), lr=0.001, epochs=200, save_path)
-c.save("cnn_model.pkl")
-c.test(data=mnist.test.images, labels=np.asarray(mnist.test.labels, dtype=np.int32))
-print(c.predict(mnist.test.images[0]))
+"""c.fit(data=mnist.train.images,
+      labels=np.asarray(mnist.train.labels, dtype=np.int32),
+      lr=0.001,
+      epochs=200,
+      save_path="./CNN_model",)"""
+c.load("./CNN_model")
+#c.test(data=mnist.test.images, labels=np.asarray(mnist.test.labels, dtype=np.int32))
+pred = c.predict(mnist.test.images[0])
+print(next(pred))
+

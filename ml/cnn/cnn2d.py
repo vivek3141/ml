@@ -92,59 +92,49 @@ class CNN2D:
             input_fn=train_input_fn,
             steps=epochs,
             hooks=[logging_hook])
-        eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-            x=data,
-            y=labels,
-            num_epochs=1,
-            shuffle=False)
-
-        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        if to_print:
-            print("Done Training")
-            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
-        print("")
-        self.eval_results = eval_results
+        #eval_input_fn = tf.estimator.inputs.numpy_input_fn(
+        #    x=data,
+        #    y=labels,
+        #    num_epochs=1,
+        #    shuffle=False)
+#
+#        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
+#        if to_print:
+#            print("Done Training")
+#            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+#        print("")
+#        self.eval_results = eval_results
 
     def predict(self, data):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x=data,
             shuffle=False)
-        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-        return next(eval_results)
+        eval_results = self.classifier.predict(input_fn=eval_input_fn)
+        return eval_results
 
-    def fit(self, data, labels, lr, epochs, to_print=False, save_path="./CNN_model"):
+    def fit(self, data, labels, lr, epochs, to_print=True, save_path="./CNN_model"):
         self.lr = lr
         self._fit(data, labels, epochs, to_print, save_path)
-        return self.eval_results
+        # return self.eval_results
 
-    def _test(self, data, labels, to_print=False):
+    def _test(self, data, labels, to_print):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x=data,
             y=labels,
             num_epochs=1,
             shuffle=False)
 
-        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-
+        results = self.classifier.evaluate(input_fn=eval_input_fn)
         if to_print:
             print("Done Testing")
-            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+            [print(str(i) + " : " + str(results[i])) for i in results.keys()]
         print("")
-        self.eval_results = eval_results
+        self.eval_results = results
 
-    def test(self, data, labels, to_print=False):
+    def test(self, data, labels, to_print=True):
         self._test(data, labels, to_print)
         return self.eval_results
 
-    def save(self, file_name):
-        s = tf.train.Saver()
-        path = s.save(self.classifier, "./" + file_name)
-        #with open(file_name, "wb") as w:
-        #    pickle.dump(self.classifier, w, pickle.HIGHEST_PROTOCOL)
-        print("Saved to " + path)
-
     def load(self, file_name):
-        s = tf.train.Saver()
-        s.restore(self.classifier, "./" + file_name)
-        #with open(file_name, "rb") as w:
-        #    self.classifier = pickle.load(w)
+        self.classifier = tf.estimator.Estimator(
+            model_fn=self._create_model, model_dir=file_name)
