@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ml-python',
-    version='0.18',
+    version='0.19',
     author="Vivek Verma",
     author_email="vivekverma3141@gmail.com",
     url="https://github.com/vivek3141/ml",
