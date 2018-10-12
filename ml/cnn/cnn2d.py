@@ -31,6 +31,7 @@ class CNN2D:
         data = features
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
+        print(tf.size(data))
         inp = tf.reshape(data, size)
 
         self.conv = tf.layers.conv2d(
@@ -58,11 +59,13 @@ class CNN2D:
         dense = tf.layers.dense(inputs=pool_flat, units=1024, activation=self.activation)
         drop = tf.layers.dropout(inputs=dense, rate=self.drop, training=train)
         logits = tf.layers.dense(inputs=drop, units=self.output)
+
         p = {"classes": tf.argmax(logits, axis=1), "probabilities": tf.nn.softmax(logits, name="softmax_tensor")}
+        if not train:
+            return tf.estimator.EstimatorSpec(mode=mode, predictions=p)
         loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
 
-        if not train:
-            return tf.estimator.EstimatorSpec(mode=mode, predictions=p, loss=loss)
+
 
         if train:
             optimizer = tf.train.AdamOptimizer(learning_rate=self.lr)
