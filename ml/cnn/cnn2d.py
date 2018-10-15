@@ -28,6 +28,10 @@ class CNN2D:
     def _create_model(self, features, labels, mode):
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
+        if mode == tf.estimator.ModeKeys.PREDICT:
+            #print(self.input)
+            #features = tf.reshape(features, [self.input, -1])
+            print(features)
         inp = tf.reshape(features, size)
 
         self.conv = tf.layers.conv2d(
@@ -57,7 +61,7 @@ class CNN2D:
         logits = tf.layers.dense(inputs=drop, units=self.output)
 
         p = {"classes": tf.argmax(logits, axis=1), "probabilities": tf.nn.softmax(logits, name="softmax_tensor")}
-        if not train:
+        if mode == tf.estimator.ModeKeys.PREDICT:
             return tf.estimator.EstimatorSpec(mode=mode, predictions=p)
         loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
 
