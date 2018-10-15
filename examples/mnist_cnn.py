@@ -19,6 +19,6 @@ c = CNN2D(
 c.load("./CNN_model")
 
 # c.test(data=mnist.test.images, labels=np.asarray(mnist.test.labels, dtype=np.int32))
-print(mnist.test.images[0].reshape([28, 28]))
+print(len(mnist.train.images[0]))
 pred = c.predict(mnist.train.images[0])
 print(next(pred))

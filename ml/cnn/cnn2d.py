@@ -1,7 +1,5 @@
 import tensorflow as tf
 from ml.activation import relu
-import numpy as np
-import pickle
 
 
 class CNN2D:
@@ -28,11 +26,9 @@ class CNN2D:
         self.dimensions = dimensions
 
     def _create_model(self, features, labels, mode):
-        data = features
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
-        print(tf.size(data))
-        inp = tf.reshape(data, size)
+        inp = tf.reshape(features, size)
 
         self.conv = tf.layers.conv2d(
             inputs=inp,
@@ -65,9 +61,7 @@ class CNN2D:
             return tf.estimator.EstimatorSpec(mode=mode, predictions=p)
         loss = tf.losses.sparse_softmax_cross_entropy(labels=labels, logits=logits)
 
-
-
-        if train:
+        if mode == tf.estimator.ModeKeys.TRAIN:
             optimizer = tf.train.AdamOptimizer(learning_rate=self.lr)
             op = optimizer.minimize(loss=loss, global_step=tf.train.get_global_step())
             return tf.estimator.EstimatorSpec(mode=mode, loss=loss, train_op=op)
@@ -95,22 +89,24 @@ class CNN2D:
             input_fn=train_input_fn,
             steps=epochs,
             hooks=[logging_hook])
-        #eval_input_fn = tf.estimator.inputs.numpy_input_fn(
+        # eval_input_fn = tf.estimator.inputs.numpy_input_fn(
         #    x=data,
         #    y=labels,
         #    num_epochs=1,
         #    shuffle=False)
-#
-#        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-#        if to_print:
-#            print("Done Training")
-#            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
-#        print("")
-#        self.eval_results = eval_results
+
+    #
+    #        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
+    #        if to_print:
+    #            print("Done Training")
+    #            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
+    #        print("")
+    #        self.eval_results = eval_results
 
     def predict(self, data):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x=data,
+            batch_size=1,
             shuffle=False)
         eval_results = self.classifier.predict(input_fn=eval_input_fn)
         return eval_results
