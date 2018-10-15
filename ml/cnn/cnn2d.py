@@ -28,10 +28,6 @@ class CNN2D:
     def _create_model(self, features, labels, mode):
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
-        if mode == tf.estimator.ModeKeys.PREDICT:
-            # print(self.input)
-            # features = tf.reshape(features, [self.input, -1])
-            print(features)
         inp = tf.reshape(features, size)
 
         self.conv = tf.layers.conv2d(
@@ -93,21 +89,10 @@ class CNN2D:
             input_fn=train_input_fn,
             steps=epochs,
             hooks=[logging_hook])
-        # eval_input_fn = tf.estimator.inputs.numpy_input_fn(
-        #    x=data,
-        #    y=labels,
-        #    num_epochs=1,
-        #    shuffle=False)
 
-    #
-    #        eval_results = self.classifier.evaluate(input_fn=eval_input_fn)
-    #        if to_print:
-    #            print("Done Training")
-    #            [print(str(i) + " : " + str(eval_results[i])) for i in eval_results.keys()]
-    #        print("")
-    #        self.eval_results = eval_results
-
-    def predict(self, data):
+    def predict(self, data, transpose=False):
+        if transpose:
+            data = data.reshape((1, self.input))
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
             x=data,
             batch_size=1,
@@ -118,7 +103,6 @@ class CNN2D:
     def fit(self, data, labels, lr, epochs, to_print=True, save_path="./CNN_model"):
         self.lr = lr
         self._fit(data, labels, epochs, to_print, save_path)
-        # return self.eval_results
 
     def _test(self, data, labels, to_print):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
