@@ -1,6 +1,5 @@
 from ml.cnn import CNN2D
 from ml.data import mnist
-import numpy as np
 
 c = CNN2D(
     layers=2,
@@ -11,13 +10,12 @@ c = CNN2D(
     filters=[32, 64],
     dimensions=[28, 28],
 )
-"""c.fit(data=mnist.train.images,
-      labels=np.asarray(mnist.train.labels, dtype=np.int32),
+c.fit(data=mnist.train.images,
+      labels=mnist.train.labels,
       lr=0.001,
       epochs=200,
-      save_path="./CNN_model",)"""
+      save_path="./CNN_model",)
 
-c.load("./CNN_model")
-
+# c.load("./CNN_model")
 pred = c.predict(mnist.train.images[0], transpose=True)
 print(pred)

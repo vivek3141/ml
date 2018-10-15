@@ -100,9 +100,9 @@ class CNN2D:
         eval_results = self.classifier.predict(input_fn=eval_input_fn)
         return next(eval_results)
 
-    def fit(self, data, labels, lr, epochs, to_print=True, save_path="./CNN_model"):
+    def fit(self, data, labels, lr, epochs, save_path="./CNN_model"):
         self.lr = lr
-        self._fit(data, labels, epochs, to_print, save_path)
+        self._fit(data, labels, epochs, save_path)
 
     def _test(self, data, labels, to_print):
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
