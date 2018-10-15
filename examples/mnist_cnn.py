@@ -1,5 +1,6 @@
 from ml.cnn import CNN2D
 from ml.data import mnist
+from ml.data import get_predicted_value
 
 c = CNN2D(
     layers=2,
@@ -10,12 +11,14 @@ c = CNN2D(
     filters=[32, 64],
     dimensions=[28, 28],
 )
-c.fit(data=mnist.train.images,
-      labels=mnist.train.labels,
-      lr=0.001,
-      epochs=200,
-      save_path="./CNN_model",)
 
-# c.load("./CNN_model")
-predicted = c.predict(mnist.train.images[0], transpose=True)
-print(predicted)
+# c.fit(data=mnist.train.images, labels=mnist.train.labels, lr=0.001, epochs=200, save_path="./model")
+
+c.load("./model")
+
+# c.test(data=mnist.test.images[0:100], labels=mnist.test.labels[0:100])
+
+predicted = c.predict(mnist.test.images[0], transpose=True)
+
+print("Predicted Value: {}".format(get_predicted_value(predicted['probabilities'])))
+print("Actual Value: {}".format(mnist.test.labels[0]))

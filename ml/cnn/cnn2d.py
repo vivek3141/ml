@@ -101,7 +101,7 @@ class CNN2D:
         eval_results = self.classifier.predict(input_fn=eval_input_fn)
         return next(eval_results)
 
-    def fit(self, data, labels, lr, epochs, save_path="./CNN_model"):
+    def fit(self, data, labels, lr, epochs, save_path="./model"):
         self.lr = lr
         labels = np.asarray(labels, dtype=np.int32)
         self._fit(data, labels, epochs, save_path)
