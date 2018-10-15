@@ -29,8 +29,8 @@ class CNN2D:
         size = [-1, self.dimensions[0], self.dimensions[1], 1]
         train = mode == tf.estimator.ModeKeys.TRAIN
         if mode == tf.estimator.ModeKeys.PREDICT:
-            #print(self.input)
-            #features = tf.reshape(features, [self.input, -1])
+            # print(self.input)
+            # features = tf.reshape(features, [self.input, -1])
             print(features)
         inp = tf.reshape(features, size)
 
