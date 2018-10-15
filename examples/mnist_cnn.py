@@ -17,5 +17,5 @@ c.fit(data=mnist.train.images,
       save_path="./CNN_model",)
 
 # c.load("./CNN_model")
-pred = c.predict(mnist.train.images[0], transpose=True)
-print(pred)
+predicted = c.predict(mnist.train.images[0], transpose=True)
+print(predicted)

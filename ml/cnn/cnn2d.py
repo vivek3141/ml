@@ -1,5 +1,6 @@
 import tensorflow as tf
 from ml.activation import relu
+import numpy as np
 
 
 class CNN2D:
@@ -102,6 +103,7 @@ class CNN2D:
 
     def fit(self, data, labels, lr, epochs, save_path="./CNN_model"):
         self.lr = lr
+        labels = np.asarray(labels, dtype=np.int32)
         self._fit(data, labels, epochs, save_path)
 
     def _test(self, data, labels, to_print):
