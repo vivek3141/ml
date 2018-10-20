@@ -12,11 +12,11 @@ c = CNN2D(
     dimensions=[28, 28],
 )
 
-# c.fit(data=mnist.train.images, labels=mnist.train.labels, lr=0.001, epochs=200, save_path="./model")
+c.fit(data=mnist.train.images, labels=mnist.train.labels, lr=0.001, epochs=200, save_path="./model")
 
 c.load("./model")
 
-# c.test(data=mnist.test.images[0:100], labels=mnist.test.labels[0:100])
+c.test(data=mnist.test.images[0:100], labels=mnist.test.labels[0:100])
 
 predicted = c.predict(mnist.test.images[0], transpose=True)
 
