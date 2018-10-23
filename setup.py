@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='ml-python',
-    version='1.1',
+    version='1.2',
     author="Vivek Verma",
     packages=["ml"],
     author_email="vivekverma3141@gmail.com",
