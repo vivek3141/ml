@@ -18,6 +18,16 @@ class LogisticRegression:
         self.J = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=self.y, labels=self.yy))
 
     def fit(self, data, labels, lr=0.001, steps=1000, graph=False, batch_size=25):
+        """
+        Fit the model from the given data
+        :param data: Input data matrix
+        :param labels: Input labels
+        :param lr: Learning Rate
+        :param steps: Number of steps
+        :param graph: True if to graph the function
+        :param batch_size: Batch size for batch gradient descent
+        :return: None
+        """
         minimize = tf.train.AdamOptimizer(learning_rate=lr)
         optimize = minimize.minimize(self.J)
         losses = []
@@ -38,19 +48,41 @@ class LogisticRegression:
             plt.show()
 
     def test(self, data, labels):
+        """
+        Test the model for accuracy
+        :param data: Input data
+        :param labels: Input labels
+        :return: Accuracy (float)
+        """
         correct = 0
         for i in range(len(data)):
             if labels[i] == self.predict(data[i]):
                 correct += 1
         print("Accuracy: {}%".format(correct / len(data) * 100))
+        return correct / len(data) * 100
 
     def hypothesis(self, data):
+        """
+        Run h(x) for some x
+        :param data: Input data
+        :return: Value for h(x)
+        """
         return self.s.run(self.y, feed_dict={self.x: data})
 
     def predict(self, data, to_round=True):
+        """
+        Predict the value based on input data
+        :param data: Input data
+        :param to_round: Set true to round the value to 1 or 0
+        :return: int or float for predicted value
+        """
         if to_round:
             return self.s.run(self.predicted, feed_dict={self.x: np.matrix(data)})[0][0]
         return self.s.run(self.predicted_no_round, feed_dict={self.x: np.matrix(data)})[0][0]
 
     def get_values(self):
+        """
+        Get weights and biases
+        :return: Weight vecor and bias vector
+        """
         return np.array(self.s.run(self.W)), self.s.run(self.b)[0]
