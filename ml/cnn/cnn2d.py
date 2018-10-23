@@ -71,7 +71,6 @@ class CNN2D:
         return tf.estimator.EstimatorSpec(mode=mode, loss=loss, eval_metric_ops=eval)
 
     def _fit(self, data, labels, epochs, save_path):
-
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir=save_path)
 
@@ -92,6 +91,12 @@ class CNN2D:
             hooks=[logging_hook])
 
     def predict(self, data, transpose=False):
+        """
+        Used to predict labels based on input data
+        :param data: Data to input
+        :param transpose: Set true to transpose the input vector
+        :return: Index of the max value of the output vector
+        """
         if transpose:
             data = data.reshape((1, self.input))
         eval_input_fn = tf.estimator.inputs.numpy_input_fn(
