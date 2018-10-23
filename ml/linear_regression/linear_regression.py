@@ -7,7 +7,7 @@ class LinearRegression:
         self.theta = []
 
     @staticmethod
-    def _linear_regression(self, x, label, m=0, b=0, steps=1000, lr=0.0001):
+    def _linear_regression(x, label, m=0, b=0, steps=1000, lr=0.0001):
         n = float(len(label))
         cost = 0
         for i in range(steps):
@@ -20,7 +20,7 @@ class LinearRegression:
         return m, b, cost
 
     @staticmethod
-    def _matrix_sub(self, mat1, mat2):
+    def _matrix_sub(mat1, mat2):
         mat = []
         for i in range(len(mat1)):
             mat.append(mat1[i] - mat2[i])
@@ -40,7 +40,7 @@ class LinearRegression:
         return [weight, bias]
 
     @staticmethod
-    def _hypothesis(self, theta, x):
+    def _hypothesis(theta, x):
         return theta[0] * x + theta[1]
 
     def fit(self, data, labels, lr=0.001, graph=False, steps=1000, init_theta=[1, 1]):
@@ -61,9 +61,9 @@ class LinearRegression:
         y = labels
         n = len(x)
         for i in range(len(x)):
-            theta = self._matrix_sub(theta, self._gradient(x[i], y[i], theta, n))
+            theta = LinearRegression._matrix_sub(theta, self._gradient(x[i], y[i], theta, n))
 
-        m, b, cost = self._linear_regression(x, y, steps=steps, lr=lr)
+        m, b, cost = LinearRegression._linear_regression(x, y, steps=steps, lr=lr)
         theta[0] = m
         theta[1] = b
         self.theta = theta
@@ -81,7 +81,7 @@ class LinearRegression:
         :param x: Input
         :return: Predicted Value
         """
-        return self._hypothesis(self.theta, x)
+        return LinearRegression._hypothesis(self.theta, x)
 
     def save(self, file_name):
         """
