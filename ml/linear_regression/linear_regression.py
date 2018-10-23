@@ -40,6 +40,16 @@ class LinearRegression:
         return theta[0] * x + theta[1]
 
     def fit(self, data, labels, lr=0.001, graph=False, steps=1000, init_theta=[1, 1]):
+        """
+        Fit the model with the given data
+        :param data: Data input matrix
+        :param labels: Data input labels
+        :param lr: Learning rate
+        :param graph:
+        :param steps:
+        :param init_theta:
+        :return:
+        """
         if steps > len(data):
             steps = len(data)
         theta = init_theta
