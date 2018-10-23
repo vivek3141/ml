@@ -147,9 +147,9 @@ class CNN2D:
 
     def load(self, file_name):
         """
-        Load the model from the
-        :param file_name:
-        :return:
+        Load the model from the folder
+        :param file_name: Path to the folder
+        :return: None
         """
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir=file_name)
