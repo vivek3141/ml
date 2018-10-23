@@ -67,11 +67,11 @@ class LinearRegression:
         theta[0] = m
         theta[1] = b
         self.theta = theta
-        xLine = np.array(range(0, 10))
-        yLine = theta[0] * xLine + theta[1]
+        x_line = np.array(range(0, 10))
+        y_line = theta[0] * x_line + theta[1]
         if graph:
             plt.scatter(x, y, c="RED")
-            plt.plot(xLine, yLine)
+            plt.plot(x_line, y_line)
             plt.show()
         return cost
 
