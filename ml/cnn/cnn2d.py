@@ -107,6 +107,15 @@ class CNN2D:
         return next(eval_results)
 
     def fit(self, data, labels, lr, epochs, save_path="./model"):
+        """
+        Fits the model based on the input
+        :param data: Input matrix
+        :param labels: Labels for the data
+        :param lr: Learning Rate
+        :param epochs: Number of steps
+        :param save_path: Folder to save the model in
+        :return: None
+        """
         self.lr = lr
         labels = np.asarray(labels, dtype=np.int32)
         self._fit(data, labels, epochs, save_path)
@@ -126,9 +135,21 @@ class CNN2D:
         self.eval_results = results
 
     def test(self, data, labels, to_print=True):
+        """
+        Test the model on the given data
+        :param data: Test data matrix
+        :param labels: Test data labels
+        :param to_print: Display results
+        :return: Results in a dictionary
+        """
         self._test(data, labels, to_print)
         return self.eval_results
 
     def load(self, file_name):
+        """
+        Load the model from the
+        :param file_name:
+        :return:
+        """
         self.classifier = tf.estimator.Estimator(
             model_fn=self._create_model, model_dir=file_name)
