@@ -83,6 +83,6 @@ class LogisticRegression:
     def get_values(self):
         """
         Get weights and biases
-        :return: Weight vecor and bias vector
+        :return: Weight vector and bias vector
         """
         return np.array(self.s.run(self.W)), self.s.run(self.b)[0]
