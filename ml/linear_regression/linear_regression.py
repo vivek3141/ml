@@ -45,10 +45,10 @@ class LinearRegression:
         :param data: Data input matrix
         :param labels: Data input labels
         :param lr: Learning rate
-        :param graph:
-        :param steps:
-        :param init_theta:
-        :return:
+        :param graph: True if to graph the model
+        :param steps: Number of steps
+        :param init_theta: Initial theta values
+        :return: Cost of the model
         """
         if steps > len(data):
             steps = len(data)
