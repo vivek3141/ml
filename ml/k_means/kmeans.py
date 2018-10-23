@@ -15,6 +15,14 @@ class KMeans:
         return total / count
 
     def fit(self, points, cluster_assignments, epochs, graph=False):
+        """
+        Takes input to fit model
+        :param points: Data points matrix
+        :param cluster_assignments: Initial Cluster assignments
+        :param epochs: Number of steps
+        :param graph: True if to graph the data points
+        :return: Centers and cluster assignments
+        """
         centroids = tf.Variable(tf.slice(points.initialized_value(), [0, 0], [self.k, 2]))
         rep_centroids = tf.reshape(tf.tile(centroids, [self.n, 1]), [self.n, self.k, 2])
         rep_points = tf.reshape(tf.tile(points, [1, self.k]), [self.n, self.k, 2])
@@ -42,11 +50,21 @@ class KMeans:
         return centers, assignments
 
     def save(self, file_name):
+        """
+        Save the model
+        :param file_name: File to save the model to
+        :return: None
+        """
         saver = tf.train.Saver()
         saver.save(self.sess, "./" + str(file_name))
         self.sess.close()
 
     def load(self, file_name):
+        """
+        Load the model
+        :param file_name: File to load the model from
+        :return: None
+        """
         load = tf.train.Saver()
         self.sess = tf.Session()
         load.restore(self.sess, file_name)
