@@ -6,8 +6,10 @@ class LinearRegression:
     def __init__(self):
         self.theta = []
 
+    @staticmethod
     def _linear_regression(self, x, label, m=0, b=0, steps=1000, lr=0.0001):
         n = float(len(label))
+        cost = 0
         for i in range(steps):
             y = (m * x) + b
             cost = sum([data ** 2 for data in (label - y)]) / n
@@ -17,6 +19,7 @@ class LinearRegression:
             b = b - (lr * b_gradient)
         return m, b, cost
 
+    @staticmethod
     def _matrix_sub(self, mat1, mat2):
         mat = []
         for i in range(len(mat1)):
@@ -36,6 +39,7 @@ class LinearRegression:
         bias = (2 / n) * (y - self._hypothesis(theta, x))
         return [weight, bias]
 
+    @staticmethod
     def _hypothesis(self, theta, x):
         return theta[0] * x + theta[1]
 
