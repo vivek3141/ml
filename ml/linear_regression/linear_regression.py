@@ -72,14 +72,29 @@ class LinearRegression:
         return cost
 
     def predict(self, x):
+        """
+        Predict a value with the model
+        :param x: Input
+        :return: Predicted Value
+        """
         return self._hypothesis(self.theta, x)
 
     def save(self, file_name):
+        """
+        Save the model
+        :param file_name: File to save the model to
+        :return: None
+        """
         with open(file_name, "w") as f:
             f.write(str(self.theta[0]) + " " + str(self.theta[1]))
         print("Saved to: {}".format(file_name))
 
     def load(self, file_name):
+        """
+        Load the model from the file
+        :param file_name: File to load the model from
+        :return: None
+        """
         with open(file_name, "r") as f:
             s = f.read().split(" ")
         self.theta[0] = int(s[0])
