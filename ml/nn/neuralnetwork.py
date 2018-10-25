@@ -108,12 +108,12 @@ class NeuralNetwork:
 
     def save(self, file_name):
         """
-
-        :param file_name:
-        :return:
+        Save the model
+        :param file_name: File to save the model to
+        :return: None
         """
         saver = tf.train.Saver()
-        saver.save(self.s, "./" + str(file_name))
+        saver.save(self.s, str(file_name))
         self.s.close()
 
     def load(self, file_name):
