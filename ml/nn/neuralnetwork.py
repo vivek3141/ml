@@ -90,6 +90,12 @@ class NeuralNetwork:
         return ret
 
     def test(self, test_x, test_y):
+        """
+        Test for accuracy
+        :param test_x: Data to test on
+        :param test_y: Test data labels
+        :return: Accuracy (int)
+        """
         self._check_length(test_x, test_y)
         num_c = 0
         for i in range(len(test_x)):
@@ -101,6 +107,11 @@ class NeuralNetwork:
         return acc
 
     def save(self, file_name):
+        """
+
+        :param file_name:
+        :return:
+        """
         saver = tf.train.Saver()
         saver.save(self.s, "./" + str(file_name))
         self.s.close()
