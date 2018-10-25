@@ -19,6 +19,7 @@ class NeuralNetwork:
         self.output = out
         self.W = []
         self.b = []
+        self.s = None
         self.x = tf.placeholder(tf.float32, shape=[None, self.input])
         self.yy = tf.placeholder(tf.float32, shape=[None, self.output])
         self.z = self.create_layer(0, self.input, self.layers[0], self.x, False)
