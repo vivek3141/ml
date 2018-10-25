@@ -60,6 +60,15 @@ class NeuralNetwork:
             plt.show()
 
     def create_layer(self, layer_number, input_size, output_size, x, nonlinear=True):
+        """
+        Creates a layer
+        :param layer_number:
+        :param input_size:
+        :param output_size:
+        :param x:
+        :param nonlinear:
+        :return:
+        """
         with tf.variable_scope(f"layer_{layer_number}"):
             self.W = tf.get_variable("W", [input_size, output_size])
             self.b = tf.get_variable("b", [1, output_size])
