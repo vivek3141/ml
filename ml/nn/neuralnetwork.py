@@ -117,6 +117,11 @@ class NeuralNetwork:
         self.s.close()
 
     def load(self, file_name):
+        """
+        Load a saved model
+        :param file_name: File to load the model from
+        :return: None
+        """
         load = tf.train.Saver()
         self.s = tf.Session()
         load.restore(self.s, file_name)
