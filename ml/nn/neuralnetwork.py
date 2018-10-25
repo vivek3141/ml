@@ -28,6 +28,16 @@ class NeuralNetwork:
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
 
     def fit(self, steps, data, labels, graph=False, check=50, lr=0.001):
+        """
+        Fits the model
+        :param steps: Number of steps
+        :param data: Data matrix
+        :param labels: Label matrix
+        :param graph: Set true to graph loss
+        :param check: Interval to plot the graph at. Eg. check=50 will plot a point every 50 epochs
+        :param lr: Learning Rate
+        :return: None
+        """
         if steps > len(data):
             steps = len(data)
         losses = []
