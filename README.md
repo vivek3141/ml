@@ -1,3 +1,6 @@
+[![PyPi Version](https://img.shields.io/pypi/v/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
+[![Python Compatibility](https://img.shields.io/pypi/pyversions/ml-python.svg)](https://pypi.python.org/pypi/fastai)
+[![License](https://img.shields.io/pypi/l/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
 # ML
 
 This module provides for the easiest way to implement Machine Learning algoritms without the need to know about them.
