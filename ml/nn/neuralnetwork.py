@@ -1,10 +1,6 @@
 import tensorflow as tf
 from ml.error import Error
-
-try:
-    import matplotlib.pyplot as plt
-except ModuleNotFoundError:
-    print("Warning: Can't graph from terminal")
+import matplotlib.pyplot as plt
 import numpy as np
 
 
