@@ -1,1 +1,1 @@
-from .logistic_regression import LogisticRegression
+from ml.logistic_regression import *

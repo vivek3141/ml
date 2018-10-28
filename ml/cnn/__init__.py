@@ -1,1 +1,1 @@
-from .cnn2d import *
+from ml.cnn.cnn2d import *

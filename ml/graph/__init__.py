@@ -1,2 +1,2 @@
-from .lr import *
-from .kmeans import *
+from ml.graph.lr import *
+from ml.graph.kmeans import *

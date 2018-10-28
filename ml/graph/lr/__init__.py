@@ -1,1 +1,1 @@
-from .graph import *
+from ml.graph.lr.graph import *
