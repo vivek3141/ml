@@ -1,6 +1,5 @@
 import warnings
 
-print("ignore")
 warnings.filterwarnings("ignore")
 
 from ml.k_means import *
