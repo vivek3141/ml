@@ -3,5 +3,8 @@ dist/
 ml.egg-info/
 examples/MNIST_data/
 examples/MNIST-data/
+examples/model/
+examples/checkpoint
 ml_python.egg-info/
 .idea/
+MNIST-data/
