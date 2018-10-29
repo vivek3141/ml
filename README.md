@@ -15,19 +15,16 @@ I would not recommend using this module for big projects.
 
 This module uses a tensorflow backend.
 
-Install by running
-<br><br>
+### Pip installation
 ```bash
 pip install ml-python
 ```
-<br><br>
-Or by cloning the repo and installing it.<br>
+### Git installation
 ```bash
 git clone https://github.com/vivek3141/ml
 cd ml
 python setup.py install
 ```
-<br><br>
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
 ## Examples
