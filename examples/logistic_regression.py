@@ -6,7 +6,7 @@ from ml.graph.lr import scatter_two_features, plot_line
 data, labels = yx2features()
 
 lr = LogisticRegression(features=2)
-lr.fit(data=data, labels=labels, graph=True, lr=0.01, steps=200)
+lr.fit(data=data, labels=labels, graph=True, lr=0.01, steps=200, to_print=False)
 
 w, b = lr.get_values()
 

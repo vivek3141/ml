@@ -26,6 +26,7 @@ class LogisticRegression:
         :param steps: Number of steps
         :param graph: True if to graph the function
         :param batch_size: Batch size for batch gradient descent
+        :param to_print: True if to print the loss after a certain amount of steps
         :return: None
         """
         minimize = tf.train.AdamOptimizer(learning_rate=lr)
