@@ -17,7 +17,7 @@ class LogisticRegression:
         self.s = tf.Session()
         self.J = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=self.y, labels=self.yy))
 
-    def fit(self, data, labels, lr=0.001, steps=1000, graph=False, batch_size=25):
+    def fit(self, data, labels, lr=0.001, steps=1000, graph=False, batch_size=25, to_print=True):
         """
         Fit the model from the given data
         :param data: Input data matrix
@@ -40,7 +40,7 @@ class LogisticRegression:
             self.s.run(optimize, feed_dict={self.x: train_x, self.yy: train_y})
             loss = self.s.run(self.J, feed_dict={self.x: train_x, self.yy: train_y})
             losses.append(loss)
-            if steps % 100 == 0:
+            if steps % 100 == 0 and to_print:
                 print("Step:{}, Loss:{}".format(i, loss))
 
         if graph:
