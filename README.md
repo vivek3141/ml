@@ -25,6 +25,10 @@ git clone https://github.com/vivek3141/ml
 cd ml
 python setup.py install
 ```
+### Bash Installation
+```bash
+./install.sh
+```
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
 ## Examples
