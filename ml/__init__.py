@@ -2,10 +2,10 @@ import warnings
 
 warnings.filterwarnings("ignore")
 
-from ml.k_means import *
-from ml.linear_regression import *
-from ml.logistic_regression import *
-from ml.nn import *
-from ml.random import *
-from ml.activation import *
-from ml.cnn import *
+from .k_means import *
+from .linear_regression import *
+from .logistic_regression import *
+from .nn import *
+from .random import *
+from .activation import *
+from .cnn import *

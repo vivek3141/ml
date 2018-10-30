@@ -1,10 +1,11 @@
 from setuptools import setup
+from setuptools import find_packages
 
 setup(
     name='ml-python',
     version='1.7',
     author="Vivek Verma",
-    packages=["ml"],
+    packages=find_packages(),
     author_email="vivekverma3141@gmail.com",
     url="https://github.com/vivek3141/ml",
     license='MIT',
