@@ -19,7 +19,7 @@ This module uses a tensorflow backend.
 ```bash
 pip install ml-python
 ```
-### Git installation
+### Python installation
 ```bash
 git clone https://github.com/vivek3141/ml
 cd ml
@@ -27,6 +27,8 @@ python setup.py install
 ```
 ### Bash Installation
 ```bash
+git clone https://github.com/vivek3141/ml
+cd ml
 ./install.sh
 ```
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
