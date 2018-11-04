@@ -2,7 +2,8 @@ language: python
 python:
   - "3.6"
 install:
-  - pip install -r requirements.txt
+  - pip3 install -r requirements.txt
 script:
   - python3 ./examples/k_means.py
   - python3 ./examples/linear_regression.py
+  - python3 ./examples/mnist_cnn.py
