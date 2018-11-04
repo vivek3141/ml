@@ -1,6 +1,10 @@
 from ml.nn import NeuralNetwork
 from ml.activation import relu
-
+import pickle
+with open("label.txt", "rb") as f:
+    label = pickle.load(f)
+with open("data.txt", "rb") as f:
+    image = pickle.load(f)
 n = NeuralNetwork(
     layers=[20],
     inp=784,
