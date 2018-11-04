@@ -24,7 +24,7 @@ class NeuralNetwork:
         self.y = self.create_layer(len(layers), self.layers[-1], self.output, self.z, False)
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
 
-    def fit(self, steps, data, labels, graph=False, check=50, lr=0.001):
+    def fit(self, steps, data, labels, graph=False, check=50, lr=0.001, to_print=False):
         """
         Fits the model
         :param steps: Number of steps
@@ -33,6 +33,7 @@ class NeuralNetwork:
         :param graph: Set true to graph loss
         :param check: Interval to plot the graph at. Eg. check=50 will plot a point every 50 epochs
         :param lr: Learning Rate
+        :param to_print: Set true to print step and loss every @param check
         :return: None
         """
         if steps > len(data):
@@ -48,7 +49,7 @@ class NeuralNetwork:
         for i in range(steps):
             x_val = data[i].reshape(1, self.input)
             y_val = labels[i].reshape(1, self.output)
-            if i % check == 0:
+            if i % check == 0 and to_print:
                 losses.append(self.s.run(self.J, feed_dict={self.x: x_c, self.yy: y_c}))
                 print("Step: {}, Loss: {}".format(steps, losses[-1]))
             self.s.run(min, feed_dict={self.x: x_val, self.yy: y_val})

@@ -7,5 +7,4 @@ install:
 script:
   - python3 ./examples/k_means.py
   - python3 ./examples/linear_regression.py
-  - python3 ./examples/mnist_cnn.py
   - python3 ./examples/mnist_neuralnet.py
