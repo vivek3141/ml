@@ -36,7 +36,7 @@ This module has support for ANNs, CNNs, linear regression, logistic regression, 
 
 ## Examples
 Examples for all implemented structures can be found in `/examples`. <br>
-In this example, we will see how to learn a linear regression example.
+In this example, linear regression is used.
 <br><br>
 First, import the required modules.
 ```python
@@ -49,7 +49,7 @@ l = LinearRegression()
 ```
 This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.
 ```python
-# Randomly generating the data
+# Randomly generating the data and converting the list to int
 x = np.array(list(map(int, 10*np.random.random(50))))
 y = np.array(list(map(int, 10*np.random.random(50))))
 ```
