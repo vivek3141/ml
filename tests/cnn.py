@@ -1,5 +1,6 @@
 from ml.cnn import CNN2D
 import pickle
+import numpy as np
 
 with open("label.txt", "rb") as f:
     label = pickle.load(f)
@@ -16,6 +17,6 @@ c = CNN2D(
     dimensions=[28, 28],
 )
 
-c.fit(data=image, labels=label, lr=0.001, epochs=1, save_path="./model")
-c.test(data=image, labels=label)
-predicted = c.predict(image, transpose=True)
+c.fit(data=np.array([image, image]), labels=np.array([label, label]), lr=0.001, epochs=1, save_path="./model")
+c.test(data=np.array([image]), labels=np.array([label], dtype=np.int32))
+predicted = c.predict(np.array([image]), transpose=True)
