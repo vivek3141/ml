@@ -9,7 +9,7 @@ def yx2features(ran=[0, 100], number=100):
     func = lambda: ((max(ran) - min(ran) + 1) * np.random.random(number)) + min(ran)
     x1 = np.array(list(map(lambda z: int(z), func())))
     x2 = np.array(list(map(lambda z: int(z), func())))
-    y = np.array([1 if x1[i] > x2[i] else 0 for i in range(100)])
-    data = [[x1[i], x2[i]] for i in range(100)]
+    y = np.array([1 if x1[i] > x2[i] else 0 for i in range(number)])
+    data = [[x1[i], x2[i]] for i in range(number)]
 
     return data, y
