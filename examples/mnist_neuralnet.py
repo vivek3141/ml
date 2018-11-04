@@ -17,4 +17,4 @@ n.fit(50000, data=mnist.train.images, labels=mnist.train.labels, lr=0.0001, grap
 
 n.test(mnist.test.images, mnist.test.labels)  # 91.52%, can be better!
 
-n.save("model.pkl")
+# n.save("model.pkl")
