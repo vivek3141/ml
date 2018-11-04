@@ -1,3 +1,4 @@
+[![Build Test](https://travis-ci.com/vivek3141/ml.svg?branch=master)](https://pypi.python.org/pypi/ml-python)
 [![PyPi Version](https://img.shields.io/pypi/v/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
 [![Python Compatibility](https://img.shields.io/pypi/pyversions/ml-python.svg)](https://pypi.python.org/pypi/fastai)
 [![License](https://img.shields.io/pypi/l/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
