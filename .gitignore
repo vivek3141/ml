@@ -8,3 +8,4 @@ examples/checkpoint
 ml_python.egg-info/
 .idea/
 MNIST-data/
+tests/MNIST-data/
