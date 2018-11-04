@@ -5,6 +5,8 @@ install:
   - pip3 install -r requirements.txt
   - python3 setup.py install
 script:
-  - python3 ./examples/k_means.py
-  - python3 ./examples/linear_regression.py
-  - python3 ./examples/mnist_neuralnet.py
+  - python3 ./tests/k_means.py
+  - python3 ./tests/linear_regression.py
+  - python3 ./tests/neuralnetwork.py
+  - python3 ./tests/cnn.py
+  - python3 ./tests/logistic_regression.py
