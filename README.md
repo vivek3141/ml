@@ -60,3 +60,9 @@ l.fit(data=x, labels=y, graph=True)
 ```
 ![Linear Regression](https://github.com/vivek3141/ml/blob/master/images/linear_regression.png)<br><br>
 The full code can be found in `/examples/linear_regression.py`
+## License
+All code is available under the [MIT License](https://github.com/vivek3141/ml/blob/master/LICENSE.md)
+## Contact
+Feel free to contact me by:
+* Email: vivnps.verma@gmail.com
+* GitHub Issue: [create issue](https://github.com/vivek3141/ml/issues/new)
