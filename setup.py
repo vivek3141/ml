@@ -10,7 +10,7 @@ setup(
     url="https://github.com/vivek3141/ml",
     license='MIT',
     description="The easiest way to do machine learning",
-    long_description=open("index.md").read(),
+    long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     classifiers=[
         "Programming Language :: Python :: 3",
