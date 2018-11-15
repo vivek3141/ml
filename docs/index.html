@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>ml | The easiest way to do Machine Learning in python</title>
+    <meta name="generator" content="Jekyll v3.7.4">
+    <meta property="og:title" content="ml">
+    <meta property="og:locale" content="en_US">
+    <meta name="description" content="The easiest way to do Machine Learning in python">
+    <meta property="og:description" content="The easiest way to do Machine Learning in python">
+    <link rel="canonical" href="https://vivek3141.github.io/ml/">
+    <meta property="og:url" content="https://vivek3141.github.io/ml/">
+    <meta property="og:site_name" content="ml">
+    <script type="application/ld+json">
+{"@type":"WebSite","headline":"ml","url":"https://vivek3141.github.io/ml/","name":"ml","description":"The easiest way to do Machine Learning in python","@context":"http://schema.org"}
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <link rel="stylesheet" href="./index_files/style.css">
+</head>
+<body>
+<section class="page-header">
+    <h1 class="project-name">ml</h1>
+    <h2 class="project-tagline">The easiest way to do Machine Learning in python</h2>
+
+    <a href="https://github.com/vivek3141/ml" class="btn">View on GitHub</a>
+
+
+</section>
+
+<section class="main-content">
+    <p><a href="https://travis-ci.com/vivek3141/ml"><img src="https://travis-ci.com/vivek3141/ml.svg?branch=master" alt="Build Test"></a>
+        <a href="https://pypi.python.org/pypi/ml-python"><img src="https://img.shields.io/pypi/v/ml-python.svg" alt="PyPi Version"></a>
+        <a href="https://pypi.python.org/pypi/fastai"><img src="https://img.shields.io/pypi/pyversions/ml-python.svg"
+                                                           alt="Python Compatibility"></a>
+        <a href="https://pypi.python.org/pypi/ml-python"><img src="https://img.shields.io/pypi/l/ml-python.svg" alt="License"></a>
+    </p>
+    <h1 id="ml">ML</h1>
+
+    <p>This module provides for the easiest way to implement Machine Learning algorithms without the need to know about
+        them.</p>
+
+    <p>Use this module if</p>
+    <ul>
+        <li>You are a complete beginner to Machine Learning.</li>
+        <li>You find other modules too complicated.</li>
+    </ul>
+
+    <p>This module is not meant for high level tasks, but only for simple use and learning.</p>
+
+    <p>I would not recommend using this module for big projects.</p>
+
+    <p>This module uses a tensorflow backend.</p>
+
+    <h3 id="pip-installation">Pip installation</h3>
+    <div class="language-bash highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code>pip install ml-python
+</code></pre>
+        </div>
+    </div>
+    <h3 id="python-installation">Python installation</h3>
+    <div class="language-bash highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code>git clone https://github.com/vivek3141/ml
+<span class="nb">cd </span>ml
+python setup.py install
+</code></pre>
+        </div>
+    </div>
+    <h3 id="bash-installation">Bash Installation</h3>
+    <div class="language-bash highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code>git clone https://github.com/vivek3141/ml
+<span class="nb">cd </span>ml
+./install.sh
+</code></pre>
+        </div>
+    </div>
+    <p>This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.</p>
+
+    <h2 id="examples">Examples</h2>
+    <p>Examples for all implemented structures can be found in <code class="highlighter-rouge">/examples</code>. <br>
+        In this example, linear regression is used.
+        <br><br>
+        First, import the required modules.</p>
+    <div class="language-python highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span
+                class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">ml.linear_regression</span> <span class="kn">import</span> <span
+                    class="n">LinearRegression</span>
+</code></pre>
+        </div>
+    </div>
+    <p>Then make the required object</p>
+    <div class="language-python highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code><span class="n">l</span> <span class="o">=</span> <span
+                class="n">LinearRegression</span><span class="p">()</span>
+</code></pre>
+        </div>
+    </div>
+    <p>This code below randomly generates 50 data points from 0 to 10 for us to run linear regression on.</p>
+    <div class="language-python highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code><span class="c"># Randomly generating the data and converting the list to int</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span
+                    class="n">array</span><span class="p">(</span><span class="nb">list</span><span
+                    class="p">(</span><span class="nb">map</span><span class="p">(</span><span
+                    class="nb">int</span><span class="p">,</span> <span class="mi">10</span><span
+                    class="o">*</span><span class="n">np</span><span class="o">.</span><span
+                    class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span
+                    class="mi">50</span><span class="p">))))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span
+                    class="n">array</span><span class="p">(</span><span class="nb">list</span><span
+                    class="p">(</span><span class="nb">map</span><span class="p">(</span><span
+                    class="nb">int</span><span class="p">,</span> <span class="mi">10</span><span
+                    class="o">*</span><span class="n">np</span><span class="o">.</span><span
+                    class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span
+                    class="mi">50</span><span class="p">))))</span>
+</code></pre>
+        </div>
+    </div>
+    <p>Lastly, train it. Set <code class="highlighter-rouge">graph=True</code> to visualize the dataset and the model.
+    </p>
+
+    <div class="language-python highlighter-rouge">
+        <div class="highlight"><pre class="highlight"><code><span class="n">l</span><span class="o">.</span><span
+                class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span
+                class="n">x</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span
+                class="n">y</span><span class="p">,</span> <span class="n">graph</span><span class="o">=</span><span
+                class="bp">True</span><span class="p">)</span>
+</code></pre>
+        </div>
+    </div>
+    <p><img src="./index_files/linear_regression.png"><br><br>
+        The full code can be found in <code class="highlighter-rouge">/examples/linear_regression.py</code></p>
+    <h2 id="license">License</h2>
+    <p>All code is available under the <a href="https://github.com/vivek3141/ml/blob/master/LICENSE.md">MIT License</a>
+    </p>
+    <h2 id="contact">Contact</h2>
+    <p>Feel free to contact me by:</p>
+    <ul>
+        <li>Email: vivnps.verma@gmail.com</li>
+        <li>GitHub Issue: <a href="https://github.com/vivek3141/ml/issues/new">create issue</a></li>
+    </ul>
+
+
+    <footer class="site-footer">
+
+        <span class="site-footer-owner"><a href="https://github.com/vivek3141/ml">ml</a> is maintained by <a
+                href="https://github.com/vivek3141">vivek3141</a>.</span>
+    </footer>
+</section>
+
+
+</body>
+</html>

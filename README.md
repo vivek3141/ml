@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/pypi/l/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
 # ML
 
-This module provides for the easiest way to implement Machine Learning algoritms without the need to know about them.
+This module provides for the easiest way to implement Machine Learning algorithms without the need to know about them.
 
 Use this module if
 - You are a complete beginner to Machine Learning.
