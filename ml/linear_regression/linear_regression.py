@@ -43,7 +43,7 @@ class LinearRegression:
     def _hypothesis(theta, x):
         return theta[0] * x + theta[1]
 
-    def fit(self, data, labels, lr=0.001, graph=False, steps=1000, init_theta=[1, 1]):
+    def fit(self, data, labels, lr=0.001, graph=False, steps=1000, init_theta=(1, 1)):
         """
         Fit the model with the given data
         :param data: Data input matrix
