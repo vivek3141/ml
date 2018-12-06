@@ -13,7 +13,7 @@ class Regression:
         theta = np.array(init_theta)
         for i in range(steps):
             J = self.cost(x, y, theta)
-            j_grad =
+            j_grad = 0
         if graph:
             plt.show()
         pass

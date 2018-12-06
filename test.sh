@@ -6,4 +6,4 @@ python3 neuralnetwork.py > /dev/null 2>&1
 python3 cnn.py > /dev/null 2>&1
 python3 logistic_regression.py > /dev/null 2>&1
 python3 regression.py > /dev/null 2>&1
-echo "Done Testing"
+echo "Passed"
