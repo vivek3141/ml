@@ -10,6 +10,10 @@ class Regression:
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False):
         self.check_length(x, y)
+        theta = np.array(init_theta)
+        for i in range(steps):
+            J = self.cost(x, y, theta)
+            j_grad =
         if graph:
             plt.show()
         pass
@@ -23,7 +27,7 @@ class Regression:
         self.check_length(x, y)
         cost = 0
         for i in range(len(x)):
-            cost += np.power(self.func(*theta) - y[i], 2)
+            cost += np.power(self.func(*theta, x[i]) - y[i], 2)
         return cost
 
     def predict(self):
