@@ -64,7 +64,7 @@ The full code can be found in `/examples/linear_regression.py`
 Both dockerfiles and makefiles are included for easy installation.<br>
 To install using docker run
 ```bash
-sudo docker build
+sudo docker build .
 ```
 To install using make run
 ```bash
