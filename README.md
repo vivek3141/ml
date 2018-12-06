@@ -62,7 +62,6 @@ l.fit(data=x, labels=y, graph=True)
 The full code can be found in `/examples/linear_regression.py`
 ## Makefile
 A Makefile is included for easy installation.<br>
-```
 To install using make run
 ```bash
 sudo make
