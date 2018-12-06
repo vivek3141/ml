@@ -60,11 +60,8 @@ l.fit(data=x, labels=y, graph=True)
 ```
 ![Linear Regression](https://raw.githubusercontent.com/vivek3141/ml/master/images/linear_regression.png)<br><br>
 The full code can be found in `/examples/linear_regression.py`
-## Dockerfile and Makefile
-Both dockerfiles and makefiles are included for easy installation.<br>
-To install using docker run
-```bash
-sudo docker build .
+## Makefile
+A Makefile is included for easy installation.<br>
 ```
 To install using make run
 ```bash
