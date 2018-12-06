@@ -9,5 +9,5 @@ ml_python.egg-info/
 .idea/
 MNIST-data/
 tests/MNIST-data/
-test.sh
 tests/model/
+MANIFEST
