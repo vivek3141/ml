@@ -1,7 +1,6 @@
 import numpy as np
 from ml.error import Error
 import matplotlib.pyplot as plt
-from scipy.optimize import curve_fit
 
 
 class Regression:
@@ -19,7 +18,7 @@ class Regression:
             for k, n in enumerate(theta):
                 t = theta[:]
                 t[k] = t[k] + dx
-                t_grad[i] = lr * ((self.cost(x, y, t) - J) / dx)
+                t_grad[k] = lr * ((self.cost(x, y, t) - J) / dx)
             theta = self.subtract(theta, t_grad)
         if graph:
             plt.show()
