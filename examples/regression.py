@@ -5,7 +5,7 @@ y1 = [0.00, 2.89, 5.14, 6.74, 7.71, 8.03, 7.71, 6.74, 5.14, 2.89, 0.00]
 
 
 def func(a, b, c, x):
-    return a * x ** 2 + b * x + c
+    return (a * (x ** 2)) + (b * x) + c
 
 
 r = Regression(func)

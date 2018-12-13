@@ -23,7 +23,7 @@ class Regression:
             print(t_grad, theta)
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
-            y1 = list(map(lambda n: self.func(*theta, n), x))
+            y1 = list(map(lambda z: self.func(*theta, z), x1))
             plt.scatter(x, y)
             plt.plot(x1, y1)
             plt.show()
