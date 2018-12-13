@@ -11,16 +11,21 @@ class Regression:
         self.check_length(x, y)
         theta = np.array(init_theta)
         for i in range(steps):
-            J = self.cost(x, y, theta)
+            j = self.cost(x, y, theta)
             dx = 0.0001
             t_grad = [0 for x in range(len(theta))]
 
             for k, n in enumerate(theta):
                 t = theta[:]
                 t[k] = t[k] + dx
-                t_grad[k] = lr * ((self.cost(x, y, t) - J) / dx)
+                t_grad[k] = lr * ((self.cost(x, y, t) - j) / dx)
             theta = self.subtract(theta, t_grad)
+            print(t_grad, theta)
         if graph:
+            x1 = np.linspace(min(x), max(x), 300)
+            y1 = list(map(lambda n: self.func(*theta, n), x))
+            plt.scatter(x, y)
+            plt.plot(x1, y1)
             plt.show()
         return theta
 
