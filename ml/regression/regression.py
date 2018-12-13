@@ -1,7 +1,7 @@
-import tensorflow as tf
 import numpy as np
 from ml.error import Error
 import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
 
 
 class Regression:
@@ -13,10 +13,25 @@ class Regression:
         theta = np.array(init_theta)
         for i in range(steps):
             J = self.cost(x, y, theta)
-            j_grad = 0
+            dx = 0.0001
+            t_grad = [0 for x in range(len(theta))]
+
+            for k, n in enumerate(theta):
+                t = theta[:]
+                t[k] = t[k] + dx
+                t_grad[i] = lr * ((self.cost(x, y, t) - J) / dx)
+            theta = self.subtract(theta, t_grad)
         if graph:
             plt.show()
-        pass
+        return theta
+
+    @staticmethod
+    def subtract(li1, li2):
+        Regression.check_length(li1, li2)
+        ret = []
+        for i in range(li1):
+            ret.append(li1[i] - li2[i])
+        return ret
 
     @staticmethod
     def check_length(x, y):
