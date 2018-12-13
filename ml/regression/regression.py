@@ -29,7 +29,7 @@ class Regression:
     def subtract(li1, li2):
         Regression.check_length(li1, li2)
         ret = []
-        for i in range(li1):
+        for i in range(len(li1)):
             ret.append(li1[i] - li2[i])
         return ret
 
