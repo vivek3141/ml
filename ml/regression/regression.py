@@ -18,8 +18,7 @@ class Regression:
 
     def tf_func(self, theta):
         t = self.s.run(theta)
-        # x = self.s.run(x)
-        return self.func(*t, self.x_data)
+        return [[self.func(*t, self.x_data[0][0])]]
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
@@ -29,24 +28,26 @@ class Regression:
             Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
-        self.x_data = x[0]
         # self.x = tf.Variable(x[0])
         # self.yy = tf.Variable(y[0])
         self.theta = tf.Variable(init_theta)
-
-        self.optim = tf.train.AdamOptimizer(learning_rate=lr)
+        self.x_data = [[x[0]]]
         self.s = tf.Session()
+        self.optim = tf.train.AdamOptimizer(learning_rate=lr)
+
         self.s.run(tf.global_variables_initializer())
-        self.y = self.tf_func(self.theta, self.x)
-        self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
+        self.y = self.tf_func(self.theta)
+        self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
         loss = []
         for i in range(steps):
-            self.x_data = x[i]
-            y_data = y[i]
+            self.x_data = [[x[i]]]
+            y_data = [[y[i]]]
+            print([[y[0]]])
             if to_print is not None and i % to_print == 0:
-                loss.append(self.s.run(self.J, feed_dict={self.x: x[0], self.yy: y[0]}))
+                loss.append(
+                    self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
                 print(f"Step: {i}, Loss:{loss[-1]}")
-            self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
+            self.s.run(self.optim, feed_dict={self.x: self.x_data, self.yy: y_data})
             """
             for i in range(steps):
                 j = self.cost(x, y, theta)
