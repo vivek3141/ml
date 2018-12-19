@@ -1,14 +1,21 @@
 import numpy as np
 from ml.error import Error
 import matplotlib.pyplot as plt
+import tensorflow as tf
 
 
 class Regression:
     def __init__(self, func):
         self.func = func
+        self.theta = None
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False):
         self.check_length(x, y)
+        try:
+            ret = self.func(*init_theta, 0)
+        except TypeError:
+            Error("Initial Theta does not match with function")
+        self.theta = tf.placeholder(tf.float32, shape=[None, len(init_theta)])
         theta = np.array(init_theta)
         for i in range(steps):
             j = self.cost(x, y, theta)
