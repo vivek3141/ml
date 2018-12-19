@@ -31,7 +31,7 @@ class Regression:
         self.theta = tf.Variable(init_theta)
         self.optim = tf.train.AdamOptimizer(learning_rate=lr)
         self.s = tf.Session()
-        self.y = self.func(self.theta, self.x)
+        self.y = self.tf_func(self.theta, self.x)
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
         loss = []
         for i in range(steps):
