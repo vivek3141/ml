@@ -7,7 +7,11 @@ import tensorflow as tf
 class Regression:
     def __init__(self, func):
         self.func = func
-        self.theta = None
+        self.theta = []
+        self.x = None
+        self.y = None
+        self.yy = None
+        self.J = None
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False):
         self.check_length(x, y)
@@ -15,26 +19,30 @@ class Regression:
             ret = self.func(*init_theta, 0)
         except TypeError:
             Error("Initial Theta does not match with function")
-        self.theta = tf.placeholder(tf.float32, shape=[None, len(init_theta)])
-        theta = np.array(init_theta)
-        for i in range(steps):
-            j = self.cost(x, y, theta)
-            dx = 0.0001
-            t_grad = [0 for x in range(len(theta))]
+        self.x = tf.placeholder(tf.float32, shape=[None, 1])
+        self.yy = tf.placeholder(tf.float32, shape=[None, 1])
+        self.theta = np.array(init_theta)
+        with tf.Session() as s:
+            self.y = tf.Variable(self.func(*self.theta, s.run(self.x)))
+            self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
+            """
+            for i in range(steps):
+                j = self.cost(x, y, theta)
+                dx = 0.0001
+                t_grad = [0 for x in range(len(theta))]
 
-            for k, n in enumerate(theta):
-                t = theta[:]
-                t[k] = t[k] + dx
-                t_grad[k] = lr * ((self.cost(x, y, t) - j) / dx)
-            theta = self.subtract(theta, t_grad)
-            print(t_grad, theta)
+                for k, n in enumerate(theta):
+                    t = theta[:]
+                    t[k] = t[k] + dx
+                    t_grad[k] = lr * ((self.cost(x, y, t) - j) / dx)
+                theta = self.subtract(theta, t_grad)
+                print(t_grad, theta)"""
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
-            y1 = list(map(lambda z: self.func(*theta, z), x1))
+            y1 = list(map(lambda z: self.func(*self.theta, z), x1))
             plt.scatter(x, y)
             plt.plot(x1, y1)
             plt.show()
-        return theta
 
     @staticmethod
     def subtract(li1, li2):
