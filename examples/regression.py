@@ -9,4 +9,4 @@ def func(a, b, c, x):
 
 
 r = Regression(func)
-theta = r.fit(x1, y1, [1, 1, 1], graph=True)
+theta = r.fit(x1, y1, [1, 1, 1], graph=True, to_print=50)

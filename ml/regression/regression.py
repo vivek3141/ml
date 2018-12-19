@@ -15,6 +15,11 @@ class Regression:
         self.optim = None
         self.s = None
 
+    def tf_func(self, theta, x):
+        t = self.s.run(theta)
+        x = self.x.run(x)
+        return self.func(*t, x)
+
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
         try:
@@ -26,7 +31,7 @@ class Regression:
         self.theta = tf.Variable(init_theta)
         self.optim = tf.train.AdamOptimizer(learning_rate=lr)
         self.s = tf.Session()
-        self.y = tf.Variable(self.func(*s.run(self.theta), s.run(self.x)))
+        self.y = self.func(self.theta, self.x)
         self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
         loss = []
         for i in range(steps):
