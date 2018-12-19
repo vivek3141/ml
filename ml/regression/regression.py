@@ -28,13 +28,11 @@ class Regression:
             Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
-        # self.x = tf.Variable(x[0])
-        # self.yy = tf.Variable(y[0])
         self.theta = tf.Variable(init_theta)
         self.x_data = [[x[0]]]
         self.s = tf.Session()
         self.s.run(tf.global_variables_initializer())
-        self.y = self.tf_func(self.theta)
+        self.y = tf.Variable(self.tf_func(self.theta))
         self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         loss = []
