@@ -7,13 +7,15 @@ import tensorflow as tf
 class Regression:
     def __init__(self, func):
         self.func = func
-        self.theta = []
+        self.theta = None
         self.x = None
         self.y = None
         self.yy = None
         self.J = None
+        self.optim = None
+        self.s = None
 
-    def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False):
+    def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
         try:
             ret = self.func(*init_theta, 0)
@@ -21,10 +23,19 @@ class Regression:
             Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
-        self.theta = np.array(init_theta)
-        with tf.Session() as s:
-            self.y = tf.Variable(self.func(*self.theta, s.run(self.x)))
-            self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
+        self.theta = tf.Variable(init_theta)
+        self.optim = tf.train.AdamOptimizer(learning_rate=lr)
+        self.s = tf.Session()
+        self.y = tf.Variable(self.func(*s.run(self.theta), s.run(self.x)))
+        self.J = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.yy, logits=self.y))
+        loss = []
+        for i in range(steps):
+            x_data = x[i]
+            y_data = y[i]
+            if to_print is not None and i % to_print == 0:
+                loss.append(self.s.run(self.J, feed_dict={self.x: x[0], self.yy: y[0]}))
+                print(f"Step: {i}, Loss:{loss[-1]}")
+            self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
             """
             for i in range(steps):
                 j = self.cost(x, y, theta)
