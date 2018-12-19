@@ -33,11 +33,10 @@ class Regression:
         self.theta = tf.Variable(init_theta)
         self.x_data = [[x[0]]]
         self.s = tf.Session()
-        self.optim = tf.train.AdamOptimizer(learning_rate=lr)
-
         self.s.run(tf.global_variables_initializer())
         self.y = self.tf_func(self.theta)
         self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
+        self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         loss = []
         for i in range(steps):
             self.x_data = [[x[i]]]
