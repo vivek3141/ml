@@ -11,3 +11,4 @@ MNIST-data/
 tests/MNIST-data/
 tests/model/
 MANIFEST
+test.py

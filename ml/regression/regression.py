@@ -17,8 +17,10 @@ class Regression:
         self.x_data = None
 
     def tf_func(self, theta):
-        t = self.s.run(theta)
-        return [[self.func(*t, self.x_data[0][0])]]
+        t = []
+        for i in theta:
+            t.append(self.s.run(i))
+        return 
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
@@ -28,18 +30,19 @@ class Regression:
             Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
-        self.theta = tf.Variable(init_theta)
-        self.x_data = [[x[0]]]
+        self.theta = np.array([tf.get_variable(f"T{i}", [1, 1]) for i in range(len(init_theta))])
+        self.x_data = x[0]
         self.s = tf.Session()
         self.s.run(tf.global_variables_initializer())
-        self.y = tf.Variable(self.tf_func(self.theta))
+        # self.y = tf.Variable(self.tf_func(self.theta))
+        self.y = self.tf_func(self.theta)
         self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         loss = []
         for i in range(steps):
-            self.x_data = [[x[i]]]
-            y_data = [[y[i]]]
-            print([[y[0]]])
+            self.x_data = x[i]
+            y_data = y[i]
+            print("HI")
             if to_print is not None and i % to_print == 0:
                 loss.append(
                     self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
@@ -56,7 +59,8 @@ class Regression:
                     t[k] = t[k] + dx
                     t_grad[k] = lr * ((self.cost(x, y, t) - j) / dx)
                 theta = self.subtract(theta, t_grad)
-                print(t_grad, theta)"""
+                print(t_grad, theta)
+                """
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
             y1 = list(map(lambda z: self.func(*self.theta, z), x1))
