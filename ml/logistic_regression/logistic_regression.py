@@ -5,6 +5,11 @@ import matplotlib.pyplot as plt
 
 class LogisticRegression:
     def __init__(self, features, seed=5):
+        """
+        Does logistic regression
+        :param features: number of features
+        :param seed: seed for randomly initializing the values
+        """
         self.input = features
         tf.set_random_seed(seed=seed)
         self.W = tf.Variable(tf.zeros(shape=[self.input, 1]))

@@ -7,6 +7,11 @@ from tensorflow import pow, log, exp, sin, sinh, cos, cosh, tan, tanh
 
 class Regression:
     def __init__(self, func):
+        """
+        Creates a new class for nonlinear regression. Function can be defined using operations on tensors
+        Inbuilt functions are pow, log, exp and trig functions
+        :param func: Function to fit, with the parameters in the front. Eg: m,b,x: m*x + b
+        """
         try:
             self.func = eval("lambda " + func)
         except SyntaxError:
