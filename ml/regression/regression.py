@@ -2,14 +2,14 @@ import numpy as np
 from ml.error import Error
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow import pow, log, exp
+from tensorflow import pow, log, exp, sin, sinh, cos, cosh, tan, tanh
 
 
 class Regression:
     def __init__(self, func):
         try:
             self.func = eval("lambda " + func)
-        except SyntaxError:
+        except:
             raise Error("Invalid syntax for nonlinear function")
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
