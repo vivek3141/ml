@@ -20,12 +20,12 @@ class Regression:
         t = []
         for i in theta:
             t.append(self.s.run(i))
-        return 
+        return
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
         try:
-            ret = self.func(*init_theta, 0)
+            _ = self.func(*init_theta, 0)
         except TypeError:
             raise Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
@@ -34,7 +34,7 @@ class Regression:
         self.s = tf.Session()
         self.s.run(tf.global_variables_initializer())
         # self.y = tf.Variable(self.tf_func(self.theta))
-        self.y = self.func(self.theta, self.x)
+        self.y = self.func(*self.theta, self.x)
         self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         loss = []
