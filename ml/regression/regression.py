@@ -40,9 +40,8 @@ class Regression:
         self.s.run(tf.global_variables_initializer())
         loss = []
         for i in range(steps):
-            x_data = [[x[i]]]
-            y_data = [[y[i]]]
-            print(x_data, y_data)
+            x_data = [[x[i % self.m]]]
+            y_data = [[y[i % self.m]]]
             if to_print is not None and i % to_print == 0:
                 loss.append(
                     self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
@@ -51,7 +50,7 @@ class Regression:
 
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
-            y1 = list(map(lambda z: self.func(*self.theta, z), x1))
+            y1 = list(map(lambda z: self.s.run(self.y, feed_dict={self.x: [[z]]})[0][0], x1))
             plt.scatter(x, y)
             plt.plot(x1, y1)
             plt.show()
