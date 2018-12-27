@@ -15,6 +15,7 @@ class Regression:
         self.optim = None
         self.s = None
         self.x_data = None
+        self.m = None
 
     def tf_func(self, theta):
         t = []
@@ -24,6 +25,7 @@ class Regression:
 
     def fit(self, x, y, init_theta, steps=1000, lr=0.01, graph=False, to_print=None):
         self.check_length(x, y)
+        self.m = len(x)
         try:
             _ = self.func(*init_theta, 0)
         except TypeError:
@@ -46,19 +48,7 @@ class Regression:
                     self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
                 print(f"Step: {i}, Loss:{loss[-1]}")
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
-            """
-            for i in range(steps):
-                j = self.cost(x, y, theta)
-                dx = 0.0001
-                t_grad = [0 for x in range(len(theta))]
 
-                for k, n in enumerate(theta):
-                    t = theta[:]
-                    t[k] = t[k] + dx
-                    t_grad[k] = lr * ((self.cost(x, y, t) - j) / dx)
-                theta = self.subtract(theta, t_grad)
-                print(t_grad, theta)
-                """
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
             y1 = list(map(lambda z: self.func(*self.theta, z), x1))
@@ -77,7 +67,7 @@ class Regression:
     @staticmethod
     def check_length(x, y):
         if not (len(x) == len(y)):
-            Error("X and Y should be the same length!")
+            raise Error("X and Y should be the same length!")
 
     def cost(self, x, y, theta):
         self.check_length(x, y)
