@@ -31,12 +31,11 @@ class Regression:
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
         self.theta = np.array([tf.get_variable(f"T{i}", [1, 1]) for i in range(len(init_theta))])
-        self.s = tf.Session()
-        self.s.run(tf.global_variables_initializer())
-        # self.y = tf.Variable(self.tf_func(self.theta))
         self.y = self.func(*self.theta, self.x)
         self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
+        self.s = tf.Session()
+        self.s.run(tf.global_variables_initializer())
         loss = []
         for i in range(steps):
             x_data = [[x[i]]]
