@@ -10,4 +10,4 @@ def func(a, b, c, x):
 
 
 r = Regression(func)
-t = r.fit(x1, y1, [1, 1, 1], graph=True, to_print=50)
+t = r.fit(x1, y1, lr=0.0001, graph=True, init_theta=[0, 0, 0], to_print=50, steps=10000)
