@@ -7,7 +7,11 @@ from tensorflow import pow, log, exp
 
 class Regression:
     def __init__(self, func):
-        self.func = eval("lambda " + func)
+        try:
+            self.func = eval("lambda " + func)
+        except SyntaxError:
+            raise Error("Invalid syntax for nonlinear function")
+        self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
         self.x = None
         self.y = None
@@ -18,18 +22,13 @@ class Regression:
         self.x_data = None
         self.m = None
 
-    def tf_func(self, theta):
-        t = []
-        for i in theta:
-            t.append(self.s.run(i))
-        return
-
-    def fit(self, x, y, init_theta, lr=0.001, steps=1000, graph=False, to_print=None):
+    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, graph=False, to_print=None):
         self.check_length(x, y)
-        k = 3
+        if init_theta is None:
+            init_theta = [0 for _ in range(self.k)]
         self.m = len(x)
         try:
-            _ = self.func(*[0 for _ in range(k)], 0)
+            _ = self.func(*init_theta, 0)
         except TypeError:
             raise Error("Initial Theta does not match with function")
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
