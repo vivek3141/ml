@@ -23,7 +23,18 @@ class Regression:
         self.m = None
 
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, graph=False, to_print=None):
-        self.check_length(x, y)
+        """
+        Fit the model
+        :param x: X data
+        :param y: Y data
+        :param init_theta: Initial Theta values; can be set to none for all 0s
+        :param lr: Learning Rate
+        :param steps: Number of steps do go through
+        :param graph: Set true to graph function and data
+        :param to_print: Print loss and step number every this number
+        :return: None
+        """
+        self._check_length(x, y)
         if init_theta is None:
             init_theta = [0 for _ in range(self.k)]
         self.m = len(x)
@@ -39,15 +50,14 @@ class Regression:
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         self.s = tf.Session()
         self.s.run(tf.global_variables_initializer())
-        loss = []
         for i in range(steps):
             x_data = [[x[i % self.m]]]
             y_data = [[y[i % self.m]]]
             if to_print is not None and i % to_print == 0:
-                loss.append(
-                    sum([self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in
-                         range(self.m)]) / (2 * self.m))
-                print(f"Step: {i}, Loss:{loss[-1]}")
+                loss = sum(
+                    [self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in range(self.m)]) / (
+                                   2 * self.m)
+                print(f"Step: {i}, Loss:{loss}")
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
@@ -57,22 +67,30 @@ class Regression:
             plt.show()
 
     @staticmethod
-    def subtract(li1, li2):
-        Regression.check_length(li1, li2)
-        ret = []
-        for i in range(len(li1)):
-            ret.append(li1[i] - li2[i])
-        return ret
-
-    @staticmethod
-    def check_length(x, y):
+    def _check_length(x, y):
+        """
+        Checks the length of two arrays, if not raises ml.error.error.Error
+        :param x: array 1
+        :param y: array 2
+        :return: None
+        """
         if not (len(x) == len(y)):
             raise Error("X and Y should be the same length!")
 
     def predict(self, x_data):
-        return self.s.run(self.y, feed_dict={self.x: x_data})[0][0]
+        """
+        Predict using the trained model
+        :param x_data: X data to input
+        :return: Predicted Value
+        """
+        return self.s.run(self.y, feed_dict={self.x: [[x_data]]})[0][0]
 
     def save(self, file_name):
+        """
+        Save the model
+        :param file_name: File to save to model to
+        :return: None
+        """
         saver = tf.train.Saver()
         saver.save(self.s, str(file_name))
         self.s.close()
