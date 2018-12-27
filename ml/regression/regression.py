@@ -69,18 +69,20 @@ class Regression:
         if not (len(x) == len(y)):
             raise Error("X and Y should be the same length!")
 
-    def cost(self, x, y, theta):
-        self.check_length(x, y)
-        cost = 0
-        for i in range(len(x)):
-            cost += np.power(self.func(*theta, x[i]) - y[i], 2)
-        return cost
+    def predict(self, x_data):
+        return self.s.run(self.y, feed_dict={self.x: x_data})[0][0]
 
-    def predict(self):
-        pass
+    def save(self, file_name):
+        saver = tf.train.Saver()
+        saver.save(self.s, str(file_name))
+        self.s.close()
 
-    def save(self):
-        pass
-
-    def load(self):
-        pass
+    def load(self, file_name):
+        """
+        Load a saved model
+        :param file_name: File to load the model from
+        :return: None
+        """
+        load = tf.train.Saver()
+        self.s = tf.Session()
+        load.restore(self.s, file_name)
