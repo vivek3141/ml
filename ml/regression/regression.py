@@ -9,7 +9,7 @@ class Regression:
     def __init__(self, func):
         try:
             self.func = eval("lambda " + func)
-        except:
+        except SyntaxError:
             raise Error("Invalid syntax for nonlinear function")
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
