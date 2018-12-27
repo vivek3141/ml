@@ -2,12 +2,12 @@ import numpy as np
 from ml.error import Error
 import matplotlib.pyplot as plt
 import tensorflow as tf
-from tensorflow import add, multiply, pow, log, exp, square, subtract, divide
+from tensorflow import pow, log, exp
 
 
 class Regression:
     def __init__(self, func):
-        self.func = func
+        self.func = eval("lambda " + func)
         self.theta = None
         self.x = None
         self.y = None
@@ -46,7 +46,8 @@ class Regression:
             y_data = [[y[i % self.m]]]
             if to_print is not None and i % to_print == 0:
                 loss.append(
-                    self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
+                    sum([self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in
+                         range(self.m)]) / (2 * self.m))
                 print(f"Step: {i}, Loss:{loss[-1]}")
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
         if graph:
