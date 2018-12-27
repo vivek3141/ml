@@ -9,7 +9,7 @@ class NeuralNetwork:
         try:
             self.activation = activation
         except KeyError:
-            print("Invalid Activation Function")
+            raise Error("Invalid Activation Function")
         self.layers = layers
         self.input = inp
         self.output = out
