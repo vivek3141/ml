@@ -39,9 +39,9 @@ class Regression:
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         loss = []
         for i in range(steps):
-            x_data = x[i]
-            print(x_data)
-            y_data = y[i]
+            x_data = [[x[i]]]
+            y_data = [[y[i]]]
+            print(x_data, y_data)
             if to_print is not None and i % to_print == 0:
                 loss.append(
                     self.s.run(self.J, feed_dict={self.x: [[x[0]]], self.yy: [[y[0]]]}))
