@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name='ml-python',
-    version='1.13',
+    version='1.14',
     author="Vivek Verma",
     packages=find_packages(),
     author_email="vivekverma3141@gmail.com",
