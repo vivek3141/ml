@@ -16,7 +16,7 @@ def cost_function(theta_0, theta_1):
 
 
 g = GradientDescentOptimizer(cost_function)
-theta = g.optimize(steps=1000000)
+theta = g.optimize()
 
 x_ = [0, 10]
 y_ = [theta[0] + theta[1] * i for i in x_]
