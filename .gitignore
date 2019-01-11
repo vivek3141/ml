@@ -13,3 +13,4 @@ tests/model/
 MANIFEST
 test.py
 model.pkl.*
+checkpoint
