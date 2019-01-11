@@ -16,12 +16,12 @@ def cost_function(theta_0, theta_1):
 
 
 g = GradientDescentOptimizer(cost_function)
-theta = g.optimize(steps=10000)
+theta = g.optimize(steps=1000000)
 
-x_ = [0,10]
+x_ = [0, 10]
 y_ = [theta[0] + theta[1] * i for i in x_]
 
 plt.plot(x_, y_)
-plt.scatter(x,y)
+plt.scatter(x, y)
 
 plt.show()
