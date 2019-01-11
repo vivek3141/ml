@@ -8,7 +8,7 @@ class GradientDescentOptimizer:
         self.num_theta = len(signature(func).parameters)
         print(self.num_theta)
 
-    def optimize(self, learning_rate, steps, init_theta=None, dx=0.0001):
+    def optimize(self, learning_rate=0.01, steps=1000, init_theta=None, dx=0.0001):
         theta = [0 for _ in range(self.num_theta)] if init_theta is None else init_theta
         for i in range(steps):
             t_grad = []
