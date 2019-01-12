@@ -20,7 +20,7 @@ def func(a, b, c, x):
 
 
 g = GradientDescentOptimizer(cost_function)
-theta = g.optimize(learning_rate=10e-7, steps=100000)
+theta = g.optimize(learning_rate=10e-7, steps=1e+5)
 
 x_ = np.linspace(min(x), max(x), 300)
 y_ = [func(*theta, i) for i in x_]
