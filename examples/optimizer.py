@@ -1,6 +1,5 @@
 from ml.optimizer import GradientDescentOptimizer
-import numpy as np
-import matplotlib.pyplot as plt
+from ml.graph import graph_function_and_data
 
 # Data
 x1 = [0.00, 4.48, 8.96, 13.44, 17.92, 22.41, 26.89, 31.37, 35.85, 40.33, 44.81]
@@ -28,5 +27,5 @@ def func(a, b, c, x):
 g = GradientDescentOptimizer(cost_function)
 theta = g.optimize(learning_rate=10e-7, steps=1e+5)
 
-#
-
+# Graph the function by using the theta learnt
+graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
