@@ -12,3 +12,4 @@ script:
   - python3 cnn.py
   - python3 logistic_regression.py
   - python3 regression.py
+  - python3 optimizer.py
