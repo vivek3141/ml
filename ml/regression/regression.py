@@ -37,7 +37,7 @@ class Regression:
         :param steps: Number of steps do go through
         :param graph: Set true to graph function and data
         :param to_print: Print loss and step number every this number
-        :param batch_size: Size of batches for Gradient Descent
+        :param batch_size: Size of batches
         :return: None
         """
         self._check_length(x, y)
@@ -70,7 +70,7 @@ class Regression:
 
         for i in range(steps):
 
-            # Batches for batch gradient descent
+            # Batches
             ind = np.random.choice(len(x), size=batch_size)
             x_data = np.array([x[ind]]).T
             y_data = np.matrix(y[ind]).T
