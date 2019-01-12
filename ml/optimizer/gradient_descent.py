@@ -18,4 +18,6 @@ class GradientDescentOptimizer:
                               )
             for k in range(self.num_theta):
                 theta[k] -= t_grad[k]
+            if i % 50 == 0:
+                print(f"Step: {i} Cost {self.func(*theta)}")
         return theta
