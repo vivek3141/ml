@@ -14,3 +14,4 @@ MANIFEST
 test.py
 model.pkl.*
 checkpoint
+test.sh
