@@ -20,10 +20,10 @@ def func(a, b, c, x):
 
 
 g = GradientDescentOptimizer(cost_function)
-theta = g.optimize(steps=2000000)
+theta = g.optimize(learning_rate=10e-7, steps=100000)
 
-x_ = [0, 10]
-y_ = [theta[0] + theta[1] * i for i in x_]
+x_ = np.linspace(min(x), max(x), 300)
+y_ = [func(*theta, i) for i in x_]
 
 plt.plot(x_, y_)
 plt.scatter(x, y)
