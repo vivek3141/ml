@@ -6,6 +6,7 @@ Thank you for contributing to ml-python!
 Please include
 * The commands/steps you took/ran to experience the issue
 * The unexpected behavior that occured
+* Screenshots, if neccecary
 * The environment - What OS, python version, ml-python version, etc.
 
 ## If it is a feature request
