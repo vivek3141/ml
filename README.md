@@ -6,6 +6,10 @@
 
 This module provides for the easiest way to implement Machine Learning algorithms without the need to know about them.
 
+Learn the module here:
+* [YouTube](https://www.youtube.com/watch?v=ReMIzozsx8Y)
+* [Blog Post](https://vivek3141.github.io/blog/posts/ml.html)
+
 Use this module if
 - You are a complete beginner to Machine Learning.
 - You find other modules too complicated.
