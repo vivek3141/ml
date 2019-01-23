@@ -30,7 +30,7 @@ python setup.py install
 ```bash
 git clone https://github.com/vivek3141/ml
 cd ml
-sudo make
+sudo make install
 ```
 This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
