@@ -75,7 +75,7 @@ Note: Superuser privileges are only required if python is installed at `/usr/loc
 All code is available under the [MIT License](https://github.com/vivek3141/ml/blob/master/LICENSE.md)
 
 ## Contributing
-Pull requests, are always welcome, so feel free to create one. Please follow the pull request template, so
+Pull requests are always welcome, so feel free to create one. Please follow the pull request template, so
 your intention and additions are clear.
 ## Contact
 Feel free to contact me by:
