@@ -137,3 +137,5 @@ class CharRNN:
             n += 1  # iteration counter
 
     # gradient checking
+
+
