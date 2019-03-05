@@ -1,7 +1,7 @@
 #include <math.h>
 #include <stdio.h>
 
-int * optimize(void (*func)(int), int learning_rate, int steps, int* theta, int dx, int num_theta){
+int * optimize(void (*func)(int*), int learning_rate, int steps, int* theta, int dx, int num_theta){
     for(int i = 0; i < steps; i ++){
         int * partials = malloc(sizeof(int) * num_theta);
         for (int t=0; t < num_theta; t++){
