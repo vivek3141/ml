@@ -16,7 +16,7 @@ int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, 
                     theta_dx[x] = theta[x] + dx;
                 }
                 else{
-                    theta[x];
+                    theta_dx[x] = theta[x];
                 }
             }
             partials[t] = func(theta) - func(theta) / dx;
@@ -44,11 +44,6 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
     return Py_BuildValue("s", print(input));
 }
 
-int main(int* args){
-    printf("Hello\n");
-    return 0;
-}
-
 int print(char* f){
-    printf(f);
+    printf("%s", f);
 }
