@@ -41,7 +41,7 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
     char* input;
     if(!PyArg_ParseTuple(args, "i", &input))
         return NULL;
-    return Py_BuildValue("i", print(input))
+    return Py_BuildValue("i", print(input));
 }
 
 int main(int* args){
