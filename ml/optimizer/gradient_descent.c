@@ -1,19 +1,20 @@
 #include <math.h>
+#include <stdio.h>
 
-struct optimizer{
-    int[] theta;
-    
-}
-int[] optimize(int learning_rate, int steps, int[] init_theta, int dx){
+int * optimize(void (*func)(int), int learning_rate, int steps, int* theta, int dx, int num_theta){
     for(int i = 0; i < steps; i ++){
-        partials = []
-        for (int t=0; t <self.num_theta; t++):
-            theta_dx = [(theta[x] + dx) if t == x else theta[x] for x in range(self.num_theta)]
+        int * partials = malloc(sizeof(int) * num_theta);
+        for (int t=0; t < num_theta; t++){
+            int * theta_dx = malloc(sizeof(int) * num_theta)
+            for( int x = 0; x < num_theta; x++){
+                [(theta[x] + dx) if t == x else theta[x] 
+            }
             partial = (self.func(*theta_dx) - self.func(*theta)) / dx
             partials.append(partial)
+        }
         for k in range(self.num_theta):
             theta[k] -= learning_rate * partials[k]
         if i % 50 == 0:
-            print(f"Step: {i} Cost {self.func(*theta)}")
+            printf(f"Step: {i} Cost {self.func(*theta)}")
     return theta
 }
