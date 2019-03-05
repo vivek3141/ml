@@ -7,7 +7,7 @@ struct optimizer{
 int[] optimize(int learning_rate, int steps, int[] init_theta, int dx){
     for(int i = 0; i < steps; i ++){
         partials = []
-        for t in range(self.num_theta):
+        for (int t=0; t <self.num_theta; t++):
             theta_dx = [(theta[x] + dx) if t == x else theta[x] for x in range(self.num_theta)]
             partial = (self.func(*theta_dx) - self.func(*theta)) / dx
             partials.append(partial)
