@@ -45,14 +45,12 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
 }
 
 static PyMethodDef gradient_descent_methods[] = {
-    {"gradient_descent", print, METH_VARARGS},
+    {"optimize", print, METH_VARARGS},
     {NULL, NULL}
     };
 
-// Module initialisation routine.
-void init_fizzbuzz(void)
+void init_gradient(void)
 {
-    // Init module.
     (void) Py_InitModule("gradient_descent", gradient_descent_methods);
 
 }

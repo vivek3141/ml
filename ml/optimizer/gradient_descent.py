@@ -1,6 +1,7 @@
 from inspect import signature
 import gradient_descent
-gradient_descent(".gradient_descen")
+
+gradient_descent.optimize(".gradient_descen")
 
 
 class GradientDescentOptimizer:
