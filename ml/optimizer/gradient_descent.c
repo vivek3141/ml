@@ -2,7 +2,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int * optimize(int (func)(int*), int learning_rate, int steps, int* theta, int dx, int num_theta){
+int main(int* args){
+    printf("Hello\n");
+    return 0;
+}
+
+
+int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
+    int* theta = init_theta;
     for(int i = 0; i < steps; i ++){
         int * partials = malloc(sizeof(int) * num_theta);
         for (int t=0; t < num_theta; t++){
@@ -24,9 +31,5 @@ int * optimize(int (func)(int*), int learning_rate, int steps, int* theta, int d
             printf("Step: {%d} Cost {%d}", i, func(theta));
         }
     return theta;
-}
-
-int main(int* args){
-    printf("Hello");
-    return 0;
+    }
 }
