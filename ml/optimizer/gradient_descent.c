@@ -39,9 +39,9 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
     int dx;
     int num_theta;
     char* input;
-    if(!PyArg_ParseTuple(args, "i", &input))
+    if(!PyArg_ParseTuple(args, "s", &input))
         return NULL;
-    return Py_BuildValue("i", print(input));
+    return Py_BuildValue("s", print(input));
 }
 
 int main(int* args){
