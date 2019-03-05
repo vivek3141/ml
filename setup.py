@@ -1,9 +1,12 @@
 from setuptools import setup
 from setuptools import find_packages
+from setuptools import Extension
+
+gradient_descent = Extension('gradient_descent', sources=['ml/optimizer/gradient_descent.c'])
 
 setup(
     name='ml-python',
-    version='2.0',
+    version='2.1',
     author="Vivek Verma",
     packages=find_packages(),
     author_email="vivekverma3141@gmail.com",
@@ -12,6 +15,7 @@ setup(
     description="The easiest way to do machine learning",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
+    ext_modules=[gradient_descent],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 2",

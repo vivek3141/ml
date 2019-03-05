@@ -61,7 +61,10 @@ class CharRNN:
     def sample(self, h, seed_ix, n):
         """
         sample a sequence of integers from the model
-        h is memory state, seed_ix is seed letter for first time step
+        :param h: Memory State
+        :param seed_ix: Seed letter for first time stpe
+        :param n: Number
+        :return:
         """
         x = np.zeros((self.vocab_size, 1))
         x[seed_ix] = 1
