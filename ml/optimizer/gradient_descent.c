@@ -41,7 +41,20 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
     char* input;
     if(!PyArg_ParseTuple(args, "s", &input))
         return NULL;
-    return Py_BuildValue("s", print(input));
+    return Py_BuildValue("i", print(input));
+}
+
+static PyMethodDef gradient_descent_methods[] = {
+    {"gradient_descent", print, METH_VARARGS},
+    {NULL, NULL}
+    };
+
+// Module initialisation routine.
+void init_fizzbuzz(void)
+{
+    // Init module.
+    (void) Py_InitModule("gradient_descent", gradient_descent_methods);
+
 }
 
 int print(char* f){
