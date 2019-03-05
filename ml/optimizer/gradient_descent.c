@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <python3.6/Python.h>
 
+int print(char* f);
 
 int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
     int* theta = init_theta;
@@ -31,10 +32,23 @@ int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, 
 }
 
 static PyObject * gradient_descent(PyObject *self, PyObject *args){
-    return Py_BuildValue
+    int* theta;
+    int learning_rate;
+    int steps;
+    int* init_theta;
+    int dx;
+    int num_theta;
+    char* input;
+    if(!PyArg_ParseTuple(args, "i", &input))
+        return NULL;
+    return Py_BuildValue("i", print(input))
 }
 
 int main(int* args){
     printf("Hello\n");
     return 0;
+}
+
+int print(char* f){
+    printf(f);
 }
