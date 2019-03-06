@@ -1,7 +1,7 @@
 from inspect import signature
-import test
-s = test.uniquetest()
-print(s)
+import gradient_descent
+
+print(gradient_descent.optimize("hiu"))
 
 
 class GradientDescentOptimizer:
