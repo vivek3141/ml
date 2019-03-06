@@ -1,11 +1,10 @@
 #include <math.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <python3.6/Python.h>
 
 int print(char* f);
 
-int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
+int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
     int* theta = init_theta;
     for(int i = 0; i < steps; i ++){
         int * partials = malloc(sizeof(int) * num_theta);
@@ -31,7 +30,7 @@ int * optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, 
     }
 }
 
-static PyObject * gradient_descent(PyObject *self, PyObject *args){
+static PyObject * optimize(PyObject *self, PyObject *args){
     int* theta;
     int learning_rate;
     int steps;
@@ -41,20 +40,31 @@ static PyObject * gradient_descent(PyObject *self, PyObject *args){
     char* input;
     if(!PyArg_ParseTuple(args, "s", &input))
         return NULL;
-    return Py_BuildValue("i", print(input));
+    return Py_BuildValue("s", print(input));
 }
 
-static PyMethodDef gradient_descent_methods[] = {
-    {"optimize", print, METH_VARARGS},
-    {NULL, NULL}
-    };
+static char optimize_docs[] =
+    "usage: optimize()\n";
 
-void init_gradient(void)
+
+static PyMethodDef module_methods[] = {
+    {"optimize", (PyCFunction) optimize, 
+     METH_NOARGS, optimize_docs},
+    {NULL}
+};
+
+
+static struct PyModuleDef gradient_descent =
 {
-    (void) Py_InitModule("gradient_descent", gradient_descent_methods);
+    PyModuleDef_HEAD_INIT,
+    "gradient_descent", 
+    "usage: gradient_descent.optimize\n", 
+    -1,   
+    module_methods
+};
 
-}
 
-int print(char* f){
-    printf("%s", f);
+PyMODINIT_FUNC PyInit_optimize(void)
+{
+    return PyModule_Create(&optimize);
 }

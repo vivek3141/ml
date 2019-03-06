@@ -1,7 +1,7 @@
 from inspect import signature
-import gradient_descent
-
-gradient_descent.optimize(".gradient_descen")
+import test
+s = test.uniquetest()
+print(s)
 
 
 class GradientDescentOptimizer:
