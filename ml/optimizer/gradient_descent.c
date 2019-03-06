@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <python3.6/Python.h>
 
-int print(char* f);
-
 int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
     int* theta = init_theta;
     for(int i = 0; i < steps; i ++){
