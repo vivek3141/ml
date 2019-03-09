@@ -1,7 +1,7 @@
 from inspect import signature
-import gradient_descent
+#import gradient_descent
 
-print(gradient_descent.optimize())
+#print(gradient_descent.optimize())
 
 
 class GradientDescentOptimizer:
