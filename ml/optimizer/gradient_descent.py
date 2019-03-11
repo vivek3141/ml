@@ -1,8 +1,8 @@
 from inspect import signature
-#import gradient_descent
+import gradient_descent
 
-#print(gradient_descent.optimize())
 
+print(gradient_descent.optimize("hi"))
 
 class GradientDescentOptimizer:
     def __init__(self, func):

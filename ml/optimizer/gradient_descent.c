@@ -26,15 +26,18 @@ int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta,
     }
 }
 
-static PyObject * optimize(PyObject *self){
-    int* theta;
+static PyObject * optimize(PyObject *self, PyObject *args){
+    /*int* theta;
     int learning_rate;
     int steps;
     int* init_theta;
     int dx;
-    int num_theta;
+    int num_theta;*/
     char* input;
-    return Py_BuildValue("s", "Hello");
+    printf("In the function!\n");
+    if (!PyArg_ParseTuple(args, "s", &input))
+        return NULL;
+    return Py_BuildValue("s", input);
 }
 
 static char optimize_docs[] =
@@ -43,7 +46,7 @@ static char optimize_docs[] =
 
 static PyMethodDef module_methods[] = {
     {"optimize", (PyCFunction) optimize, 
-     METH_NOARGS, optimize_docs},
+     METH_VARARGS, optimize_docs},
     {NULL}
 };
 
