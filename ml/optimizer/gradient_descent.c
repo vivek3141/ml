@@ -39,8 +39,8 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
 
 int call_func(PyObject* func, int* theta, int num_theta)
 {
-    PyObject* args = malloc(sizeof(PyObject)* num_theta);
-    PyObject* result = PyObject_CallObject(func, args);
+    PyObject* result = PyObject_CallObject(func, theta);
+
 
     /*const char* s = PyString_AsString(result);
     printf("%s", s);*/
@@ -67,7 +67,7 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     PyObject* func;
 
     printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "Oiiiii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+    if (!PyArg_ParseTuple(args, "Oiii*ii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
     
     return Py_BuildValue("s", "");
