@@ -2,7 +2,7 @@
 
 int call_func(PyObject* func, int* theta);
 
-int * _optimize(PyObject* func, int learning_rate, int steps, int* init_theta, int dx, int num_theta){
+int * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  double dx, int num_theta){
     int* theta = init_theta;
     for(int i = 0; i < steps; i ++){
         int * partials = malloc(sizeof(int) * num_theta);
@@ -36,6 +36,7 @@ int call_func(PyObject* func, int* theta){
     PyObject* repr = PyObject_Repr(result);
     PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
     const char *bytes = PyBytes_AS_STRING(str);
+    
 
     printf("REPR: %s\n", bytes);
 
@@ -44,11 +45,11 @@ int call_func(PyObject* func, int* theta){
 }
 
 static PyObject * optimize(PyObject* self, PyObject* args){
-    int* theta;
-    int learning_rate;
+    double* theta;
+    double learning_rate;
     int steps;
-    int* init_theta;
-    int dx;
+    double* init_theta;
+    double dx;
     int num_theta;
     PyObject* func;
 
