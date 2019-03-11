@@ -1,6 +1,8 @@
 #include <python3.6/Python.h>
 
-int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta, int dx, int num_theta){
+int call_func(PyObject* func, int* theta);
+
+int * _optimize(PyObject* func, int learning_rate, int steps, int* init_theta, int dx, int num_theta){
     int* theta = init_theta;
     for(int i = 0; i < steps; i ++){
         int * partials = malloc(sizeof(int) * num_theta);
@@ -14,32 +16,20 @@ int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta,
                     theta_dx[x] = theta[x];
                 }
             }
-            partials[t] = func(theta) - func(theta) / dx;
+            partials[t] = call_func(func, theta) - call_func(func, theta) / dx;
         }
         for(int k = 0; k < num_theta; k++){
             theta[k] -= learning_rate * partials[k];
         }
         if (i % 50 == 0){
-            printf("Step: {%d} Cost {%d}", i, func(theta));
+            printf("Step: {%d} Cost {%d}", i, call_func(func, theta));
         }
     return theta;
     }
 }
 
-static PyObject * optimize(PyObject* self, PyObject* args){
-    /*int* theta;
-    int learning_rate;
-    int steps;
-    int* init_theta;
-    int dx;
-    int num_theta;*/
-    PyObject* func;
-    char* input2;
-    char* input;
-
-    printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "ssO", &input, &input2, &func))
-        return NULL;
+int call_func(PyObject* func, int* theta){
+    PyObject* args;
     PyObject* result = PyObject_CallObject(func, args);
     /*const char* s = PyString_AsString(result);
     printf("%s", s);*/
@@ -51,8 +41,22 @@ static PyObject * optimize(PyObject* self, PyObject* args){
 
     Py_XDECREF(repr);
     Py_XDECREF(str);
+}
 
-    return Py_BuildValue("s", bytes);
+static PyObject * optimize(PyObject* self, PyObject* args){
+    int* theta;
+    int learning_rate;
+    int steps;
+    int* init_theta;
+    int dx;
+    int num_theta;
+    PyObject* func;
+
+    printf("In the function!\n");
+    if (!PyArg_ParseTuple(args, "Oiiiii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+        return NULL;
+    
+    return Py_BuildValue("s", "");
 }
 
 static char optimize_docs[] =
