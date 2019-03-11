@@ -2,7 +2,7 @@ from inspect import signature
 import gradient_descent
 
 
-print(gradient_descent.optimize("hi", "bye", lambda s1,s2, f: 0; print("hi")))
+print(gradient_descent.optimize("hi", "bye", lambda s1,s2, f: 0))
 
 class GradientDescentOptimizer:
     def __init__(self, func):

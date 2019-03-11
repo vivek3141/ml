@@ -40,10 +40,19 @@ static PyObject * optimize(PyObject* self, PyObject* args){
     printf("In the function!\n");
     if (!PyArg_ParseTuple(args, "ssO", &input, &input2, &func))
         return NULL;
-    int result = PyObject_CallObject(func, args);
-    printf("%i", result);
+    PyObject* result = PyObject_CallObject(func, args);
+    /*const char* s = PyString_AsString(result);
+    printf("%s", s);*/
+    PyObject* repr = PyObject_Repr(result);
+    PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
+    const char *bytes = PyBytes_AS_STRING(str);
 
-    return Py_BuildValue("s", result);
+    printf("REPR: %s\n", bytes);
+
+    Py_XDECREF(repr);
+    Py_XDECREF(str);
+
+    return Py_BuildValue("s", bytes);
 }
 
 static char optimize_docs[] =
