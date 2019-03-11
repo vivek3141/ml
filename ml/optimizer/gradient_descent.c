@@ -33,12 +33,17 @@ static PyObject * optimize(PyObject* self, PyObject* args){
     int* init_theta;
     int dx;
     int num_theta;*/
+    PyObject* func;
     char* input2;
     char* input;
+
     printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "ss", &input, &input2))
+    if (!PyArg_ParseTuple(args, "ssO", &input, &input2, &func))
         return NULL;
-    return Py_BuildValue("s", strcat(input, input2));
+    int result = PyObject_CallObject(func, args);
+    printf("%i", result);
+
+    return Py_BuildValue("s", result);
 }
 
 static char optimize_docs[] =
