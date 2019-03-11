@@ -26,18 +26,19 @@ int * _optimize(int (func)(int*), int learning_rate, int steps, int* init_theta,
     }
 }
 
-static PyObject * optimize(PyObject *self, PyObject *args){
+static PyObject * optimize(PyObject* self, PyObject* args){
     /*int* theta;
     int learning_rate;
     int steps;
     int* init_theta;
     int dx;
     int num_theta;*/
+    char* input2;
     char* input;
     printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "s", &input))
+    if (!PyArg_ParseTuple(args, "ss", &input, &input2))
         return NULL;
-    return Py_BuildValue("s", input);
+    return Py_BuildValue("s", strcat(input, input2));
 }
 
 static char optimize_docs[] =
