@@ -37,7 +37,7 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
     }
 }
 
-int call_func(PyObject* func, double* theta, int num_theta)
+double call_func(PyObject* func, double* theta, int num_theta)
 {
     
     
@@ -61,7 +61,10 @@ int call_func(PyObject* func, double* theta, int num_theta)
     Py_XDECREF(repr);
     Py_XDECREF(str);
 
-    return sscanf(str, "%lf", &bytes);
+    double d;
+    sscanf(bytes, "%lf", &d);
+
+    return d;
 
 
 
