@@ -1,17 +1,17 @@
 #include <python3.6/Python.h>
 
-int call_func(PyObject* func, double* theta, int num_theta);
+double call_func(PyObject* func, double* theta, int num_theta);
 
 int * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  
                 double dx, int num_theta)
 {
-    int* theta = init_theta;
+    double* theta = init_theta;
     for(int i = 0; i < steps; i ++)
     {
-        int * partials = malloc(sizeof(int) * num_theta);
+        double * partials = malloc(sizeof(double) * num_theta);
         for (int t=0; t < num_theta; t++)
         {
-            int * theta_dx = malloc(sizeof(int) * num_theta);
+            double * theta_dx = malloc(sizeof(double) * num_theta);
             for( int x = 0; x < num_theta; x++)
             {
                 if(t == x)
@@ -91,10 +91,15 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
+    printf("Before func");
     int* ret = _optimize(func, learning_rate, steps, theta, dx, num_theta);
-    
+    printf("\n");
 
-    return Py_BuildValue("s", bytes);
+    for(int i = 0; i < num_theta; i++)
+    {
+        printf("%i", ret[i]);
+    }
+    return Py_BuildValue("i*", ret);
 }
 
 static char optimize_docs[] =
