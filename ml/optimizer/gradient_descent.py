@@ -1,8 +1,9 @@
 from inspect import signature
 import gradient_descent
 
-
-print(gradient_descent.optimize(lambda s: 2*s, 1.0, 1,[1,1] ,1.0, 1))
+def func(u, v):
+    return u * v
+print(gradient_descent.optimize(func, 1.0, 2, [3, 4] , 5.0, 2))
 #print(gradient_descent.optimize(1))
 class GradientDescentOptimizer:
     def __init__(self, func):

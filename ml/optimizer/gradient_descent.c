@@ -39,12 +39,26 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
 
 int call_func(PyObject* func, double* theta, int num_theta)
 {
-    PyObject* result = PyObject_CallObject(func, theta);
+    double* theta = malloc(sizeof(double) * num_theta);
+    printf("Step 3\n");
+    PyObject* test;
+    printf("Initialization Done\n");
+    for(int i = 0; i < num_theta; i++)
+    {
+        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
+    }
+    
+    PyObject* arg = PyTuple_New(num_theta);
+    for(int i = 0; i < num_theta; i++)
+    {
+        PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
+    }
+
+    PyObject* result = PyObject_CallObject(func, arg);
+    printf("Step 4\n");
 
 
-    /*const char* s = PyString_AsString(result);
-    printf("%s", s);*/
-
+    //int ret = call_func(func, theta, num_theta);
     PyObject* repr = PyObject_Repr(result);
     PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
     const char *bytes = PyBytes_AS_STRING(str);
@@ -54,6 +68,10 @@ int call_func(PyObject* func, double* theta, int num_theta)
 
     Py_XDECREF(repr);
     Py_XDECREF(str);
+
+    printf("Step 5\n");
+
+
 }
 
 static PyObject * optimize(PyObject* self, PyObject* args)
@@ -70,21 +88,8 @@ static PyObject * optimize(PyObject* self, PyObject* args)
         return NULL;
     printf("Step 2\n");
 
-    double* theta = malloc(sizeof(double) * num_theta);
-    printf("Step 3\n");
-    PyObject* test;
-    printf("Initialization Done\n");
-    for(int i = 0; i < num_theta; i++)
-    {
-        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
-    }
-    printf("Step 4\n");
-
-
-    int ret = call_func(func, theta, num_theta);
-
-    printf("Step 5\n");
-    return Py_BuildValue("i", ret);
+    
+    return Py_BuildValue("s", bytes);
 }
 
 static char optimize_docs[] =
