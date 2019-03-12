@@ -2,7 +2,7 @@
 
 double call_func(PyObject* func, double* theta, int num_theta);
 
-int * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  
+double * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  
                 double dx, int num_theta)
 {
     
@@ -32,7 +32,7 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
         }
         if (i % 50 == 0)
         {
-            printf("Step: {%d} Cost {%d}\n", i, call_func(func, theta, num_theta));
+            printf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
         }
     return theta;
     }
@@ -48,9 +48,9 @@ double call_func(PyObject* func, double* theta, int num_theta)
     {
         PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
     }
-    printf("In the function\n");
+    //printf("In the function\n");
     PyObject* result = PyObject_CallObject(func, arg);
-    printf("Step 4\n");
+    //printf("Step 4\n");
 
 
     //int ret = call_func(func, theta, num_theta);
@@ -59,7 +59,7 @@ double call_func(PyObject* func, double* theta, int num_theta)
     const char *bytes = PyBytes_AS_STRING(str);
     
 
-    printf("REPR: %s\n", bytes);
+    //printf("REPR: %s\n", bytes);
 
     Py_XDECREF(repr);
     Py_XDECREF(str);
@@ -82,27 +82,30 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     int num_theta;
     PyObject* func;
 
-    printf("In the function!\n");
+    //printf("In the function!\n");
     if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
-    printf("Step 2\n");
+    //printf("Step 2\n");
     double* theta = malloc(sizeof(double) * num_theta);
-    printf("Step 3\n");
+    //printf("Step 3\n");
     PyObject* test;
-    printf("Initialization Done\n");
+    //printf("Initialization Done\n");
     for(int i = 0; i < num_theta; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
-    printf("Before func\n");
-    int* ret = _optimize(func, learning_rate, steps, theta, dx, num_theta);
-    printf("\n");
+    //printf("Before func\n");
+    double* ret_theta = _optimize(func, learning_rate, steps, theta, dx, num_theta);
+    //printf("\n");
+
+    PyObject* ret = PyTuple_New(num_theta);
 
     for(int i = 0; i < num_theta; i++)
     {
-        printf("%i\n", ret[i]);
+        PyTuple_SetItem(ret, i, PyFloat_FromDouble(ret_theta[i]));
     }
-    return Py_BuildValue("", ret);
+
+    return Py_BuildValue("O", ret);
 }
 
 static char optimize_docs[] =
