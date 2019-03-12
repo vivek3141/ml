@@ -1,12 +1,12 @@
 from inspect import signature
-"""import gradient_descent
+import gradient_descent
 
 
 def func(u, v):
     return u * v
 
 
-print(gradient_descent.optimize(func, 1.0, 2, [3, 4], 5.0, 2))"""
+print(gradient_descent.optimize(func, 1.0, 2, [3, 4], 5.0, 2))
 
 
 class GradientDescentOptimizer:
