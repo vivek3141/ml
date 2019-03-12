@@ -58,7 +58,6 @@ int call_func(PyObject* func, double* theta, int num_theta)
 
 static PyObject * optimize(PyObject* self, PyObject* args)
 {
-    double* theta;
     double learning_rate;
     int steps;
     PyObject* init_theta;
@@ -69,10 +68,23 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     printf("In the function!\n");
     if (!PyArg_ParseTuple(args, "OiiOii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
+
+    double* theta = malloc(sizeof(double) * num_theta);
     
+    PyObject* test;
+    for(int i = 0; i < num_theta; i++)
+    {
+        test = PyList_GetItem(init_theta, i);
+        PyObject* repr = PyObject_Repr(test);
+        PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
+        const char *bytes = PyBytes_AS_STRING(str);
+        theta[i] = atof(bytes);
+        printf("%d", theta[i]);
+    }
+
+
     int ret = call_func(func, theta, num_theta);
 
-    //double test = PyList_GetItem(init_theta, 0);
     
     return Py_BuildValue("i", ret);
 }

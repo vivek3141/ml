@@ -2,7 +2,7 @@ from inspect import signature
 import gradient_descent
 
 
-print(gradient_descent.optimize(lambda s: 2*s, 1, 1, [1,1], 1, 1))
+print(gradient_descent.optimize(lambda s: 2*s, 1, 1, [1], 1, 1))
 
 class GradientDescentOptimizer:
     def __init__(self, func):
