@@ -66,31 +66,29 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     PyObject* func;
 
     printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "OiiOii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+    if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
+    printf("Step 2\n");
 
     double* theta = malloc(sizeof(double) * num_theta);
-    
+    printf("Step 3\n");
     PyObject* test;
+    printf("Initialization Done\n");
     for(int i = 0; i < num_theta; i++)
     {
-        test = PyList_GetItem(init_theta, i);
-        PyObject* repr = PyObject_Repr(test);
-        PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
-        const char *bytes = PyBytes_AS_STRING(str);
-        theta[i] = atof(bytes);
-        printf("%d", theta[i]);
+        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
+    printf("Step 4\n");
 
 
     int ret = call_func(func, theta, num_theta);
 
-    
+    printf("Step 5\n");
     return Py_BuildValue("i", ret);
 }
 
 static char optimize_docs[] =
-    "usage: optimize()\n";
+    "usage: optimize(func, learning_rate, steps, init_theta, dx, num_theta)\n";
 
 
 static PyMethodDef module_methods[] = 
