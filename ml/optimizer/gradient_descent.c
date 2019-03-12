@@ -37,7 +37,7 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
     }
 }
 
-int call_func(PyObject* func, int* theta, int num_theta)
+int call_func(PyObject* func, double* theta, int num_theta)
 {
     PyObject* result = PyObject_CallObject(func, theta);
 
@@ -61,16 +61,18 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     double* theta;
     double learning_rate;
     int steps;
-    double* init_theta;
+    PyObject* init_theta;
     double dx;
     int num_theta;
     PyObject* func;
 
     printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "Oiii*ii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+    if (!PyArg_ParseTuple(args, "OiiOii", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
+    int ret = call_func(func, theta, num_theta);
+    //double test = PyList_GetItem(init_theta, 0);
     
-    return Py_BuildValue("s", "");
+    return Py_BuildValue("i", ret);
 }
 
 static char optimize_docs[] =
