@@ -39,22 +39,14 @@ int * _optimize(PyObject* func, double learning_rate, int steps, double* init_th
 
 int call_func(PyObject* func, double* theta, int num_theta)
 {
-    double* theta = malloc(sizeof(double) * num_theta);
-    printf("Step 3\n");
-    PyObject* test;
-    printf("Initialization Done\n");
-    for(int i = 0; i < num_theta; i++)
-    {
-        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
-    }
+    
     
     PyObject* arg = PyTuple_New(num_theta);
     for(int i = 0; i < num_theta; i++)
     {
         PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
     }
-
-    PyObject* result = PyObject_CallObject(func, arg);
+    PyObject* result = PyObject_CallObject(func, theta);
     printf("Step 4\n");
 
 
@@ -69,7 +61,8 @@ int call_func(PyObject* func, double* theta, int num_theta)
     Py_XDECREF(repr);
     Py_XDECREF(str);
 
-    printf("Step 5\n");
+    return sscanf(str, "%lf", &bytes);
+
 
 
 }
@@ -87,8 +80,17 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
     printf("Step 2\n");
-
+    double* theta = malloc(sizeof(double) * num_theta);
+    printf("Step 3\n");
+    PyObject* test;
+    printf("Initialization Done\n");
+    for(int i = 0; i < num_theta; i++)
+    {
+        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
+    }
+    int* ret = _optimize(func, learning_rate, steps, theta, dx, num_theta);
     
+
     return Py_BuildValue("s", bytes);
 }
 
