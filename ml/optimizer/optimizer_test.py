@@ -1,6 +1,8 @@
 from ml.optimizer import GradientDescentOptimizer
 from ml.graph import graph_function_and_data
 import gradient_descent
+import time
+
 
 # Data
 x1 = [0.00, 4.48, 8.96, 13.44, 17.92, 22.41, 26.89, 31.37, 35.85, 40.33, 44.81]
@@ -26,10 +28,14 @@ def func(a, b, c, x):
 # This can be compressed to:
 # theta = GradientDescentOptimizer(cost_function).optimize(learning_rate=10e-7, steps=1e+5)
 #g = GradientDescentOptimizer(cost_function)
-#theta = g.optimize(learning_rate=10e-7, steps=1e+5)
-print(cost_function(0,0,0))
+#theta = g.optimize(learning_rate=10e-7, steps=30000)
+
+
+#print(cost_function(0,0,0))
+start_time = time.time()
 theta = gradient_descent.optimize(
-    cost_function, 10e-7, 10000, [0, 0, 0], 0.0001, 3)
+    cost_function, 7e-7, 50000, [0, 0, 0], 0.0001, 3)
+print("--- %s seconds ---" % (time.time() - start_time))
 
 # Graph the function by using the theta learnt
 graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
