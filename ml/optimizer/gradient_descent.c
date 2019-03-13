@@ -1,4 +1,4 @@
-#include <python3.6/Python.h>
+#include <Python.h>
 
 double call_func(PyObject* func, double* theta, int num_theta);
 
