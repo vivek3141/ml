@@ -28,7 +28,7 @@ def func(a, b, c, x):
 #g = GradientDescentOptimizer(cost_function)
 #theta = g.optimize(learning_rate=10e-7, steps=1e+5)
 theta = gradient_descent.optimize(
-    cost_function, 10e-7, 100000, [0, 0, 0], 0.0001, 3)
+    cost_function, 10e-7, 10000, [0, 0, 0], 0.0001, 3)
 
 # Graph the function by using the theta learnt
 graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
