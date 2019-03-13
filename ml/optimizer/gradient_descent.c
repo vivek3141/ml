@@ -105,7 +105,6 @@ static PyObject * optimize(PyObject* self, PyObject* args)
 
     PyObject* ret = PyTuple_New(num_theta);
 
-    int i;
     for(i = 0; i < num_theta; i++)
     {
         PyTuple_SetItem(ret, i, PyFloat_FromDouble(ret_theta[i]));
