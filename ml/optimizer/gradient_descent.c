@@ -7,13 +7,16 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
 {
     printf("%d\n", steps);
     double* theta = init_theta;
-    for(int i = 0; i < steps; i ++)
+    int i;
+    for(i = 0; i < steps; i ++)
     {
         double * partials = malloc(sizeof(double) * num_theta);
-        for (int t=0; t < num_theta; t++)
+        int t;
+        for (t = 0; t < num_theta; t++)
         {
             double * theta_dx = malloc(sizeof(double) * num_theta);
-            for( int x = 0; x < num_theta; x++)
+            int x;
+            for(x = 0; x < num_theta; x++)
             {
                 if(t == x)
                 {
@@ -26,7 +29,8 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
             }
             partials[t] = (call_func(func, theta_dx, num_theta) - call_func(func, theta, num_theta)) / dx;
         }
-        for(int k = 0; k < num_theta; k++)
+        int k;
+        for(k = 0; k < num_theta; k++)
         {
             theta[k] -= learning_rate * partials[k];
         }
