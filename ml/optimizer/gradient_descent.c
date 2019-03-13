@@ -24,13 +24,13 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
                     theta_dx[x] = theta[x];
                 }
             }
-            partials[t] = (call_func(func, theta, num_theta) - call_func(func, theta, num_theta)) / dx;
+            partials[t] = (call_func(func, theta_dx, num_theta) - call_func(func, theta, num_theta)) / dx;
         }
         for(int k = 0; k < num_theta; k++)
         {
             theta[k] -= learning_rate * partials[k];
         }
-        if (i % 50 == 0)
+        if (i % 500 == 0)
         {
             printf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
         }

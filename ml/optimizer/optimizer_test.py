@@ -9,9 +9,9 @@ y1 = [0.00, 2.89, 5.14, 6.74, 7.71, 8.03, 7.71, 6.74, 5.14, 2.89, 0.00]
 
 # Defining Cost Function to optimize
 def cost_function(a, b, c):
-    j = 1 / len(x1)
+    j = 1 / 11
     sigma = 0
-    for i in range(len(x1)):
+    for i in range(11):
         sigma = sigma + (y1[i] - func(a, b, c, x1[i])) ** 2
     j = j * sigma
     return j
@@ -27,6 +27,7 @@ def func(a, b, c, x):
 # theta = GradientDescentOptimizer(cost_function).optimize(learning_rate=10e-7, steps=1e+5)
 #g = GradientDescentOptimizer(cost_function)
 #theta = g.optimize(learning_rate=10e-7, steps=1e+5)
+print(cost_function(0,0,0))
 theta = gradient_descent.optimize(
     cost_function, 10e-7, 10000, [0, 0, 0], 0.0001, 3)
 
