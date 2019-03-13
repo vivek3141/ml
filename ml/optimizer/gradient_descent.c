@@ -5,7 +5,7 @@ double call_func(PyObject* func, double* theta, int num_theta);
 double * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  
                 double dx, int num_theta)
 {
-    
+    printf("%d\n", steps);
     double* theta = init_theta;
     for(int i = 0; i < steps; i ++)
     {
@@ -34,8 +34,8 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
         {
             printf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
         }
-    return theta;
     }
+    return theta;
 }
 
 double call_func(PyObject* func, double* theta, int num_theta)
@@ -85,6 +85,7 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     //printf("In the function!\n");
     if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
         return NULL;
+    
     //printf("Step 2\n");
     double* theta = malloc(sizeof(double) * num_theta);
     //printf("Step 3\n");
