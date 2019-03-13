@@ -47,8 +47,8 @@ double call_func(PyObject* func, double* theta, int num_theta)
     
     PyObject* arg = PyTuple_New(num_theta);
     //PyObject* arglist = Py_BuildValue("(dd)", theta);
-
-    for(int i = 0; i < num_theta; i++)
+    int i;
+    for(i = 0; i < num_theta; i++)
     {
         PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
     }
@@ -93,9 +93,9 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     //printf("Step 2\n");
     double* theta = malloc(sizeof(double) * num_theta);
     //printf("Step 3\n");
-    PyObject* test;
     //printf("Initialization Done\n");
-    for(int i = 0; i < num_theta; i++)
+    int i;
+    for(i = 0; i < num_theta; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
@@ -105,7 +105,8 @@ static PyObject * optimize(PyObject* self, PyObject* args)
 
     PyObject* ret = PyTuple_New(num_theta);
 
-    for(int i = 0; i < num_theta; i++)
+    int i;
+    for(i = 0; i < num_theta; i++)
     {
         PyTuple_SetItem(ret, i, PyFloat_FromDouble(ret_theta[i]));
     }
