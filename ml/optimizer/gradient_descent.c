@@ -5,9 +5,8 @@ double call_func(PyObject* func, double* theta, int num_theta);
 double * _optimize(PyObject* func, double learning_rate, int steps, double* init_theta,  
                 double dx, int num_theta)
 {
-    printf("%d\n", steps);
     double* theta = init_theta;
-    int i;
+    int i; // Initialize variable here to deal with outdated compilers
     for(i = 0; i < steps; i ++)
     {
         double * partials = malloc(sizeof(double) * num_theta);
@@ -45,25 +44,20 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
 double call_func(PyObject* func, double* theta, int num_theta)
 {
     
-    PyObject* arg = PyTuple_New(num_theta);
-    //PyObject* arglist = Py_BuildValue("(dd)", theta);
+    PyObject* arg = PyTuple_New(num_theta); // For arguments to call the passed function
     int i;
     for(i = 0; i < num_theta; i++)
     {
         PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
     }
-    //printf("In the function\n");
+
     PyObject* result = PyObject_CallObject(func, arg);
-    //printf("Step 4\n");
 
-
-    //int ret = call_func(func, theta, num_theta);
     PyObject* repr = PyObject_Repr(result);
     PyObject* str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
-    const char *bytes = PyBytes_AS_STRING(str);
-    
 
-    //printf("REPR: %s\n", bytes);
+    // Decoding PyObject into double
+    const char *bytes = PyBytes_AS_STRING(str);
 
     Py_XDECREF(repr);
     Py_XDECREF(str);

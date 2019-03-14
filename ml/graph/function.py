@@ -18,5 +18,5 @@ def graph_function_and_data(func, x_data, y_data, num=300, min_x=None, max_x=Non
     y_ = [func(i) for i in x_]
 
     plt.plot(x_, y_)
-    plt.scatter(x_data, y_data)
+    plt.scatter(x_data, y_data, color="RED")
     plt.show()

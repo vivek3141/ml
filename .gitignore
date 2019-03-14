@@ -16,3 +16,4 @@ model.pkl.*
 checkpoint
 test.sh
 __pycache__/
+.vscode/

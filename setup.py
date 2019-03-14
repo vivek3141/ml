@@ -6,7 +6,7 @@ gradient_descent = Extension('gradient_descent', sources=['ml/optimizer/gradient
 
 setup(
     name='ml-python',
-    version='2.1',
+    version='2.2',
     author="Vivek Verma",
     packages=find_packages(),
     author_email="vivekverma3141@gmail.com",
