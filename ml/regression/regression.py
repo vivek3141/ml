@@ -44,7 +44,7 @@ class Regression:
         return loss
 
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
-            graph=False):
+            graph=False, dx=0.0001):
         """
         Fit the model
         :param x: X data
@@ -61,13 +61,18 @@ class Regression:
         x = list(x)
         y = list(x)
 
+        if init_theta is None:
+            init_theta = [0 for _ in range(self.k)]
+
         try:
             _ = self.func(*init_theta, 0)
         except TypeError:
             raise Error("Initial Theta does not match with function")
 
         optim = GradientDescentOptimizer(self.loss)
-        optim.minimize()
+        theta = optim.minimize(learning_rate=lr, steps=steps, init_theta=init_theta)
+        graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
+        return theta
 
     def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000,
                        graph=False, to_print=None, batch_size=10):
