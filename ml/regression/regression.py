@@ -24,7 +24,7 @@ class Regression:
         if loss_function not in self._losses.keys():
             raise Error("Invalid Loss Function")
         else:
-            self.loss = self._losses(loss_function)
+            self.loss = self._losses[loss_function]
 
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
