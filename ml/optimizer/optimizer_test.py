@@ -26,12 +26,7 @@ def func(a, b, c, x):
 
 # Define the function
 # This can be compressed to:
-# theta = GradientDescentOptimizer(cost_function).optimize(learning_rate=10e-7, steps=1e+5)
-#g = GradientDescentOptimizer(cost_function)
-#theta = g.optimize(learning_rate=10e-7, steps=30000)
 
-
-#print(cost_function(0,0,0))
 start_time = time.time()
 theta = gradient_descent.optimize(
     cost_function, 7e-7, 50000, [0, 0, 0], 0.0001, 3)

@@ -1,4 +1,6 @@
 import numpy as np
+from ml.optimizer import GradientDescentOptimizer
+from ml.graph import graph_function_and_data
 from ml.error import Error
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -6,11 +8,12 @@ from tensorflow import pow, log, exp, sin, sinh, cos, cosh, tan, tanh
 
 
 class Regression:
-    def __init__(self, func):
+    def __init__(self, func, loss_function):
         """
         Creates a new class for nonlinear regression. Function can be defined using operations on tensors
         Inbuilt functions are pow, log, exp and trig functions
         :param func: Function to fit, with the parameters in the front. Eg: m,b,x: m*x + b
+        :param loss_function: Cost function to use -> examples MSE
         """
         try:
             self.func = eval("lambda " + func)
@@ -26,8 +29,25 @@ class Regression:
         self.s = None
         self.x_data = None
         self.m = None
+        self.loss = loss_function
 
-    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, graph=False, to_print=None, batch_size=10):
+    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, 
+                    graph=False):
+        """
+        Fit the model
+        :param x: X data
+        :param y: Y data
+        :param init_theta: Initial Theta values; can be set to none for all 0s
+        :param lr: Learning Rate
+        :param steps: Number of steps do go through
+        :param graph: Set true to graph function and data
+        :param to_print: Print loss and step number every this number
+        :param batch_size: Size of batches
+        :return: None
+        """
+
+    def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000, 
+                        graph=False, to_print=None, batch_size=10):
         """
         Fit the model
         :param x: X data
@@ -59,10 +79,12 @@ class Regression:
         self.x = tf.placeholder(tf.float32, shape=[None, 1])
         self.yy = tf.placeholder(tf.float32, shape=[None, 1])
 
-        self.theta = [tf.Variable(initial_value=i, dtype=tf.float32) for i in init_theta]
+        self.theta = [tf.Variable(initial_value=i, dtype=tf.float32)
+                      for i in init_theta]
 
         self.y = self.func(*self.theta, self.x)
-        self.J = tf.reduce_mean(tf.losses.mean_squared_error(labels=self.yy, predictions=self.y))
+        self.J = tf.reduce_mean(tf.losses.mean_squared_error(
+            labels=self.yy, predictions=self.y))
 
         self.optim = tf.train.AdamOptimizer(learning_rate=lr).minimize(self.J)
         self.s = tf.Session()
@@ -79,14 +101,15 @@ class Regression:
                     # Mean Squared Error
                 loss = sum(
                     [self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in range(self.m)]) / (
-                               2 * self.m)
+                    2 * self.m)
                 print(f"Step: {i}, Loss:{loss}")
 
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
 
         if graph:
             x1 = np.linspace(min(x), max(x), 300)
-            y1 = list(map(lambda z: self.s.run(self.y, feed_dict={self.x: [[z]]})[0][0], x1))
+            y1 = list(map(lambda z: self.s.run(
+                self.y, feed_dict={self.x: [[z]]})[0][0], x1))
             plt.scatter(x, y)
             plt.plot(x1, y1, c="r")
             plt.show()
