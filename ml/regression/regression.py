@@ -58,8 +58,8 @@ class Regression:
         :return: None
         """
         self._check_length(x, y)
-        x = list(x)
-        y = list(x)
+        self.x = list(x)
+        self.y = list(x)
 
         if init_theta is None:
             init_theta = [0 for _ in range(self.k)]
@@ -70,8 +70,8 @@ class Regression:
             raise Error("Initial Theta does not match with function")
 
         optim = GradientDescentOptimizer(self.loss)
-        theta = optim.minimize(learning_rate=lr, steps=steps, init_theta=init_theta)
-        graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
+        theta = optim.optimize(learning_rate=lr, steps=steps, init_theta=init_theta)
+        graph_function_and_data(lambda x: self.func(*theta, x), x_data=self.x, y_data=self.y)
         return theta
 
     def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000,
