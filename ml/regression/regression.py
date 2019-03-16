@@ -19,10 +19,13 @@ class Regression:
             self.func = eval("lambda " + func)
         except SyntaxError:
             raise Error("Invalid syntax for nonlinear function")
-        
-        self._losses = ['MSE']
-        if loss_function not in self._losses:
-            raise Error("Invalid Loss Function") 
+
+        self._losses = {'MSE': self._mean_squared_error}
+        if loss_function not in self._losses.keys():
+            raise Error("Invalid Loss Function")
+        else:
+            self.loss = self._losses(loss_function)
+
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
         self.x = None
@@ -33,17 +36,15 @@ class Regression:
         self.s = None
         self.x_data = None
         self.m = None
-        self.loss = loss_function
-    
-    def _mean_squared_error(theta):
+
+    def _mean_squared_error(self, theta):
         loss = 0
-        for i in range(len(x)):
-            loss += (func(*theta, self.x[i]) - self.y[i]) ** 2
+        for i in range(len(self.x)):
+            loss += (self.func(*theta, self.x[i]) - self.y[i]) ** 2
         return loss
 
-
-    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, 
-                    graph=False):
+    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
+            graph=False):
         """
         Fit the model
         :param x: X data
@@ -56,9 +57,20 @@ class Regression:
         :param batch_size: Size of batches
         :return: None
         """
+        self._check_length(x, y)
+        x = list(x)
+        y = list(x)
 
-    def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000, 
-                        graph=False, to_print=None, batch_size=10):
+        try:
+            _ = self.func(*init_theta, 0)
+        except TypeError:
+            raise Error("Initial Theta does not match with function")
+
+        optim = GradientDescentOptimizer(self.loss)
+        optim.minimize()
+
+    def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000,
+                       graph=False, to_print=None, batch_size=10):
         """
         Fit the model
         :param x: X data
