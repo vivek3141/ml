@@ -8,7 +8,7 @@ from tensorflow import pow, log, exp, sin, sinh, cos, cosh, tan, tanh
 
 
 class Regression:
-    def __init__(self, func, loss_function):
+    def __init__(self, func, loss_function='MSE'):
         """
         Creates a new class for nonlinear regression. Function can be defined using operations on tensors
         Inbuilt functions are pow, log, exp and trig functions
@@ -19,6 +19,10 @@ class Regression:
             self.func = eval("lambda " + func)
         except SyntaxError:
             raise Error("Invalid syntax for nonlinear function")
+        
+        self._losses = ['MSE']
+        if loss_function not in self._losses:
+            raise Error("Invalid Loss Function") 
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
         self.x = None
@@ -30,6 +34,13 @@ class Regression:
         self.x_data = None
         self.m = None
         self.loss = loss_function
+    
+    def _mean_squared_error(theta):
+        loss = 0
+        for i in range(len(x)):
+            loss += (func(*theta, self.x[i]) - self.y[i]) ** 2
+        return loss
+
 
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000, 
                     graph=False):
