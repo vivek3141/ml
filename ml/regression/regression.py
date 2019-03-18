@@ -3,8 +3,7 @@ from ml.optimizer import GradientDescentOptimizer
 from ml.graph import graph_function_and_data
 from ml.error import Error
 import matplotlib.pyplot as plt
-import tensorflow as tf
-from tensorflow import pow, log, exp, sin, sinh, cos, cosh, tan, tanh
+from math import *
 
 
 class Regression:
@@ -37,9 +36,9 @@ class Regression:
         self.x_data = None
         self.m = None
 
-    def _mean_squared_error(self, theta):
+    def _mean_squared_error(self, *theta):
         loss = 0
-        for i in range(len(self.x)):
+        for i in range(11):
             loss += (self.func(*theta, self.x[i]) - self.y[i]) ** 2
         return loss
 
@@ -61,15 +60,25 @@ class Regression:
         self.x = list(x)
         self.y = list(x)
 
+
+        func = self.func
+
         if init_theta is None:
             init_theta = [0 for _ in range(self.k)]
 
         try:
             _ = self.func(*init_theta, 0)
+            print(_)
         except TypeError:
             raise Error("Initial Theta does not match with function")
 
-        optim = GradientDescentOptimizer(self.loss)
+        def _loss(*args):
+            loss = 0
+            for i in range(11):
+                loss += (func(*args, x[i]) - y[i]) ** 2
+            return loss
+
+        optim = GradientDescentOptimizer(_loss)
         theta = optim.optimize(learning_rate=lr, steps=steps, init_theta=init_theta)
         graph_function_and_data(lambda x: self.func(*theta, x), x_data=self.x, y_data=self.y)
         return theta
@@ -129,7 +138,7 @@ class Regression:
                     # Mean Squared Error
                 loss = sum(
                     [self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in range(self.m)]) / (
-                    2 * self.m)
+                               2 * self.m)
                 print(f"Step: {i}, Loss:{loss}")
 
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
