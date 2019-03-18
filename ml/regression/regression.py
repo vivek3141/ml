@@ -42,7 +42,7 @@ class Regression:
             loss += (self.func(*theta, self.x[i]) - self.y[i]) ** 2
         return loss
 
-    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
+    def fit_grad(self, x, y, init_theta=None, lr=0.001, steps=1000,
             graph=False, dx=0.0001):
         """
         Fit the model
@@ -83,7 +83,7 @@ class Regression:
         graph_function_and_data(lambda x: self.func(*theta, x), x_data=self.x, y_data=self.y)
         return theta
 
-    def fit_tensorflow(self, x, y, init_theta=None, lr=0.001, steps=1000,
+    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
                        graph=False, to_print=None, batch_size=10):
         """
         Fit the model
