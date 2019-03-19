@@ -43,7 +43,7 @@ class Regression:
         return loss
 
     def fit_grad(self, x, y, init_theta=None, lr=0.001, steps=1000,
-            graph=False, dx=0.0001):
+                 graph=False, dx=0.0001):
         """
         Fit the model
         :param x: X data
@@ -60,7 +60,6 @@ class Regression:
         self.x = list(x)
         self.y = list(x)
 
-
         func = self.func
 
         if init_theta is None:
@@ -73,18 +72,21 @@ class Regression:
             raise Error("Initial Theta does not match with function")
 
         def _loss(*args):
+            J = 1/len(x)
             loss = 0
             for i in range(11):
                 loss += (func(*args, x[i]) - y[i]) ** 2
-            return loss
+            return loss*J
 
         optim = GradientDescentOptimizer(_loss)
-        theta = optim.optimize(learning_rate=lr, steps=steps, init_theta=init_theta)
-        graph_function_and_data(lambda x: self.func(*theta, x), x_data=self.x, y_data=self.y)
+        theta = optim.optimize(
+            learning_rate=lr, steps=steps, init_theta=init_theta)
+        graph_function_and_data(lambda x: self.func(
+            *theta, x), x_data=self.x, y_data=self.y)
         return theta
 
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
-                       graph=False, to_print=None, batch_size=10):
+            graph=False, to_print=None, batch_size=10):
         """
         Fit the model
         :param x: X data
@@ -138,7 +140,7 @@ class Regression:
                     # Mean Squared Error
                 loss = sum(
                     [self.s.run(self.J, feed_dict={self.x: [[x[n]]], self.yy: [[y[n]]]}) for n in range(self.m)]) / (
-                               2 * self.m)
+                    2 * self.m)
                 print(f"Step: {i}, Loss:{loss}")
 
             self.s.run(self.optim, feed_dict={self.x: x_data, self.yy: y_data})
