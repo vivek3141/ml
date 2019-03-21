@@ -16,13 +16,15 @@ class Regression:
         """
         if callable(func):
             self.func = func
+            self.k = len(signature(func).parameters) - 1
         else:
             try:
                 self.func = eval("lambda " + func)
+                self.k = len(func.split(":")[0].split(",")) - 1
             except SyntaxError:
                 raise Error("Invalid syntax for nonlinear function")
 
-        self.k = len(func.split(":")[0].split(",")) - 1
+        
         self.theta = None
         self.x = None
         self.y = None
