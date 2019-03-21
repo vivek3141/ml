@@ -7,7 +7,7 @@ double * _optimize(PyObject* func, double learning_rate, int steps, double* init
 {
     double* theta = init_theta;
     int i; // Initialize variable here to deal with outdated compilers
-    for(i = 0; i < steps; i ++)
+    for(i = 0; i < steps; i++)
     {
         double * partials = malloc(sizeof(double) * num_theta);
         int t;
@@ -67,8 +67,6 @@ double call_func(PyObject* func, double* theta, int num_theta)
 
     return d;
 
-
-
 }
 
 static PyObject * optimize(PyObject* self, PyObject* args)
@@ -88,12 +86,14 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     double* theta = malloc(sizeof(double) * num_theta);
     //printf("Step 3\n");
     //printf("Initialization Done\n");
+
     int i;
     for(i = 0; i < num_theta; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
     //printf("Before func\n");
+
     double* ret_theta = _optimize(func, learning_rate, steps, theta, dx, num_theta);
     //printf("\n");
 
