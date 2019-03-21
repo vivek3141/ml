@@ -71,7 +71,7 @@ class Regression:
              loss = loss * (1 / len(x))
              return loss
 
-        optim = GradientDescentOptimizer(self._mean_squared_error, num_theta=self.k)
+        optim = GradientDescentOptimizer(_loss, num_theta=self.k)
         theta = optim.optimize(
             learning_rate=lr, steps=steps, init_theta=init_theta)
 
