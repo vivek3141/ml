@@ -36,13 +36,6 @@ class Regression:
         self.x_data = None
         self.m = None
 
-    def _mean_squared_error(self, *theta):
-        loss = 0
-        print(self.x)
-        for i in range(11):
-            loss += (self.func(*theta, self.x[i]) - self.y[i]) ** 2
-        return loss
-
     def fit_grad(self, x, y, init_theta=None, lr=0.001, steps=1000,
                  graph=False, dx=0.0001):
         """
@@ -71,12 +64,12 @@ class Regression:
         except TypeError:
             raise Error("Initial Theta does not match with function")
 
-        # def _loss(*args):
-        #     loss = 0
-        #     for i in range(len(x)):
-        #         loss += (func(*args, x[i]) - y[i]) ** 2
-        #     loss = loss * (1 / len(x))
-        #     return loss
+        def _loss(*args):
+             loss = 0
+             for i in range(len(x)):
+                 loss += (func(*args, x[i]) - y[i]) ** 2
+             loss = loss * (1 / len(x))
+             return loss
 
         optim = GradientDescentOptimizer(self._mean_squared_error, num_theta=self.k)
         theta = optim.optimize(
