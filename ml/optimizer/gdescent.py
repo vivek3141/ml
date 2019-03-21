@@ -5,7 +5,8 @@ import gradient_descent
 class GradientDescentOptimizer:
     def __init__(self, func, num_theta=None):
         self.func = func
-        self.num_theta = len(signature(func).parameters) if num_theta is not None else num_theta
+        self.num_theta = len(signature(func).parameters) if num_theta is None else num_theta
+        print(self.num_theta)
 
     def optimize(self, learning_rate=0.01, steps=10000, init_theta=None, dx=0.0001):
         theta = [0 for _ in range(self.num_theta)
