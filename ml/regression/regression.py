@@ -4,6 +4,7 @@ from ml.graph import graph_function_and_data
 from ml.error import Error
 import matplotlib.pyplot as plt
 from math import *
+from inspect import signature
 
 
 class Regression:
