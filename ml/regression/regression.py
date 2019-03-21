@@ -25,7 +25,6 @@ class Regression:
             except SyntaxError:
                 raise Error("Invalid syntax for nonlinear function")
 
-        
         self.theta = None
         self.x = None
         self.y = None
@@ -65,23 +64,25 @@ class Regression:
             raise Error("Initial Theta does not match with function")
 
         def _loss(*args):
-             loss = 0
-             for i in range(len(x)):
-                 loss += (func(*args, x[i]) - y[i]) ** 2
-             loss = loss * (1 / len(x))
-             return loss
+            loss = 0
+            for i in range(len(x)):
+                loss += (func(*args, x[i]) - y[i]) ** 2
+            loss = loss * (1 / len(x))
+            return loss
 
         optim = GradientDescentOptimizer(_loss, num_theta=self.k)
         theta = optim.optimize(
             learning_rate=lr, steps=steps, init_theta=init_theta)
-
-        graph_function_and_data(lambda x: func(
-            *theta, x), x_data=x, y_data=y)
+            
+        if graph:
+            graph_function_and_data(lambda x: func(
+                *theta, x), x_data=x, y_data=y)
         return theta
 
+    """
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
             graph=False, to_print=None, batch_size=10):
-        """
+        
         Fit the model
         :param x: X data
         :param y: Y data
@@ -92,7 +93,7 @@ class Regression:
         :param to_print: Print loss and step number every this number
         :param batch_size: Size of batches
         :return: None
-        """
+        
         self._check_length(x, y)
 
         x = np.array(x)
@@ -146,6 +147,7 @@ class Regression:
             plt.scatter(x, y)
             plt.plot(x1, y1, c="r")
             plt.show()
+    """
 
     @staticmethod
     def _check_length(x, y):
