@@ -19,12 +19,6 @@ class Regression:
         except SyntaxError:
             raise Error("Invalid syntax for nonlinear function")
 
-        self._losses = {'MSE': self._mean_squared_error}
-        if loss_function not in self._losses.keys():
-            raise Error("Invalid Loss Function")
-        else:
-            self.loss = self._losses[loss_function]
-
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
         self.x = None
