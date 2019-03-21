@@ -69,17 +69,18 @@ class Regression:
             _ = self.func(*init_theta, 0)
         except TypeError:
             raise Error("Initial Theta does not match with function")
+        print(init_theta)
 
         def _loss(*args):
             loss = 0
             for i in range(len(x)):
                 loss += (func(*args, x[i]) - y[i]) ** 2
-            loss = loss * (1/len(x))
+            loss = loss * (1 / len(x))
             return loss
 
         optim = GradientDescentOptimizer(_loss, num_theta=self.k)
         theta = optim.optimize(
-            learning_rate=lr, steps=steps, init_theta=init_theta)
+            learning_rate=lr, steps=steps, init_theta=[0, 0, 0])
         graph_function_and_data(lambda x: self.func(
             *theta, x), x_data=self.x, y_data=self.y)
         return theta
