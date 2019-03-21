@@ -35,7 +35,7 @@ class Regression:
         self.x_data = None
         self.m = None
 
-    def fit_grad(self, x, y, init_theta=None, lr=0.001, steps=1000,
+    def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
                  graph=False, dx=0.0001):
         """
         Fit the model
@@ -73,7 +73,7 @@ class Regression:
         optim = GradientDescentOptimizer(_loss, num_theta=self.k)
         theta = optim.optimize(
             learning_rate=lr, steps=steps, init_theta=init_theta)
-            
+
         if graph:
             graph_function_and_data(lambda x: func(
                 *theta, x), x_data=x, y_data=y)
