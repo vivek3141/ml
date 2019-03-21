@@ -14,10 +14,13 @@ class Regression:
         :param func: Function to fit, with the parameters in the front. Eg: m,b,x: m*x + b
         :param loss_function: Cost function to use -> examples MSE
         """
-        try:
-            self.func = eval("lambda " + func)
-        except SyntaxError:
-            raise Error("Invalid syntax for nonlinear function")
+        if callable(func):
+            self.func = func
+        else:
+            try:
+                self.func = eval("lambda " + func)
+            except SyntaxError:
+                raise Error("Invalid syntax for nonlinear function")
 
         self.k = len(func.split(":")[0].split(",")) - 1
         self.theta = None
