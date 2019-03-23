@@ -1,28 +1,36 @@
 #include <Python.h>
 
-double* _fit(PyObject* x, PyObject* y, double lr, int steps, PyObject* init_theta)
+double* _fit(double* x, double* y, double lr, int steps, double* init_theta)
 {
 
 }
 
 static PyObject * fit(PyObject* self, PyObject* args)
 {
-    PyObject* x;
-    PyObject* y;
+    PyObject* x_;
+    PyObject* y_;
     PyObject* init_theta;
     double lr;
     int steps;
+    int m;
 
-    if (!PyArg_ParseTuple(args, "OOdiO", &x, &y, &lr, &steps, &init_theta))
+    if (!PyArg_ParseTuple(args, "OOdiOi", &x_, &y_, &lr, &steps, &init_theta, &m))
         return NULL;
 
     double* theta = malloc(sizeof(double) * 2);
+    double* x = malloc(sizeof(double) * m);
+    double* y = malloc(sizeof(double) * m);
 
     int i;
     for(i = 0; i < 2; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
-        printf("%f", theta[i]);
+    }
+
+    for(i = 0; i < m; i++)
+    {
+        x[i] = PyFloat_AsDouble(PyList_GetItem(x_, (Py_ssize_t)i));
+        y[i] = PyFloat_AsDouble(PyList_GetItem(y_, (Py_ssize_t)i));
     }
 
     double* ret_theta = _fit(x, y, lr, steps, init_theta);
