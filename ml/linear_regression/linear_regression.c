@@ -1,8 +1,38 @@
 #include <Python.h>
 
-double* _fit(double* x, double* y, double lr, int steps, double* init_theta, int m)
+double* fit(double* x, double* y, double lr, int steps, double* init_theta, int n)
 {
 
+}
+double* _linear_r()
+{
+    int cost = 0;
+    for(int i = 0; i < steps; i++){
+        y = (m * x) + b
+        cost = sum([data ** 2 for data in (label - y)]) / n
+        m_gradient = -(2 / n) * sum(x * (label - y))
+        b_gradient = -(2 / n) * sum(label - y)
+        m = m - (lr * m_gradient)
+        b = b - (lr * b_gradient)
+    }
+    return m, b, cost
+}
+    
+
+double * matrix_sub(double* mat1, double* mat2)
+{
+    int len = sizeof(mat1)/sizeof(mat2);
+    double * mat = malloc(sizeof(double) * len);
+    for(int i = 0; i < len; i++){
+        mat[i] = mat1[i] - mat2[i];
+    }
+    return mat;
+}
+
+
+double hypothesis(double* theta, double x)
+{
+    return theta[0] * x + theta[1];
 }
 
 static PyObject * fit(PyObject* self, PyObject* args)
