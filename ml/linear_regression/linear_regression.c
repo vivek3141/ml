@@ -1,6 +1,6 @@
 #include <Python.h>
 
-double* _fit(double* x, double* y, double lr, int steps, double* init_theta)
+double* _fit(double* x, double* y, double lr, int steps, double* init_theta, int m)
 {
 
 }
@@ -33,7 +33,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
         y[i] = PyFloat_AsDouble(PyList_GetItem(y_, (Py_ssize_t)i));
     }
 
-    double* ret_theta = _fit(x, y, lr, steps, init_theta);
+    double* ret_theta = _fit(x, y, lr, steps, init_theta, m);
 
     PyObject* ret = PyTuple_New(2);
 
