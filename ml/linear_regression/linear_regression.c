@@ -7,15 +7,14 @@ double* _fit()
 
 static PyObject * fit(PyObject* self, PyObject* args)
 {
-    double learning_rate;
-    int steps;
+    PyObject* x;
+    PyObject* y;
     PyObject* init_theta;
-    double dx;
-    int num_theta;
-    PyObject* func;
+    double lr;
+    int steps;
 
     //printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+    if (!PyArg_ParseTuple(args, "OOdiO", &x, &y, &lr, &steps, &init_theta))
         return NULL;
     
     //printf("Step 2\n");
@@ -44,7 +43,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
 }
 
 static char fit_docs[] =
-    "usage: fit(func, learning_rate, steps, init_theta, dx, num_theta)\n";
+    "usage: fit(data, labels, lr, steps, init_theta)\n";
 
 
 static PyMethodDef module_methods[] = 
