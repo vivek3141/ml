@@ -4,7 +4,7 @@ double* fit(double* x, double* y, double lr, int steps, double* init_theta, int 
 {
 
 }
-double* _linear_r()
+double* _linear_r(double* x, double* label, double m, double b, int steps, double lr)
 {
     int cost = 0;
     for(int i = 0; i < steps; i++){
