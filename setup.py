@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import Extension
 
 gradient_descent = Extension('gradient_descent', sources=['ml/optimizer/gradient_descent.c'])
-linear_regression = Extension('linear_regression', sources=['ml/linear_regression/linear_regression.c'])
+#linear_regression = Extension('linear_regression', sources=['ml/linear_regression/linear_regression.c'])
 
 
 setup(
@@ -17,7 +17,7 @@ setup(
     description="The easiest way to do machine learning",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    ext_modules=[gradient_descent, linear_regression],
+    ext_modules=[gradient_descent],
     classifiers=[
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 2",
