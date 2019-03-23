@@ -1,8 +1,11 @@
 #include <Python.h>
 
-double* _fit(double* x, double* label, double m, double b, int steps, double lr, int n)
+double* _fit(double* x, double* label, double* init_theta, int steps, double lr, int n)
 {
+    double m = init_theta[0];
+    double b = init_theta[1];
     double cost;
+
     for(int i = 0; i < steps; i++){
         double y;
         double m_grad = 0;
@@ -17,14 +20,16 @@ double* _fit(double* x, double* label, double m, double b, int steps, double lr,
             b_grad += label[i] - y;
         }
 
-        cost = cost/n;
-        m_grad = m_grad * -(2/n);
-        b_grad = b_grad * -(2/n);
+        cost = cost / n;
+        
+        m_grad = m_grad * (2/n) * (-1);
+        b_grad = b_grad * (2/n) * (-1);
+
         m = m - (lr * m_grad);
         b = b - (lr * b_grad);
-        
+
         if(i % 50 == 0){
-            printf("Step: %d Cost %f\n", i, cost);
+            printf("Step: %d Cost %f m_grad %f\n", i, cost, m_grad);
         }
     }
     double ret[3] = {m, b, cost};
@@ -76,7 +81,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
         y[i] = PyFloat_AsDouble(PyList_GetItem(y_, (Py_ssize_t)i));
     }
 
-    double* ret_theta = _fit(x, y, theta[0], theta[1], steps, lr, m);
+    double* ret_theta = _fit(x, y, theta, steps, lr, m);
 
     PyObject* ret = PyTuple_New(2);
 
