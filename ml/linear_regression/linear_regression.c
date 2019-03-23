@@ -22,6 +22,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
     for(i = 0; i < 2; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
+        printf("%f", theta[i]);
     }
 
     double* ret_theta = _fit(x, y, lr, steps, init_theta);
@@ -58,7 +59,7 @@ static struct PyModuleDef linear_regression =
 };
 
 
-PyMODINIT_FUNC PyInit_gradient_descent(void)
+PyMODINIT_FUNC PyInit_linear_regression(void)
 {
     return PyModule_Create(&linear_regression);
 }
