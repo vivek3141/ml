@@ -24,6 +24,7 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
         
         m_grad = m_grad * (2/n) * (-1);
         b_grad = b_grad * (2/n) * (-1);
+        printf("%f\n", m_grad);
 
         m = m - (lr * m_grad);
         b = b - (lr * b_grad);
