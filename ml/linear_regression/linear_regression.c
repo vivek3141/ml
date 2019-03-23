@@ -1,11 +1,11 @@
 #include <Python.h>
 
-double* _optimize()
+double* _fit()
 {
 
 }
 
-static PyObject * optimize(PyObject* self, PyObject* args)
+static PyObject * fit(PyObject* self, PyObject* args)
 {
     double learning_rate;
     int steps;
@@ -30,7 +30,7 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     }
     //printf("Before func\n");
 
-    double* ret_theta = _optimize(func, learning_rate, steps, theta, dx, num_theta);
+    double* ret_theta = _fit(func, learning_rate, steps, theta, dx, num_theta);
     //printf("\n");
 
     PyObject* ret = PyTuple_New(2);
@@ -43,14 +43,14 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     return Py_BuildValue("O", ret);
 }
 
-static char optimize_docs[] =
-    "usage: optimize(func, learning_rate, steps, init_theta, dx, num_theta)\n";
+static char fit_docs[] =
+    "usage: fit(func, learning_rate, steps, init_theta, dx, num_theta)\n";
 
 
 static PyMethodDef module_methods[] = 
 {
-    {"optimize", (PyCFunction) optimize, 
-     METH_VARARGS, optimize_docs},
+    {"fit", (PyCFunction) fit, 
+     METH_VARARGS, fit_docs},
     {NULL}
 };
 
@@ -59,7 +59,7 @@ static struct PyModuleDef linear_regression =
 {
     PyModuleDef_HEAD_INIT,
     "linear_regression", 
-    "usage: linear_regression.optimize\n", 
+    "usage: linear_regression.fit\n", 
     -1,   
     module_methods
 };
