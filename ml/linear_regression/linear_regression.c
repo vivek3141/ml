@@ -1,10 +1,6 @@
 #include <Python.h>
 
-double* _fit(double* x, double* y, double lr, int steps, double* init_theta, int n)
-{
-
-}
-double* _linear_r(double* x, double* label, double m, double b, int steps, double lr, int n)
+double* _fit(double* x, double* label, double m, double b, int steps, double lr, int n)
 {
     double cost;
     for(int i = 0; i < steps; i++){
@@ -26,6 +22,10 @@ double* _linear_r(double* x, double* label, double m, double b, int steps, doubl
         b_grad = b_grad * -(2/n);
         m = m - (lr * m_grad);
         b = b - (lr * b_grad);
+        
+        if(i % 50 == 0){
+            printf("Step: %d Cost %f\n", i, cost);
+        }
     }
     double ret[3] = {m, b, cost};
     return ret;
@@ -76,7 +76,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
         y[i] = PyFloat_AsDouble(PyList_GetItem(y_, (Py_ssize_t)i));
     }
 
-    double* ret_theta = _fit(x, y, lr, steps, init_theta, m);
+    double* ret_theta = _fit(x, y, theta[0], theta[1], steps, lr, m);
 
     PyObject* ret = PyTuple_New(2);
 
