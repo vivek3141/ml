@@ -1,6 +1,6 @@
 #include <Python.h>
 
-double* _fit()
+double* _fit(PyObject* x, PyObject* y, double lr, int steps, PyObject* init_theta)
 {
 
 }
@@ -13,24 +13,18 @@ static PyObject * fit(PyObject* self, PyObject* args)
     double lr;
     int steps;
 
-    //printf("In the function!\n");
     if (!PyArg_ParseTuple(args, "OOdiO", &x, &y, &lr, &steps, &init_theta))
         return NULL;
-    
-    //printf("Step 2\n");
+
     double* theta = malloc(sizeof(double) * 2);
-    //printf("Step 3\n");
-    //printf("Initialization Done\n");
 
     int i;
-    for(i = 0; i < num_theta; i++)
+    for(i = 0; i < 2; i++)
     {
         theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
-    //printf("Before func\n");
 
-    double* ret_theta = _fit(func, learning_rate, steps, theta, dx, num_theta);
-    //printf("\n");
+    double* ret_theta = _fit(x, y, lr, steps, init_theta);
 
     PyObject* ret = PyTuple_New(2);
 
