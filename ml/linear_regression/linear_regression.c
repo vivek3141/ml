@@ -7,11 +7,18 @@ double* fit(double* x, double* y, double lr, int steps, double* init_theta, int 
 double* _linear_r(double* x, double* label, double m, double b, int steps, double lr, int n)
 {
     for(int i = 0; i < steps; i++){
-        double* y = malloc(sizeof(double) * n);
+        //double* y = malloc(sizeof(double) * n);
+        double y;
+        double m_grad = 0;
+        double cost = 0;
+        double b_grad = 0;
+
         for(int i = 0; i < n; i++){
-            y[i] = m * x[i] + b;
+            y = m * x[i] + b;
+            cost += label[i] - y;
         }
-        int cost = 0;
+
+        for(int i = 0; i < n; i+)
         cost = sum([data ** 2 for data in (label - y)]) / n
         m_gradient = -(2 / n) * sum(x * (label - y))
         b_gradient = -(2 / n) * sum(label - y)
