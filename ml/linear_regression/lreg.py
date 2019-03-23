@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import linear_regression
 
 
 class LinearRegression:
@@ -60,20 +61,16 @@ class LinearRegression:
         x = data
         y = labels
         n = len(x)
-        for i in range(len(x)):
-            theta = LinearRegression._matrix_sub(theta, self._gradient(x[i], y[i], theta, n))
+        self.theta = linear_regression.fit(list(data), list(
+            labels), float(lr), int(steps), list(init_theta))
 
-        m, b, cost = LinearRegression._linear_regression(x, y, steps=steps, lr=lr)
-        theta[0] = m
-        theta[1] = b
-        self.theta = theta
-        x_line = np.array(range(0, 10))
-        y_line = theta[0] * x_line + theta[1]
         if graph:
+            x_line = np.array(range(min(x), max(x)))
+            y_line = theta[0] * x_line + theta[1]
             plt.scatter(x, y, c="RED")
             plt.plot(x_line, y_line)
             plt.show()
-        return cost
+        return 
 
     def predict(self, x):
         """
