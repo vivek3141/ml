@@ -1,6 +1,6 @@
 #include <Python.h>
 
-double* fit(double* x, double* y, double lr, int steps, double* init_theta, int n)
+double* _fit(double* x, double* y, double lr, int steps, double* init_theta, int n)
 {
 
 }
