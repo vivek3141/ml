@@ -22,9 +22,9 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
 
         cost = cost / n;
         
-        m_grad = m_grad * (2/n) * (-1);
-        b_grad = b_grad * (2/n) * (-1);
-        printf("%f\n", m_grad);
+        m_grad = m_grad * (-2/(double)n);
+        b_grad = b_grad * (-2/(double)n);
+        
 
         m = m - (lr * m_grad);
         b = b - (lr * b_grad);
@@ -83,6 +83,7 @@ static PyObject * fit(PyObject* self, PyObject* args)
     }
 
     double* ret_theta = _fit(x, y, theta, steps, lr, m);
+    printf("HELLO\n");
 
     PyObject* ret = PyTuple_New(2);
 
