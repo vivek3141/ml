@@ -33,7 +33,10 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
             printf("Step: %d Cost %f m_grad %f\n", i, cost, m_grad);
         }
     }
-    double ret[3] = {m, b, cost};
+    double* ret = malloc(sizeof(double) * 2);
+    ret[0] = m;
+    ret[1] = b;
+
     return ret;
 }
     
@@ -83,8 +86,6 @@ static PyObject * fit(PyObject* self, PyObject* args)
     }
 
     double* ret_theta = _fit(x, y, theta, steps, lr, m);
-    printf("HELLO\n");
-
     PyObject* ret = PyTuple_New(2);
 
     for(i = 0; i < 2; i++)

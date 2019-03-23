@@ -1,1 +1,1 @@
-from ml.linear_regression .linear_regression import *
+from ml.linear_regression.lreg import *
