@@ -33,9 +33,9 @@ static PyObject * optimize(PyObject* self, PyObject* args)
     double* ret_theta = _optimize(func, learning_rate, steps, theta, dx, num_theta);
     //printf("\n");
 
-    PyObject* ret = PyTuple_New(num_theta);
+    PyObject* ret = PyTuple_New(2);
 
-    for(i = 0; i < num_theta; i++)
+    for(i = 0; i < 2; i++)
     {
         PyTuple_SetItem(ret, i, PyFloat_FromDouble(ret_theta[i]));
     }
