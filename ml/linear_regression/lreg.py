@@ -44,7 +44,7 @@ class LinearRegression:
     def _hypothesis(theta, x):
         return theta[0] * x + theta[1]
 
-    def fit(self, data, labels, lr=0.001, graph=False, steps=1000, init_theta=(1, 1)):
+    def fit(self, data, labels, lr=0.01, graph=False, steps=1000, init_theta=(1, 1)):
         """
         Fit the model with the given data
         :param data: Data input matrix
@@ -63,8 +63,8 @@ class LinearRegression:
             labels), lr, steps, list(init_theta), len(data))
 
         if graph:
-            x_line = np.array(range(min(x), max(x)))
-            y_line = theta[0] * x_line + theta[1]
+            x_line = np.array([min(x), max(x)])
+            y_line = self.theta[0] * x_line + self.theta[1]
             plt.scatter(x, y, c="RED")
             plt.plot(x_line, y_line)
             plt.show()
