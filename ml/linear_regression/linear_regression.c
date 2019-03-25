@@ -29,7 +29,7 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
         m = m - (lr * m_grad);
         b = b - (lr * b_grad);
 
-        if(i % 50 == 0){
+        if(i % 300 == 0){
             printf("Step: %d Cost %f\n", i, cost);
         }
     }
