@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import linear_regression
+import lin_reg
 
 
 class LinearRegression:

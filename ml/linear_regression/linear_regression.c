@@ -111,14 +111,14 @@ static PyMethodDef module_methods[] =
 static struct PyModuleDef linear_regression =
 {
     PyModuleDef_HEAD_INIT,
-    "linear_regression", 
-    "usage: linear_regression.fit\n", 
+    "lin_reg", 
+    "usage: lin_reg.fit\n", 
     -1,   
     module_methods
 };
 
 
-PyMODINIT_FUNC PyInit_linear_regression(void)
+PyMODINIT_FUNC PyInit_lin_reg(void)
 {
-    return PyModule_Create(&linear_regression);
+    return PyModule_Create(&lin_reg);
 }
