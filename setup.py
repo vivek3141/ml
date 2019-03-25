@@ -10,7 +10,7 @@ linear_regression = Extension('lin_reg', sources=[
 
 setup(
     name='ml-python',
-    version='2.3',
+    version='2.2',
     author="Vivek Verma",
     packages=find_packages(),
     author_email="vivekverma3141@gmail.com",
