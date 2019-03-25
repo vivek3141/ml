@@ -108,7 +108,7 @@ static PyMethodDef module_methods[] =
 };
 
 
-static struct PyModuleDef linear_regression =
+static struct PyModuleDef lin_reg =
 {
     PyModuleDef_HEAD_INIT,
     "lin_reg", 
