@@ -5,15 +5,17 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
     double m = init_theta[0];
     double b = init_theta[1];
     double cost;
+    int i;
 
-    for(int i = 0; i < steps; i++){
+    for(i = 0; i < steps; i++){
         double y;
         double m_grad = 0;
         double b_grad = 0;
 
         cost = 0;
 
-        for(int i = 0; i < n; i++){
+        int k;
+        for(k = 0; i < n; i++){
             y = m * x[i] + b;
             cost += pow(label[i] - y, 2);
             m_grad += x[i] * (label[i] - y);
@@ -45,7 +47,8 @@ double * matrix_sub(double* mat1, double* mat2)
 {
     int len = sizeof(mat1)/sizeof(mat2);
     double * mat = malloc(sizeof(double) * len);
-    for(int i = 0; i < len; i++){
+    int i;
+    for(i = 0; i < len; i++){
         mat[i] = mat1[i] - mat2[i];
     }
     return mat;
