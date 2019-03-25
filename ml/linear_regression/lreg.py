@@ -55,14 +55,12 @@ class LinearRegression:
         :param init_theta: Initial theta values
         :return: Cost of the model
         """
-        if steps > len(data):
-            steps = len(data)
         theta = init_theta
         x = data
         y = labels
         n = len(x)
         self.theta = lin_reg.fit(list(data), list(
-            labels), float(lr), int(steps), list(init_theta), len(data))
+            labels), lr, steps, list(init_theta), len(data))
 
         if graph:
             x_line = np.array(range(min(x), max(x)))
