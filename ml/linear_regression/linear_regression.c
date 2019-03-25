@@ -30,7 +30,7 @@ double* _fit(double* x, double* label, double* init_theta, int steps, double lr,
         b = b - (lr * b_grad);
 
         if(i % 50 == 0){
-            printf("Step: %d Cost %f\n", i, cost, m_grad);
+            printf("Step: %d Cost %f\n", i, cost);
         }
     }
     double* ret = malloc(sizeof(double) * 2);
