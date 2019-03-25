@@ -4,7 +4,7 @@ from setuptools import Extension
 
 gradient_descent = Extension('gradient_descent', sources=[
                             'ml/optimizer/gradient_descent.c'])
-linear_regression = Extension('linear_regression', sources=[
+linear_regression = Extension('lin_reg', sources=[
                               'ml/linear_regression/linear_regression.c'])
 
 

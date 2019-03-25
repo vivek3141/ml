@@ -61,7 +61,7 @@ class LinearRegression:
         x = data
         y = labels
         n = len(x)
-        self.theta = linear_regression.fit(list(data), list(
+        self.theta = lin_reg.fit(list(data), list(
             labels), float(lr), int(steps), list(init_theta))
 
         if graph:

@@ -1,4 +1,4 @@
-import linear_regression
+import lin_reg
 import numpy as np
 import matplotlib.pyplot as plt
 from ml.linear_regression import LinearRegression
@@ -11,7 +11,7 @@ start_time = time.time()
 #theta = LinearRegression()
 #theta.fit(np.array(x), np.array(y), lr=0.01)
 #theta = theta.theta
-theta = linear_regression.fit(x, y, 0.01, 1000, [1, 1], len(x))
+theta = lin_reg.fit(x, y, 0.01, 1000, [1, 1], len(x))
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
