@@ -55,17 +55,13 @@ class LinearRegression:
         :param init_theta: Initial theta values
         :return: Cost of the model
         """
-        theta = init_theta
-        x = data
-        y = labels
-        n = len(x)
         self.theta = lin_reg.fit(list(data), list(
             labels), lr, steps, list(init_theta), len(data))
 
         if graph:
-            x_line = np.array([min(x), max(x)])
+            x_line = np.array([min(data), max(data)])
             y_line = self.theta[0] * x_line + self.theta[1]
-            plt.scatter(x, y, c="RED")
+            plt.scatter(data, labels, c="RED")
             plt.plot(x_line, y_line)
             plt.show()
         return 
