@@ -62,7 +62,7 @@ class LinearRegression:
         y = labels
         n = len(x)
         self.theta = lin_reg.fit(list(data), list(
-            labels), float(lr), int(steps), list(init_theta))
+            labels), float(lr), int(steps), list(init_theta), len(data))
 
         if graph:
             x_line = np.array(range(min(x), max(x)))
