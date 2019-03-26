@@ -1,4 +1,3 @@
-import numpy as np
 from ml.linear_regression import LinearRegression
 
 # data

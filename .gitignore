@@ -17,3 +17,5 @@ checkpoint
 test.sh
 __pycache__/
 .vscode/
+*.so
+
