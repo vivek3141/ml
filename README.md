@@ -52,7 +52,6 @@ git clone https://github.com/vivek3141/ml
 cd ml
 sudo make install
 ```
-This module has support for ANNs, CNNs, linear regression, logistic regression, k-means.
 
 ## Examples
 Examples for all implemented structures can be found in `/examples`. <br>
