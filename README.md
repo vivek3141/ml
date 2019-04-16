@@ -10,6 +10,7 @@ This module provides for the easiest way to implement Machine Learning algorithm
 Learn the module here:
 * [YouTube](https://www.youtube.com/watch?v=ReMIzozsx8Y)
 * [Blog Post](https://vivek3141.github.io/blog/posts/ml.html)
+* [Examples](https://github.com/vivek3141/ml/tree/master/examples)
 
 Use this module if
 - You are a complete beginner to Machine Learning.
@@ -17,9 +18,23 @@ Use this module if
 
 This module is not meant for high level tasks, but only for simple use and learning.
 
-I would not recommend using this module for big projects.
-
 This module uses a tensorflow backend.
+
+## Implemented Algorithms
+* 2D CNN `ml.cnn`
+* Basic MLP `ml.nn`
+* K-Means `ml.k_means`
+* Linear Regression `ml.linear_regression`
+    * optimized with C
+* Logistic Regression `ml.logistic_regression`
+* Graph Modules `ml.graph`
+    * Graph any function with or without data points - `from ml.graph import graph_function, graph_function_and_data`
+* Nonlinear Regression `ml.regression`
+* Optimizers - `ml.optimizer` optimized with C
+    * GradientDescentOptimizer -`from ml.optimizer import GradientDescentOptimizer`
+* <b>UNSTABLE</b> - Character generating RNN - `ml.rnn`
+
+#### You can find examples for all of these in `/examples`
 
 ### Pip installation
 ```bash
