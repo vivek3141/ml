@@ -5,18 +5,12 @@
 [![License](https://img.shields.io/pypi/l/ml-python.svg)](https://pypi.python.org/pypi/ml-python)
 # ML
 
-This module provides for the easiest way to implement Machine Learning algorithms without the need to know about them.
+This module provides for the easiest way to implement Machine Learning algorithms. It also has in-built support for graphing and optimizers based in C.
 
 Learn the module here:
 * [YouTube](https://www.youtube.com/watch?v=ReMIzozsx8Y)
 * [Blog Post](https://vivek3141.github.io/blog/posts/ml.html)
 * [Examples](https://github.com/vivek3141/ml/tree/master/examples)
-
-Use this module if
-- You are a complete beginner to Machine Learning.
-- You find other modules too complicated.
-
-This module is not meant for high level tasks, but only for simple use and learning.
 
 This module uses a tensorflow backend.
 
@@ -31,7 +25,7 @@ This module uses a tensorflow backend.
     * Graph any function with or without data points - `from ml.graph import graph_function, graph_function_and_data`
 * Nonlinear Regression `ml.regression`
 * Optimizers - `ml.optimizer` optimized with C
-    * GradientDescentOptimizer -`from ml.optimizer import GradientDescentOptimizer`
+    * GradientDescentOptimizer - `from ml.optimizer import GradientDescentOptimizer`
 * <b>UNSTABLE</b> - Character generating RNN - `ml.rnn`
 
 #### You can find examples for all of these in `/examples`
