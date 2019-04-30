@@ -7,4 +7,5 @@ y1 = [0.00,2.89, 5.14, 6.74, 7.71, 8.03, 7.71, 6.74, 5.14, 2.89, 0.00]
 #r = Regression(lambda a,b,c,x: a*(x**2) + b*x + c)
 r = Regression("a,b,c,x: a*(x**2) + b*x + c")
 t = r.fit(x1, y1, graph=True, steps=50000, lr=7e-7)
+r.save("model.pkl")
 

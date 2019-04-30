@@ -1,10 +1,11 @@
-import numpy as np
 from ml.optimizer import GradientDescentOptimizer
 from ml.graph import graph_function_and_data
 from ml.error import Error
 import matplotlib.pyplot as plt
 from math import *
 from inspect import signature
+import pickle
+import dill
 
 
 class Regression:
@@ -36,7 +37,7 @@ class Regression:
         self.m = None
 
     def fit(self, x, y, init_theta=None, lr=0.001, steps=1000,
-                 graph=False, dx=0.0001):
+            graph=False, dx=0.0001):
         """
         Fit the model
         :param x: X data
@@ -174,9 +175,8 @@ class Regression:
         :param file_name: File to save to model to
         :return: None
         """
-        saver = tf.train.Saver()
-        saver.save(self.s, str(file_name))
-        self.s.close()
+        pickle.dump(RegressionSave(self.func, self.theta),
+                    open(file_name, "wb"))
 
     def load(self, file_name):
         """
@@ -184,6 +184,20 @@ class Regression:
         :param file_name: File to load the model from
         :return: None
         """
-        load = tf.train.Saver()
-        self.s = tf.Session()
-        load.restore(self.s, file_name)
+        save = pickle.load(open(file_name, "rb"))
+        self.func = save.func
+        self.theta = save.theta
+
+    def graph(self):
+        """
+        Graph the model and data
+        :return None
+        """
+        graph_function_and_data(lambda x: func(
+            *theta, x), x_data=x, y_data=y)
+
+
+class RegressionSave:
+    def __init__(self, func, theta):
+        self.func = func
+        self.theta = theta
