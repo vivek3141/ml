@@ -1,20 +1,13 @@
----
-name: Feature request
-about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+Thank you for contributing to ml-python!
 
----
+#### Please make sure the issue still exists in the latest version of ml-python.
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## If it is an issue in the library
+Please include
+* The commands/steps you took/ran to experience the issue
+* The unexpected behavior that occured
+* Screenshots, if neccecary
+* The environment - What OS, python version, ml-python version, etc.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## If it is a feature request
+Please include why this should be a feature
