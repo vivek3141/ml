@@ -5,7 +5,6 @@ import matplotlib.pyplot as plt
 from math import *
 from inspect import signature
 import pickle
-import dill
 
 
 class Regression:
@@ -194,7 +193,7 @@ class Regression:
         :return None
         """
         graph_function_and_data(lambda x: func(
-            *theta, x), x_data=x, y_data=y)
+            *self.theta, x), x_data=self.x, y_data=self.y)
 
 
 class RegressionSave:
