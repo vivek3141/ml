@@ -21,9 +21,7 @@ def func(a, b, c, x):
     return a * (x ** 2) + b * x + c
 
 
-# Define the function
-# This can be compressed to:
-# theta = GradientDescentOptimizer(cost_function).optimize(learning_rate=7e-7, steps=5e+4)
+# Optimize
 g = GradientDescentOptimizer(cost_function)
 theta = g.optimize(learning_rate=7e-7, steps=5e+4)
 
