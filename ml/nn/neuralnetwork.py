@@ -84,7 +84,7 @@ class NeuralNetwork:
     def predict(self, x):
         ret = []
         for i in range(len(x)):
-            ret.append(self.s.run(self.y, feed_dict={self.x: x[i]}))
+            ret.append(self.s.run(self.y, feed_dict={self.x: x.reshape(1, self.input)}))
         return ret
 
     def test(self, test_x, test_y):
