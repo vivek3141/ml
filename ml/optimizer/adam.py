@@ -18,14 +18,14 @@ class AdamOptimizer:
         epsilon=1e-8,
         steps=1,
         init_theta=None,
-        dx=0.0001
+        dx=0.001
     ):
         theta = np.array([0 for i in range(self.num_theta)
                           ] if init_theta is None else init_theta)
         m = 0
         v = 0
         for i in range(steps):
-            grad = self.gradient(theta)
+            grad = self.gradient(theta, dx=dx)
             m = beta1 * m + (1 - beta1) * grad
             v = beta2 * v + (1 - beta2) * (grad ** 2)
             m_h = m / (1 - (beta1 ** i))
