@@ -26,14 +26,17 @@ double *graident(PyObject *func, double *theta, double dx, int num_theta)
     return partials;
 }
 
-double *_optimize(PyObject *func, double learning_rate, int steps, double *init_theta,
-                  double dx, int num_theta)
+double *_optimize(PyObject *func, double alpha, int steps, double *init_theta,
+                  double dx, double beta1, double beta2, int num_theta)
 {
     double *theta = init_theta;
+    double m[num_theta] = {0};
+    double v[num_theta] = {0};
     int i;
     for (i = 0; i < steps; i++)
     {
-        
+        double *grad = gradient(func, theta, dx, num_theta);
+
     }
 }
 
