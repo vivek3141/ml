@@ -3,6 +3,7 @@ from inspect import signature
 import numpy as np
 import math
 
+
 class AdamOptimizer:
     def __init__(self, func, num_theta=None):
         self.func = func
@@ -15,27 +16,24 @@ class AdamOptimizer:
         beta1=0.9,
         beta2=0.999,
         epsilon=1e-8,
-        steps=10000,
+        steps=1,
         init_theta=None,
         dx=0.0001
     ):
-        theta_0 = [0 for i in range(self.num_theta)
-                   ] if init_theta is None else init_theta
-        m_t = 0
-        v_t = 0
+        theta = np.array([0 for i in range(self.num_theta)
+                          ] if init_theta is None else init_theta)
+        m = 0
+        v = 0
         for i in range(steps):
-            g_t = self.gradient(theta_0)
-            m_t = beta1*m_t + (1-beta1)*g_t
-            v_t = beta2*v_t + (1-beta2)*(g_t*g_t)
-            m_cap = m_t/(1-(beta1**i))
-            v_cap = v_t/(1-(beta2**i))
-            theta_0_prev = theta_0
-            theta_0 = theta_0 - (alpha*m_cap)/(math.sqrt(v_cap) +
-                                               epsilon)
-            if(theta_0 == theta_0_prev):
-                break
+            grad = self.gradient(theta)
+            m = beta1 * m + (1 - beta1) * grad
+            v = beta2 * v + (1 - beta2) * (grad ** 2)
+            m_h = m / (1 - (beta1 ** i))
+            v_h = m / (1 - (beta2 ** i))
+            theta = theta - alpha * (m_h / (np.sqrt(v_h) - epsilon))
+        return theta
 
-    def gradient(self, theta, dx=0.0001):
+    def gradient(self, theta, dx=0.001):
         partials = []
         for t in range(self.num_theta):
             theta_dx = [(theta[x] + dx) if t == x else theta[x]
@@ -70,4 +68,4 @@ g = AdamOptimizer(cost_function)
 theta = g._optimize_python()
 
 # Graph the function by using the theta learnt
-graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
+#graph_function_and_data(lambda x: func(*theta, x), x_data=x1, y_data=y1)
