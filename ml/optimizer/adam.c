@@ -31,6 +31,10 @@ double *_optimize(PyObject *func, double learning_rate, int steps, double *init_
 {
     double *theta = init_theta;
     int i;
+    for (i = 0; i < steps; i++)
+    {
+        
+    }
 }
 
 double call_func(PyObject *func, double *theta, int num_theta)
