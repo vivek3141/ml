@@ -1,4 +1,6 @@
 #include <Python.h>
+#include <stdio.h>
+#include <math.h>
 
 double call_func(PyObject *func, double *theta, int num_theta);
 
@@ -26,14 +28,15 @@ double *graident(PyObject *func, double *theta, double dx, int num_theta)
     return partials;
 }
 
-double *_optimize(PyObject *func, double alpha, int steps, double *init_theta,
-                  double dx, double beta1, double beta2, int num_theta)
+double *_optimize(PyObject *func, double alpha, double beta1, double beta2,
+                  double epsilon, int steps, double *init_theta,
+                  double dx, int num_theta)
 {
     double *theta = init_theta;
-    double m[num_theta] = {0};
-    double v[num_theta] = {0};
-    int i;
-    for (i = 1; i < steps; i++)
+    double *m = malloc(sizeof(double) * num_theta);
+    double *v = malloc(sizeof(double) * num_theta);
+    double m_h, v_h;
+    for (int i = 1; i < steps; i++)
     {
         double *grad = gradient(func, theta, dx, num_theta);
         for (int x = 0; x < num_theta; x++)
@@ -41,7 +44,13 @@ double *_optimize(PyObject *func, double alpha, int steps, double *init_theta,
             m[x] = beta1 * m[x] + (1 - beta1) * grad[x];
             v[x] = beta2 * v[x] + (1 - beta2) * grad[x] * grad[x];
         }
-        
+
+        for (int x = 0; x < num_theta; x++)
+        {
+            m_h = m[x] / (1 - pow(beta1, i));
+            v_h = v[x] / (1 - pow(beta2, i));
+            theta[x] = theta[x] - alpha * (m_h / (sqrt(v_h) - epsilon))
+        }
     }
 }
 
