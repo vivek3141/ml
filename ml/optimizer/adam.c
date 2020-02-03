@@ -33,10 +33,15 @@ double *_optimize(PyObject *func, double alpha, int steps, double *init_theta,
     double m[num_theta] = {0};
     double v[num_theta] = {0};
     int i;
-    for (i = 0; i < steps; i++)
+    for (i = 1; i < steps; i++)
     {
         double *grad = gradient(func, theta, dx, num_theta);
-
+        for (int x = 0; x < num_theta; x++)
+        {
+            m[x] = beta1 * m[x] + (1 - beta1) * grad[x];
+            v[x] = beta2 * v[x] + (1 - beta2) * grad[x] * grad[x];
+        }
+        
     }
 }
 
