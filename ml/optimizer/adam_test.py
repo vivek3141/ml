@@ -1,4 +1,4 @@
-from _adam import AdamOptimizer
+import adam
 import time
 from ml.graph import graph_function_and_data
 

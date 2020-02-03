@@ -6,7 +6,7 @@ double call_func(PyObject *func, double *theta, int num_theta);
 
 double *graident(PyObject *func, double *theta, double dx, int num_theta)
 {
-    double partials[num_theta];
+    double *partials = malloc(sizeof(double) * num_theta);
     int t;
     for (t = 0; t < num_theta; t++)
     {
@@ -49,9 +49,14 @@ double *_optimize(PyObject *func, double alpha, double beta1, double beta2,
         {
             m_h = m[x] / (1 - pow(beta1, i));
             v_h = v[x] / (1 - pow(beta2, i));
-            theta[x] = theta[x] - alpha * (m_h / (sqrt(v_h) - epsilon))
+            theta[x] = theta[x] - alpha * (m_h / (sqrt(v_h) - epsilon));
+        }
+        if (i % 500 == 0)
+        {
+            printf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
         }
     }
+    return theta;
 }
 
 double call_func(PyObject *func, double *theta, int num_theta)
@@ -83,15 +88,16 @@ double call_func(PyObject *func, double *theta, int num_theta)
 
 static PyObject *optimize(PyObject *self, PyObject *args)
 {
-    double learning_rate;
     int steps;
     PyObject *init_theta;
     double dx;
     int num_theta;
     PyObject *func;
+    double alpha, beta1, beta2, epsilon;
 
     //printf("In the function!\n");
-    if (!PyArg_ParseTuple(args, "OdiOdi", &func, &learning_rate, &steps, &init_theta, &dx, &num_theta))
+    if (!PyArg_ParseTuple(args, "OiddddiOd", &func, &num_theta, &alpha, &beta1, &beta2,
+                          &epsilon, &steps, &init_theta, &dx))
         return NULL;
 
     //printf("Step 2\n");
@@ -106,7 +112,7 @@ static PyObject *optimize(PyObject *self, PyObject *args)
     }
     //printf("Before func\n");
 
-    double *ret_theta = _optimize(func, learning_rate, steps, theta, dx, num_theta);
+    double *ret_theta = _optimize(func, alpha, beta1, beta2, epsilon, steps, init_theta, dx, num_theta);
     //printf("\n");
 
     PyObject *ret = PyTuple_New(num_theta);
