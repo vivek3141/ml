@@ -26,14 +26,13 @@ def func(a, b, c, x):
 # This can be compressed to:
 
 start_time = time.time()
-adam = AdamOptimizer(cost_function)
-theta = adam._optimize_python(alpha=0.0001,
-                              beta1=0.9,
-                              beta2=0.999,
-                              epsilon=1e-8,
-                              steps=10000,
-                              init_theta=[0, 0, 0],
-                              dx=0.0001)
+#adam = AdamOptimizer(cost_function)
+theta = adam.optimize(cost_function, 3, 0.0001,0.9,
+        0.999,
+        0.00000001,
+        10000,
+        [0, 0, 0],
+        0.0001)
 print("--- %s seconds ---" % (time.time() - start_time))
 
 # Graph the function by using the theta learnt

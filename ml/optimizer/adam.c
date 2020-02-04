@@ -2,16 +2,16 @@
 #include <stdio.h>
 #include <math.h>
 
-double call_func(PyObject *func, double *theta, int num_theta);
+long double call_func(PyObject *func, long double *theta, long num_theta);
 
-double *graident(PyObject *func, double *theta, double dx, int num_theta)
+long double *gradient(PyObject *func, long double *theta, long double dx, long num_theta)
 {
-    double *partials = malloc(sizeof(double) * num_theta);
-    int t;
+    long double *partials = malloc(sizeof(long double) * num_theta);
+    long t;
     for (t = 0; t < num_theta; t++)
     {
-        double *theta_dx = malloc(sizeof(double) * num_theta);
-        int x;
+        long double *theta_dx = malloc(sizeof(long double) * num_theta);
+        long x;
         for (x = 0; x < num_theta; x++)
         {
             if (t == x)
@@ -28,24 +28,24 @@ double *graident(PyObject *func, double *theta, double dx, int num_theta)
     return partials;
 }
 
-double *_optimize(PyObject *func, double alpha, double beta1, double beta2,
-                  double epsilon, int steps, double *init_theta,
-                  double dx, int num_theta)
+long double *_optimize(PyObject *func, long double alpha, long double beta1, long double beta2,
+                  long double epsilon, long steps, long double *init_theta,
+                  long double dx, long num_theta)
 {
-    double *theta = init_theta;
-    double *m = malloc(sizeof(double) * num_theta);
-    double *v = malloc(sizeof(double) * num_theta);
-    double m_h, v_h;
-    for (int i = 1; i < steps; i++)
+    long double *theta = init_theta;
+    long double *m = malloc(sizeof(long double) * num_theta);
+    long double *v = malloc(sizeof(long double) * num_theta);
+    long double m_h, v_h;
+    for (long i = 1; i < steps; i++)
     {
-        double *grad = gradient(func, theta, dx, num_theta);
-        for (int x = 0; x < num_theta; x++)
+        long double *grad = gradient(func, theta, dx, num_theta);
+        for (long x = 0; x < num_theta; x++)
         {
             m[x] = beta1 * m[x] + (1 - beta1) * grad[x];
             v[x] = beta2 * v[x] + (1 - beta2) * grad[x] * grad[x];
         }
 
-        for (int x = 0; x < num_theta; x++)
+        for (long x = 0; x < num_theta; x++)
         {
             m_h = m[x] / (1 - pow(beta1, i));
             v_h = v[x] / (1 - pow(beta2, i));
@@ -53,20 +53,20 @@ double *_optimize(PyObject *func, double alpha, double beta1, double beta2,
         }
         if (i % 500 == 0)
         {
-            printf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
+            prlongf("Step: %d Cost %f\n", i, call_func(func, theta, num_theta));
         }
     }
     return theta;
 }
 
-double call_func(PyObject *func, double *theta, int num_theta)
+long double call_func(PyObject *func, long double *theta, long num_theta)
 {
 
     PyObject *arg = PyTuple_New(num_theta); // For arguments to call the passed function
-    int i;
+    long i;
     for (i = 0; i < num_theta; i++)
     {
-        PyTuple_SetItem(arg, i, PyFloat_FromDouble(theta[i]));
+        PyTuple_SetItem(arg, i, PyFloat_Fromlong double(theta[i]));
     }
 
     PyObject *result = PyObject_CallObject(func, arg);
@@ -74,13 +74,13 @@ double call_func(PyObject *func, double *theta, int num_theta)
     PyObject *repr = PyObject_Repr(result);
     PyObject *str = PyUnicode_AsEncodedString(repr, "utf-8", "~E~");
 
-    // Decoding PyObject into double
+    // Decoding PyObject longo long double
     const char *bytes = PyBytes_AS_STRING(str);
 
     Py_XDECREF(repr);
     Py_XDECREF(str);
 
-    double d;
+    long double d;
     sscanf(bytes, "%lf", &d);
 
     return d;
@@ -88,45 +88,45 @@ double call_func(PyObject *func, double *theta, int num_theta)
 
 static PyObject *optimize(PyObject *self, PyObject *args)
 {
-    int steps;
+    long steps;
     PyObject *init_theta;
-    double dx;
-    int num_theta;
+    long double dx;
+    long num_theta;
     PyObject *func;
-    double alpha, beta1, beta2, epsilon;
+    long double alpha, beta1, beta2, epsilon;
 
-    //printf("In the function!\n");
+    //prlongf("In the function!\n");
     if (!PyArg_ParseTuple(args, "OiddddiOd", &func, &num_theta, &alpha, &beta1, &beta2,
                           &epsilon, &steps, &init_theta, &dx))
         return NULL;
 
-    //printf("Step 2\n");
-    double *theta = malloc(sizeof(double) * num_theta);
-    //printf("Step 3\n");
-    //printf("Initialization Done\n");
+    //prlongf("Step 2\n");
+    long double *theta = malloc(sizeof(long double) * num_theta);
+    //prlongf("Step 3\n");
+    //prlongf("Initialization Done\n");
 
-    int i;
+    long i;
     for (i = 0; i < num_theta; i++)
     {
-        theta[i] = PyFloat_AsDouble(PyList_GetItem(init_theta, (Py_ssize_t)i));
+        theta[i] = PyFloat_Aslong double(PyList_GetItem(init_theta, (Py_ssize_t)i));
     }
-    //printf("Before func\n");
+    //prlongf("Before func\n");
 
-    double *ret_theta = _optimize(func, alpha, beta1, beta2, epsilon, steps, init_theta, dx, num_theta);
-    //printf("\n");
+    long double *ret_theta = _optimize(func, alpha, beta1, beta2, epsilon, steps, init_theta, dx, num_theta);
+    //prlongf("\n");
 
     PyObject *ret = PyTuple_New(num_theta);
 
     for (i = 0; i < num_theta; i++)
     {
-        PyTuple_SetItem(ret, i, PyFloat_FromDouble(ret_theta[i]));
+        PyTuple_SetItem(ret, i, PyFloat_Fromlong double(ret_theta[i]));
     }
 
     return Py_BuildValue("O", ret);
 }
 
 static char optimize_docs[] =
-    "usage: optimize(func, learning_rate, steps, init_theta, dx, num_theta)\n";
+    "usage: optimize(func, num_theta, alpha, beta1, beta2, epsilon, steps, init_theta, dx)";
 
 static PyMethodDef module_methods[] =
     {
