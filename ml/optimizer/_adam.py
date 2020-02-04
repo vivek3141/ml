@@ -1,27 +1,39 @@
-from ml.graph import graph_function_and_data
 from inspect import signature
-import numpy as np
-import math
+import adam
 
 
 class AdamOptimizer:
     def __init__(self, func, num_theta=None):
         self.func = func
         self.num_theta = len(
-            signature(func).parameters) if num_theta is None else num_theta
+                signature(func).parameters) if num_theta is None else num_theta
+        def optimize(
+                self,
+                alpha=0.001,
+                beta1=0.9,
+                beta2=0.999,
+                epsilon=1e-8,
+                steps=10000,
+                init_theta=None,
+                dx=0.001):
+            theta = [0 for i in range(self.num_theta)] if init_theta is None else init_theta
+        theta = adam.optimize(self.func, self.num_theta, alpha, beta1, beta2, epsilon, steps, init_theta, dx)
+        return theta
 
     def _optimize_python(
-        self,
-        alpha=0.001,
-        beta1=0.9,
-        beta2=0.999,
-        epsilon=1e-8,
-        steps=10000,
-        init_theta=None,
-        dx=0.001
-    ):
+            self,
+            alpha=0.001,
+            beta1=0.9,
+            beta2=0.999,
+            epsilon=1e-8,
+            steps=10000,
+            init_theta=None,
+            dx=0.001
+            ):
+        import numpy as np
+        import math
         theta = np.array([0 for i in range(self.num_theta)
-                          ] if init_theta is None else init_theta)
+            ] if init_theta is None else init_theta)
         m = 0
         v = 0
         for i in range(1, steps):
@@ -41,7 +53,7 @@ class AdamOptimizer:
         partials = []
         for t in range(self.num_theta):
             theta_dx = [(theta[x] + dx) if t == x else theta[x]
-                        for x in range(self.num_theta)]
+                    for x in range(self.num_theta)]
             partial = (self.func(*theta_dx) - self.func(*theta)) / dx
             partials.append(partial)
         return np.array(partials)
