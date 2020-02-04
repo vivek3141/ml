@@ -12,7 +12,7 @@ adam = Extension('adam', sources=[
 
 setup(
         name='ml-python',
-        version='2.3',
+        version='2.3.1',
         author="Vivek Verma",
         packages=find_packages(),
         author_email="vivekverma3141@gmail.com",
