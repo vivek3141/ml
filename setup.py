@@ -21,7 +21,7 @@ setup(
         description="The easiest way to do machine learning",
         long_description=open("README.md").read(),
         long_description_content_type="text/markdown",
-        ext_modules=[gradient_descent, linear_regression],
+        ext_modules=[gradient_descent, linear_regression, adam],
         classifiers=[
             "Programming Language :: Python :: 3",
             "Programming Language :: Python :: 2",
