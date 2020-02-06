@@ -1,7 +1,7 @@
 #include <Python.h>
 #include <iostream>
 #include <vector>
-#include <math>
+#include <math.h>
 
 using namespace std;
 
