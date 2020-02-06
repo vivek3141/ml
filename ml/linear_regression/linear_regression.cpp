@@ -48,19 +48,6 @@ vector<double> _fit(vector<double> x, vector<double> label, vector<double> init_
 	return ret;
 }
 
-
-double * matrix_sub(double* mat1, double* mat2)
-{
-	int len = sizeof(mat1)/sizeof(mat2);
-	double * mat = malloc(sizeof(double) * len);
-	int i;
-	for(i = 0; i < len; i++){
-		mat[i] = mat1[i] - mat2[i];
-	}
-	return mat;
-}
-
-
 double hypothesis(vector<double> theta, double x)
 {
 	return theta[0] * x + theta[1];

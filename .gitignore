@@ -19,4 +19,4 @@ __pycache__/
 .vscode/
 *.so
 model.pkl
-
+*.swp
