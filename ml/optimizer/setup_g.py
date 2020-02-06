@@ -1,7 +1,7 @@
 from setuptools import Extension
 from setuptools import setup
 
-gradient_descent = Extension('gradient_descent', sources=['gradient_descent.c'])
+gradient_descent = Extension('gradient_descent', sources=['gradient_descent.cpp'])
 
 
 setup(
