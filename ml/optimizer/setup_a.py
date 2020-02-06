@@ -1,7 +1,7 @@
 from setuptools import Extension
 from setuptools import setup
 
-adam = Extension('adam', sources=['adam.c'])
+adam = Extension('adam', sources=['adam.cpp'])
 
 
 setup(
