@@ -1,7 +1,7 @@
 from setuptools import Extension
 from setuptools import setup
 
-linear_regression = Extension('lin_reg', sources=['linear_regression.c'])
+linear_regression = Extension('lin_reg', sources=['linear_regression.cpp'])
 
 
 setup(

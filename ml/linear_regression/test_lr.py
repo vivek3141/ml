@@ -11,7 +11,7 @@ start_time = time.time()
 #theta = LinearRegression()
 #theta.fit(np.array(x), np.array(y), lr=0.01)
 #theta = theta.theta
-theta = lin_reg.fit(x, y, 0.01, 1000, [1, 1], len(x))
+theta = lin_reg.fit(x, y, 0.01, 10000, [1, 1], len(x))
 
 print("--- %s seconds ---" % (time.time() - start_time))
 
