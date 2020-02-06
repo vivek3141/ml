@@ -27,10 +27,10 @@ def func(a, b, c, x):
 
 start_time = time.time()
 #adam = AdamOptimizer(cost_function)
-theta = adam.optimize(cost_function, 3, 0.0001,0.9,
+theta = adam.optimize(cost_function, 3, 0.00001,0.9,
         0.999,
         0.00000001,
-        10000,
+        100000,
         [0, 0, 0],
         0.0001)
 print("--- %s seconds ---" % (time.time() - start_time))
