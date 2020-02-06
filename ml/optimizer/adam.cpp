@@ -37,7 +37,7 @@ vector<double> _optimize(PyObject *func, double alpha, double beta1, double beta
 		double dx, int num_theta)
 {
 	vector<double> theta = init_theta;
-	vector<double> m(num_theta), v(num_theta); 
+	vector<double> m(num_theta), v(num_theta);
 	double m_h = 0; double v_h = 0;
 	for(int i = 0; i < num_theta; i++)
 	{
