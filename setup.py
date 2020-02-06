@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import Extension
 
 gradient_descent = Extension('gradient_descent', sources=[
-    'ml/optimizer/gradient_descent.c'])
+    'ml/optimizer/gradient_descent.cpp'])
 linear_regression = Extension('lin_reg', sources=[
     'ml/linear_regression/linear_regression.c'])
 adam = Extension('adam', sources=[
