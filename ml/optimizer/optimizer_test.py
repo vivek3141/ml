@@ -1,4 +1,5 @@
 from ml.optimizer import GradientDescentOptimizer
+from ml.optimizer import NewtonMethodOptimizer
 from ml.graph import graph_function_and_data
 import gradient_descent
 import time
