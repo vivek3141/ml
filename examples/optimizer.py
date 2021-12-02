@@ -19,12 +19,14 @@ def cost_function(a, b, c):
 def func(a, b, c, x):
     return a * (x ** 2) + b * x + c
 
-
+def f(x):
+    return 12*x[0]**2+x[1]-12*x[0]*x[1]
 # Optimize
-#g = GradientDescentOptimizer(cost_function)
-#theta = g.optimize(learning_rate=7e-7, steps=5e+4)
-g = NewtonMethodOptimizer(cost_function)
-theta_bis= g.newton_method_()
+g = GradientDescentOptimizer(cost_function)
+theta = g.optimize(learning_rate=7e-7, steps=5e+4)
+y=[-2,7]
+f = NewtonMethodOptimizer(cost_function, y)
+theta_bis= f.newton_method_()
 
 
 # Graph the function by using the theta learnt
