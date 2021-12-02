@@ -25,6 +25,7 @@ This module uses a tensorflow backend.
 * Nonlinear Regression `ml.regression`
 * Optimizers - `ml.optimizer` optimized with C
     * GradientDescentOptimizer - `from ml.optimizer import GradientDescentOptimizer`
+    * NewtonMethodOptimizer - `from ml.optimizer import NewtonMethodOptimizer`
     * AdamOptimizer - `from ml.optimizer import AdamOptimizer`	
 * <b>UNSTABLE</b> - Character generating RNN - `ml.rnn`
 
